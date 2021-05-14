@@ -1,4 +1,4 @@
-package gboardcomment.model.vo;
+package gboard.model.vo;
 
 public class GBoardComment {
 	// 그룹게시판댓글번호 

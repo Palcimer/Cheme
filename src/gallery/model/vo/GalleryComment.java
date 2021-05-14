@@ -1,4 +1,4 @@
-package gallerycomment.model.vo;
+package gallery.model.vo;
 
 public class GalleryComment {
 	private int rnum;
