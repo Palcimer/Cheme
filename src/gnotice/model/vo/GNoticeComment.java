@@ -5,13 +5,13 @@ public class GNoticeComment {
 	private int gNcLev;
 	private int gNcRef;
 	private int gNoticeNo;
-	private String gNcWriter;
+	private int gNcWriter;
 	private String gNcContent;
 	public GNoticeComment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public GNoticeComment(int gNcNo, int gNcLev, int gNcRef, int gNoticeNo, String gNcWriter, String gNcContent) {
+	public GNoticeComment(int gNcNo, int gNcLev, int gNcRef, int gNoticeNo, int gNcWriter, String gNcContent) {
 		super();
 		this.gNcNo = gNcNo;
 		this.gNcLev = gNcLev;
@@ -44,10 +44,10 @@ public class GNoticeComment {
 	public void setgNoticeNo(int gNoticeNo) {
 		this.gNoticeNo = gNoticeNo;
 	}
-	public String getgNcWriter() {
+	public int getgNcWriter() {
 		return gNcWriter;
 	}
-	public void setgNcWriter(String gNcWriter) {
+	public void setgNcWriter(int gNcWriter) {
 		this.gNcWriter = gNcWriter;
 	}
 	public String getgNcContent() {

@@ -5,7 +5,7 @@ public class GNotice {
 	private int gNoticeNo;
 	private int groupId;
 	private String gNoticeTitle;
-	private String gNoticeWriter;
+	private int gNoticeWriter;
 	private String gNoticeContent;
 	private String gNoticeDate;
 	private String Filename;
@@ -14,7 +14,7 @@ public class GNotice {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public GNotice(int rnum, int gNoticeNo, int groupId, String gNoticeTitle, String gNoticeWriter,
+	public GNotice(int rnum, int gNoticeNo, int groupId, String gNoticeTitle, int gNoticeWriter,
 			String gNoticeContent, String gNoticeDate, String filename, String filepath) {
 		super();
 		this.rnum = rnum;
@@ -51,10 +51,10 @@ public class GNotice {
 	public void setgNoticeTitle(String gNoticeTitle) {
 		this.gNoticeTitle = gNoticeTitle;
 	}
-	public String getgNoticeWriter() {
+	public int getgNoticeWriter() {
 		return gNoticeWriter;
 	}
-	public void setgNoticeWriter(String gNoticeWriter) {
+	public void setgNoticeWriter(int gNoticeWriter) {
 		this.gNoticeWriter = gNoticeWriter;
 	}
 	public String getgNoticeContent() {
