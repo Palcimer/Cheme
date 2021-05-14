@@ -4,7 +4,7 @@ public class Gallery {
 	private int rnum;
 	private int galleryNo;
 	private String galleryTitle;
-	private String galleryWriter;
+	private int galleryWriter;
 	private String galleryContent;
 	private String galleryDate;
 	private String groupId;
@@ -13,7 +13,7 @@ public class Gallery {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Gallery(int rnum, int galleryNo, String galleryTitle, String galleryWriter, String galleryContent,
+	public Gallery(int rnum, int galleryNo, String galleryTitle, int galleryWriter, String galleryContent,
 			String galleryDate, String groupId, String galleryFilepath) {
 		super();
 		this.rnum = rnum;
@@ -43,10 +43,10 @@ public class Gallery {
 	public void setGalleryTitle(String galleryTitle) {
 		this.galleryTitle = galleryTitle;
 	}
-	public String getGalleryWriter() {
+	public int getGalleryWriter() {
 		return galleryWriter;
 	}
-	public void setGalleryWriter(String galleryWriter) {
+	public void setGalleryWriter(int galleryWriter) {
 		this.galleryWriter = galleryWriter;
 	}
 	public String getGalleryContent() {
