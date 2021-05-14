@@ -6,7 +6,7 @@ public class Board {
 	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
-	private int boardWrite;
+	private String boardWriter;
 	private Date date;
 	private String fileName;
 	private String filePath;
@@ -14,13 +14,13 @@ public class Board {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Board(int boardNo, String boardTitle, String boardContent, int boardWrite, Date date, String fileName,
+	public Board(int boardNo, String boardTitle, String boardContent, String boardWriter, Date date, String fileName,
 			String filePath) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
-		this.boardWrite = boardWrite;
+		this.boardWriter = boardWriter;
 		this.date = date;
 		this.fileName = fileName;
 		this.filePath = filePath;
@@ -43,11 +43,11 @@ public class Board {
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
-	public int getBoardWrite() {
-		return boardWrite;
+	public String getBoardWriter() {
+		return boardWriter;
 	}
-	public void setBoardWrite(int boardWrite) {
-		this.boardWrite = boardWrite;
+	public void setBoardWriter(String boardWriter) {
+		this.boardWriter = boardWriter;
 	}
 	public Date getDate() {
 		return date;
@@ -67,6 +67,7 @@ public class Board {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
+	
 	
 	
 }
