@@ -19,6 +19,7 @@
 		<fieldset>
 			<legend>갤러리</legend>
 			<table class="table-hover" style="width:100%;">
+			
 			</table>
 			<div id="pageNavi"><%=pageNavi %></div>
 		</fieldset>
