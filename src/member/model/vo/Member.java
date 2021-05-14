@@ -6,14 +6,14 @@ public class Member {
 	private String memberPw;
 	private String memberName;
 	private String phone;
-	private int memberLev;
+	private int memberLv;
 	private String gender;
 	private String addr;
 	public Member() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Member(int memberNo, String memberId, String memberPw, String memberName, String phone, int memberLev,
+	public Member(int memberNo, String memberId, String memberPw, String memberName, String phone, int memberLv,
 			String gender, String addr) {
 		super();
 		this.memberNo = memberNo;
@@ -21,7 +21,7 @@ public class Member {
 		this.memberPw = memberPw;
 		this.memberName = memberName;
 		this.phone = phone;
-		this.memberLev = memberLev;
+		this.memberLv = memberLv;
 		this.gender = gender;
 		this.addr = addr;
 	}
@@ -55,11 +55,11 @@ public class Member {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getMemberLev() {
-		return memberLev;
+	public int getMemberLv() {
+		return memberLv;
 	}
-	public void setMemberLev(int memberLev) {
-		this.memberLev = memberLev;
+	public void setMemberLv(int memberLv) {
+		this.memberLv = memberLv;
 	}
 	public String getGender() {
 		return gender;
@@ -73,5 +73,6 @@ public class Member {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
+	
 	
 }
