@@ -10,7 +10,16 @@
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
-    안녕하세요 반갑습니다
+	<div class="navbar">
+        <ul class="nuderline-hover">
+            <li><a href="#">모임 리스트</a></li>
+            <li><a href="#">모임 만들기</a></li>
+            <li><a href="#">공지사항</a></li>
+            <li><a href="#">자유게시판</a></li>
+            <li><a href="#">회사소개</a></li>
+        </ul>
+    </div>
+       안녕하세요 반갑습니다
 	안녕하세요 권용찬입니다.
 	JI_IL AS 코딩코딩 다시테스트 	
 	<button type="button" class="btn btn-primary"><a href="galleryList?reqPage=1">갤러리</a></button>
