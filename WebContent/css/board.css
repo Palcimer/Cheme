@@ -1,0 +1,91 @@
+.container > div {
+  margin-top: 50px;
+}
+.container > div > div {
+  overflow: hidden;
+}
+.legend {
+  padding-left: 20px;
+  height: 50px;
+  line-height: 50px;
+  font-weight: bold;
+  color: white;
+}
+.form-group > div {
+  display: inline-block;
+}
+.board-title {
+  float: left;
+  width: 80%;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 20px;
+  font-weight: bolder;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+.board-date {
+  float: right;
+  height: 50px;
+  line-height: 50px;
+  padding-right: 20px;
+  width: 20%;
+  text-align: right;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+.board-body {
+  padding: 20px;
+}
+.files {
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+.board-buttons {
+  text-align: right;
+  padding-top: 10px;
+}
+.replies {
+  padding: 15px 20px;
+}
+.comments1 {
+  padding: 3px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+.comments1:first-of-type {
+  padding: 3px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+.comments2 {
+  padding: 3px 10px;
+  padding-left: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+.cmtWriter {
+  font-weight: bold;
+  font-size: 15px;
+  display: inline-block;
+  float: left;
+  width: 120px;
+}
+.cmtContent {
+  font-size: 15px;
+  display: inline-block;
+  float: left;
+}
+.cmtDate {
+  font-size: 15px;
+  display: inline-block;
+  float: right;
+}
+.cmtMenu {
+  font-size: 13px;
+}
+.replysubmit {
+  margin-top: 10px;
+}

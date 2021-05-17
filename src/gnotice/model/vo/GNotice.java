@@ -60,6 +60,9 @@ public class GNotice {
 	public String getgNoticeContent() {
 		return gNoticeContent;
 	}
+	public String getgNoticeContentBr() {
+		return gNoticeContent.replaceAll("\r\n", "<br>");
+	}
 	public void setgNoticeContent(String gNoticeContent) {
 		this.gNoticeContent = gNoticeContent;
 	}
