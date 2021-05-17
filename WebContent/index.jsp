@@ -5,14 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/css/bootstrap.css">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
-    안녕하세요 반갑습니다
+       안녕하세요 반갑습니다
 	안녕하세요 권용찬입니다.
 	JI_IL AS 코딩코딩 다시테스트 	
+	<button type="button" class="btn btn-primary"><a href="galleryList?reqPage=1">갤러리</a></button>
 	</div>
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
