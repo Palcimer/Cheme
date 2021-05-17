@@ -42,6 +42,7 @@ public class GalleryListServlet extends HttpServlet {
 		request.setAttribute("list", gpd.getList());
 		request.setAttribute("pageNavi", gpd.getPageNavi());
 		rd.forward(request, response);
+		
 	}
 
 	/**

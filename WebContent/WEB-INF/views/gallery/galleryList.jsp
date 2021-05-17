@@ -13,14 +13,52 @@
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <title>Insert title here</title>
+<style>
+	.photoWrapper{
+		padding-top : 20px;
+		clear : right;
+		display : flex;
+		justify-content: space-around;
+		flex-wrap : wrap;
+	}
+	.photo{	
+		margin-top : 30px;
+		width : 30%;
+		height: 300px;
+		overflow : hidden;
+		textalign : center;
+	}
+	.photo>img{
+		width : 100%;
+		height : 70%;
+	}
+	#pageNavi>* {
+		justify-content: center !important;
+	}
+</style>
 </head>
 <body>
+	
 	<div class="container">
 		<fieldset>
 			<legend>갤러리</legend>
-			<table class="table-hover" style="width:100%;">
-			
-			</table>
+			<div>
+				<a class="btn btn-info writeBtn" href="/galleryWriteFrm">글쓰기</a>
+			</div>
+			<div class="photoWrapper">
+				<%for(int i=0;i<list.size();i++) { %>
+					<div class="photo">
+						<a href=""><img src="/upload/photo/<%=list.get(i).getGalleryFilepath()%>"></a>
+						<table class="table">
+						<tr>
+						<th scope="col">제목 : <%=list.get(i).getGalleryTitle()%></th>
+						<th scope="col">글쓴이 : <%=list.get(i).getGalleryWriter()%></th>
+						<th scope="col">작성일 : <%=list.get(i).getGalleryDate()%></th>
+						</tr>
+						</table>
+					</div>
+				<%} %>
+			</div>
 			<div id="pageNavi"><%=pageNavi %></div>
 		</fieldset>
 	</div>
