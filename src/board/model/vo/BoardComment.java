@@ -2,20 +2,22 @@ package board.model.vo;
 
 import java.sql.Date;
 
-public class Boardcomment {
+public class BoardComment {
 	private int commentNo;
 	private int No;
 	private String commentContent;
-	private int commentWriter;
+	private String commentWriter;
 	private Date date;
 	private int level;
-	private int commentref;
-	public Boardcomment() {
+	private int boardRef;
+	private int bcRef;
+	
+	public BoardComment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Boardcomment(int commentNo, int no, String commentContent, int commentWriter, Date date, int level,
-			int commentref) {
+	public BoardComment(int commentNo, int no, String commentContent, String commentWriter, Date date, int level,
+			int boardRef, int bcRef) {
 		super();
 		this.commentNo = commentNo;
 		No = no;
@@ -23,7 +25,8 @@ public class Boardcomment {
 		this.commentWriter = commentWriter;
 		this.date = date;
 		this.level = level;
-		this.commentref = commentref;
+		this.boardRef = boardRef;
+		this.bcRef = bcRef;
 	}
 	public int getCommentNo() {
 		return commentNo;
@@ -43,11 +46,11 @@ public class Boardcomment {
 	public void setCommentContent(String commentContent) {
 		this.commentContent = commentContent;
 	}
-	public int getCommentWriter() {
+	public String getCommentWriter() {
 		return commentWriter;
 	}
-	public void setCommentWriter(int commentWriter) {
-		this.commentWriter = commentWriter;
+	public void setCommentWriter(String string) {
+		this.commentWriter = string;
 	}
 	public Date getDate() {
 		return date;
@@ -61,12 +64,20 @@ public class Boardcomment {
 	public void setLevel(int level) {
 		this.level = level;
 	}
-	public int getCommentref() {
-		return commentref;
+	public int getBoardRef() {
+		return boardRef;
 	}
-	public void setCommentref(int commentref) {
-		this.commentref = commentref;
+	public void setBoardRef(int boardRef) {
+		this.boardRef = boardRef;
 	}
-	
+	public int getBcRef() {
+		return bcRef;
+	}
+	public void setBcRef(int bcRef) {
+		this.bcRef = bcRef;
+	}
+	public String getCommentContentBr() {
+		return commentContent.replaceAll("\r\n", "<br>");
+	}
 	
 }

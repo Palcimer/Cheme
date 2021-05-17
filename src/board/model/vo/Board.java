@@ -3,6 +3,7 @@ package board.model.vo;
 import java.sql.Date;
 
 public class Board {
+	private int rnum;
 	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
@@ -14,9 +15,10 @@ public class Board {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Board(int boardNo, String boardTitle, String boardContent, String boardWriter, Date date, String fileName,
-			String filePath) {
+	public Board(int rnum, int boardNo, String boardTitle, String boardContent, String boardWriter, Date date,
+			String fileName, String filePath) {
 		super();
+		this.rnum = rnum;
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
@@ -24,6 +26,12 @@ public class Board {
 		this.date = date;
 		this.fileName = fileName;
 		this.filePath = filePath;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getBoardNo() {
 		return boardNo;
