@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import gallery.model.vo.Gallery;
+import gallery.model.vo.GalleryComment;
 import group.model.vo.Group;
 import member.model.vo.Member;
 
@@ -86,6 +87,67 @@ public class GalleryDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public Gallery selectOneGallery(Connection conn, int galleryNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from gallery where gallery_no=?";
+		Gallery g =null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, galleryNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				g = new Gallery();
+				g.setGalleryContent(rset.getString("gallery_content"));
+				g.setGalleryDate(rset.getString("gallery_date"));
+				g.setGalleryFileName(rset.getString("gallery_filename"));
+				g.setGalleryFilepath(rset.getString("gallery_filepath"));
+				g.setGalleryNo(rset.getInt("gallery_no"));
+				g.setGalleryTitle(rset.getString("gallery_title"));
+				g.setGalleryWriter(rset.getInt("gallery_write"));
+				g.setGroupId(rset.getInt("gallery_id"));
+				
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return g;
+	}
+
+	public ArrayList<GalleryComment> selectGalleryCommentList(Connection conn, int galleryNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<GalleryComment> list = new ArrayList<GalleryComment>();
+		String query = "select * from gallery_comment where notice_ref=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, galleryNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				GalleryComment gc = new GalleryComment();
+				gc.setGalleryCommentNo(rset.getInt("gal_comment_no"));
+				gc.setGalleryNo(rset.getInt("gallery_no"));
+				gc.setGalleryCommentContent(rset.getString("gal_comment_content"));
+				gc.setGalleryCommentWriter(rset.getInt("gal_comment_writer"));
+				gc.setGalleryCommentLevel(rset.getInt("gal_comment_lev"));
+				gc.setGalleryCommentRef(rset.getInt("gal_comment_ref"));
+				list.add(gc);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return list;
 	}
 
 }
