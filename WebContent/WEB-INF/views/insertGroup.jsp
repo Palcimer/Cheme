@@ -5,15 +5,6 @@ pageEncoding="UTF-8"%>
   <head>
     <meta charset="UTF-8" />
     <title>모임 개설하기</title>
-    <link rel="stylesheet" href="/bootstrap.css" />
-    <!-- TODO: 작업 후 빼기 -->
-    <link rel="stylesheet" href="/bootstrap.min.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script
-      type="text/javascript"
-      src="http://code.jquery.com/jquery-3.3.1.js"
-    ></script>
-
     <style>
       .content-wrap {
         padding: 100px;
@@ -36,7 +27,9 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <%@include file="/WEB-INF/views/common/header.jsp"%>
-
+    <form action ="/myPageFrm">
+    	<button>마이페이지</button>
+    </form>
     <div class="content-wrap">
       <div class="content">
         <form
@@ -74,10 +67,10 @@ pageEncoding="UTF-8"%>
                 id="moim-leader"
                 value="ㅇㅇ"
               />
-              <!-- TODO: m.getMemberName 넣기 -->
+              <!-- TODO: value에 m.getMemberName 넣기 -->
             </fieldset>
           </div>
-          <!-- 멤버 번호 값 DB에 넘겨줘야 함 -->
+          <!-- 멤버 번호 값 DB에 넘겨주는 용도 -->
           <input type="hidden" value="ㅇㅇ2" name="memberNo" />
           <!-- TODO: m.gemMemberNo 넣기 -->
           <div class="form-group">
@@ -258,33 +251,30 @@ pageEncoding="UTF-8"%>
       }
     }
     var bool = true;
+    var nameBool = false;
     $("[name = moimName]").keyup(function () {
       var Reg = /^[a-zA-Z0-9가-힣\s]{1,}$/;
       var name = $(this).val();
+      var Reg2 = /^.{0,20}$/;
 
       if (Reg.test(name)) {
-        $(this).attr("class", "form-control is-valid");
-        self.bool = true;
-      } else if (!Reg.test(name)) {
-        $(this).attr("class", "form-control is-invalid");
-        $("[id = nameReg ]").attr("class", "invalid-feedback");
-        $("[id = nameReg]").html("특수문자 및 자음, 모음 제한");
-        self.bool = false;
-      }
-    });
-    $("[name = moimName]").keyup(function () {
-      var Reg = /^.{0,20}$/;
-      var name = $(this).val();
-
-      if (Reg.test(name)) {
-        self.bool = true;
+        $(this).attr("class", "form-control form-control-lg is-valid");
+        self.nameBool = true;
+        console.log(self.nameBool);
       } else if (!Reg.test(name)) {
         $(this).attr("class", "form-control is-invalid");
         $("[id = nameReg ]").attr("class", "invalid-feedback");
         $("[id = nameReg]").html("최대 20글자");
-        self.bool = false;
+        self.nameBool = false;
+      } else if (!Reg.test(name)) {
+        $(this).attr("class", "form-control form-control-lg is-invalid");
+        $("[id = nameReg]").attr("class", "invalid-feedback");
+        $("[id = nameReg]").html("특수문자 및 자음, 모음 제한");
+        self.nameBool = false;
+        console.log(self.nameBool);
       }
     });
+
     $("[id = moim-categori").mousedown(function () {
       if ($("[id = moim-categori]").val()) {
         $("[id = moim-categori]").attr("class", "form-control is-valid");
@@ -306,30 +296,19 @@ pageEncoding="UTF-8"%>
     $("[name = moimKeyword1]").keyup(function () {
       var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,}$/;
       var name = $(this).val();
-
+      var Reg2 = /^.{0,12}$/;
       if (Reg.test(name)) {
         $(this).attr("class", "form-control form-control-sm is-valid");
         self.bool = true;
+      } else if (!Reg2.test(name)) {
+        $(this).attr("class", "form-control form-control-sm is-invalid");
+        $("[id = error-msg2]").attr("class", "invalid-feedback");
+        $("[id = error-msg2]").html("ex)11글자 내에서 작성해주세요.");
+        self.bool = false;
       } else if (!Reg.test(name)) {
         $(this).attr("class", "form-control form-control-sm is-invalid");
         $("[id = error-msg1]").attr("class", "invalid-feedback");
         $("[id = error-msg1]").html("ex)#북한산둘레길");
-        self.bool = false;
-      } else if (name == "") {
-        console.log("dd");
-        self.bool = true;
-      }
-    });
-    $("[name = moimKeyword1]").keyup(function () {
-      var Reg = /^.{0,12}$/;
-      var name = $(this).val();
-
-      if (Reg.test(name)) {
-        self.bool = true;
-      } else if (!Reg.test(name)) {
-        $(this).attr("class", "form-control form-control-sm is-invalid");
-        $("[id = error-msg2]").attr("class", "invalid-feedback");
-        $("[id = error-msg2]").html("11글자 이하로 작성해주세요");
         self.bool = false;
       }
     });
@@ -337,10 +316,15 @@ pageEncoding="UTF-8"%>
     $("[name = moimKeyword2]").keyup(function () {
       var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,}$/;
       var name = $(this).val();
-
+      var Reg2 = /^.{0,12}$/;
       if (Reg.test(name)) {
         $(this).attr("class", "form-control form-control-sm is-valid");
         self.bool = true;
+      } else if (!Reg2.test(name)) {
+        $(this).attr("class", "form-control form-control-sm is-invalid");
+        $("[id = error-msg4]").attr("class", "invalid-feedback");
+        $("[id = error-msg4]").html("ex)11글자 내에서 작성해주세요.");
+        self.bool = false;
       } else if (!Reg.test(name)) {
         $(this).attr("class", "form-control form-control-sm is-invalid");
         $("[id = error-msg3]").attr("class", "invalid-feedback");
@@ -348,27 +332,19 @@ pageEncoding="UTF-8"%>
         self.bool = false;
       }
     });
-    $("[name = moimKeyword2]").keyup(function () {
-      var Reg = /^.{0,12}$/;
-      var name = $(this).val();
-
-      if (Reg.test(name)) {
-        self.bool = true;
-      } else if (!Reg.test(name)) {
-        $(this).attr("class", "form-control form-control-sm is-invalid");
-        $("[id = error-msg4]").attr("class", "invalid-feedback");
-        $("[id = error-msg4]").html("11글자 이하로 작성해주세요");
-        self.bool = false;
-      }
-    });
 
     $("[name = moimKeyword3]").keyup(function () {
       var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,}$/;
       var name = $(this).val();
-
+      var Reg2 = /^.{0,12}$/;
       if (Reg.test(name)) {
         $(this).attr("class", "form-control form-control-sm is-valid");
         self.bool = true;
+      } else if (!Reg2.test(name)) {
+        $(this).attr("class", "form-control form-control-sm is-invalid");
+        $("[id = error-msg6]").attr("class", "invalid-feedback");
+        $("[id = error-msg6]").html("ex)11글자 내에서 작성해주세요.");
+        self.bool = false;
       } else if (!Reg.test(name)) {
         $(this).attr("class", "form-control form-control-sm is-invalid");
         $("[id = error-msg5]").attr("class", "invalid-feedback");
@@ -376,27 +352,19 @@ pageEncoding="UTF-8"%>
         self.bool = false;
       }
     });
-    $("[name = moimKeyword3]").keyup(function () {
-      var Reg = /^.{0,12}$/;
-      var name = $(this).val();
-
-      if (Reg.test(name)) {
-        self.bool = true;
-      } else if (!Reg.test(name)) {
-        $(this).attr("class", "form-control form-control-sm is-invalid");
-        $("[id = error-msg6]").attr("class", "invalid-feedback");
-        $("[id = error-msg6]").html("11글자 이하로 작성해주세요");
-        self.bool = false;
-      }
-    });
 
     $("[name = moimKeyword4]").keyup(function () {
       var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,}$/;
       var name = $(this).val();
-
+      var Reg2 = /^.{0,12}$/;
       if (Reg.test(name)) {
         $(this).attr("class", "form-control form-control-sm is-valid");
         self.bool = true;
+      } else if (!Reg2.test(name)) {
+        $(this).attr("class", "form-control form-control-sm is-invalid");
+        $("[id = error-msg8]").attr("class", "invalid-feedback");
+        $("[id = error-msg8]").html("ex)11글자 내에서 작성해주세요.");
+        self.bool = false;
       } else if (!Reg.test(name)) {
         $(this).attr("class", "form-control form-control-sm is-invalid");
         $("[id = error-msg7]").attr("class", "invalid-feedback");
@@ -404,27 +372,19 @@ pageEncoding="UTF-8"%>
         self.bool = false;
       }
     });
-    $("[name = moimKeyword4]").keyup(function () {
-      var Reg = /^.{0,12}$/;
-      var name = $(this).val();
-
-      if (Reg.test(name)) {
-        self.bool = true;
-      } else if (!Reg.test(name)) {
-        $(this).attr("class", "form-control form-control-sm is-invalid");
-        $("[id = error-msg8]").attr("class", "invalid-feedback");
-        $("[id = error-msg8]").html("11글자 이하로 작성해주세요");
-        self.bool = false;
-      }
-    });
 
     $("[name = moimKeyword5]").keyup(function () {
       var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,}$/;
       var name = $(this).val();
-
+      var Reg2 = /^.{0,12}$/;
       if (Reg.test(name)) {
         $(this).attr("class", "form-control form-control-sm is-valid");
         self.bool = true;
+      } else if (!Reg2.test(name)) {
+        $(this).attr("class", "form-control form-control-sm is-invalid");
+        $("[id = error-msg10]").attr("class", "invalid-feedback");
+        $("[id = error-msg10]").html("ex)11글자 내에서 작성해주세요.");
+        self.bool = false;
       } else if (!Reg.test(name)) {
         $(this).attr("class", "form-control form-control-sm is-invalid");
         $("[id = error-msg9]").attr("class", "invalid-feedback");
@@ -432,23 +392,11 @@ pageEncoding="UTF-8"%>
         self.bool = false;
       }
     });
-    $("[name = moimKeyword5]").keyup(function () {
-      var Reg = /^.{0,12}$/;
-      var name = $(this).val();
-
-      if (Reg.test(name)) {
-        self.bool = true;
-      } else if (!Reg.test(name)) {
-        $(this).attr("class", "form-control form-control-sm is-invalid");
-        $("[id = error-msg10]").attr("class", "invalid-feedback");
-        $("[id = error-msg10]").html("11글자 이하로 작성해주세요");
-        self.bool = false;
-      }
-    });
 
     $("#moimForm").submit(function () {
       if (
-        bool == false ||
+        !self.nameBool ||
+        !self.bool ||
         $("#moim-name").val() == "" ||
         $("#formFile").val() == "" ||
         $("#moim-intro").val() == ""
