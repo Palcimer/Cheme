@@ -59,4 +59,16 @@ public class GNoticeService {
 		return result;
 	}
 
+	public int deleteNotice(int noticeNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GNoticeDao dao = new GNoticeDao();
+		int result = dao.deleteNotice(conn, noticeNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
 }

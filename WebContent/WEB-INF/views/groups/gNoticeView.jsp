@@ -35,7 +35,7 @@
             <div class="board-body"><%=gNotice.getgNoticeContentBr() %>
             	<%if(gNotice.getFilename() != null) {%>
                 <div class="bg-light files">
-                   	첨부파일 : cat.png <%=gNotice.getFilename() %>
+                   	첨부파일 : <i class="fas fa-clone"></i> <a href="file?noticeNo=<%=gNotice.getgNoticeNo() %>"><%=gNotice.getFilename() %></a>
                 </div>
                 <%} %>
             </div>
@@ -55,7 +55,11 @@
                     <button type="button" class="btn btn-secondary" style="width:100%">댓글 달기</button>                    
                 </div>
             </div>
+            <div class="board-list"><a href="/gNoticeList?Page=1" class="btn btn-outline-primary" style="width:200px">글 목록</a></div>
+            
         </div>        
     </div>
+    <%@include file="/WEB-INF/views/common/footer.jsp" %>
+    
 </body>
 </html>

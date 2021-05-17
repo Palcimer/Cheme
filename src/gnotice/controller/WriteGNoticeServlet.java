@@ -59,11 +59,12 @@ public class WriteGNoticeServlet extends HttpServlet {
 		notice.setgNoticeContent(mRequest.getParameter("noticeContent"));
 		notice.setgNoticeTitle(mRequest.getParameter("noticeTitle"));
 		notice.setGroupId(Integer.parseInt(mRequest.getParameter("groupId")));
-		notice.setFilename(mRequest.getOriginalFileName("file"));
-		notice.setFilepath(mRequest.getFilesystemName("file"));
+		notice.setFilename(mRequest.getOriginalFileName("noticeFile"));
+		notice.setFilepath(mRequest.getFilesystemName("noticeFile"));
 		System.out.println(notice.getgNoticeWriter());
 		System.out.println(notice.getgNoticeContent());
 		System.out.println(notice.getGroupId());
+		System.out.println(notice.getFilename());
 		
 		int result = new GNoticeService().insertNotice(notice);
 		
