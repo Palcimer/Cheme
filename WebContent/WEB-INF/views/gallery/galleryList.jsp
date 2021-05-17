@@ -52,6 +52,8 @@
 						<table class="table">
 						<tr>
 						<th scope="col">제목 : <%=list.get(i).getGalleryTitle()%></th>
+						</tr>
+						<tr>
 						<th scope="col">글쓴이 : <%=list.get(i).getGalleryWriter()%></th>
 						<th scope="col">작성일 : <%=list.get(i).getGalleryDate()%></th>
 						</tr>
