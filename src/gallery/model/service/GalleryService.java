@@ -4,9 +4,14 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import gallery.controller.GallerViewData;
 import gallery.model.dao.GalleryDao;
 import gallery.model.vo.Gallery;
+import gallery.model.vo.GalleryComment;
 import gallery.model.vo.GalleryPageData;
+import gallery.model.vo.GalleryViewData;
+import group.model.vo.Group;
+import member.model.vo.Member;
 
 public class GalleryService {
 
@@ -64,4 +69,26 @@ public class GalleryService {
 		return gpd;
 	}
 
+	public int insertGallery(Gallery ga) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new GalleryDao().insertGallery(conn,ga);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public GalleryViewData selectGalleryView(int galleryNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GalleryDao dao = new GalleryDao();
+		Gallery g =  dao.selectOneGallery(conn,galleryNo);
+		ArrayList<GalleryComment> list = dao.selectGalleryCommentList(conn,galleryNo);
+		JDBCTemplate.close(conn);
+		GalleryViewData gvd = new GalleryViewData(g,list);
+		return gvd;
+	}
 }

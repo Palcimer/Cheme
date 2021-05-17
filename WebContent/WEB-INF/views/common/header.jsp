@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% %>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
@@ -25,12 +26,14 @@
         <div class="navbar">
         <ul class="nuderline-hover">
             <li><a href="#">모임 리스트</a></li>
-            <li><a href="#">모임 만들기</a></li>
+            <li><a href="/insertGroupFrm">모임 만들기</a></li>
             <li><a href="#">공지사항</a></li>
-            <li><a href="#">자유게시판</a></li>
+            <li><a href="/board?reqPage=1">자유게시판</a></li>
             <li><a href="#">회사소개</a></li>
         </ul>
     </div>
     </div>
+    <br>
+    <br>
     <br>
     
