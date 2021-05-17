@@ -18,6 +18,7 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
+	<br><br><br>
 	<div class="container">
 		<fieldset>
 			<legend>공지사항</legend>
