@@ -21,7 +21,7 @@
 	<br><br><br>
 	<div class="container">
 		<fieldset>
-			<legend>공지사항</legend>
+			<legend>자유게시판</legend>
 			<table class="table" id="boardView" style="width:100%;">
 				<tr class="table-info">
 					<th colspan="4"><%=b.getBoardTitle() %></th>
