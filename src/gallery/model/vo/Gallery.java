@@ -1,21 +1,24 @@
 package gallery.model.vo;
 
 public class Gallery {
+	private String mName;
 	private int rnum;
 	private int galleryNo;
 	private String galleryTitle;
 	private int galleryWriter;
 	private String galleryContent;
 	private String galleryDate;
-	private String groupId;
+	private int groupId;
 	private String galleryFilepath;
+	private String galleryFileName;
 	public Gallery() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Gallery(int rnum, int galleryNo, String galleryTitle, int galleryWriter, String galleryContent,
-			String galleryDate, String groupId, String galleryFilepath) {
+	public Gallery(String mName, int rnum, int galleryNo, String galleryTitle, int galleryWriter, String galleryContent,
+			String galleryDate, int groupId, String galleryFilepath, String galleryFileName) {
 		super();
+		this.mName = mName;
 		this.rnum = rnum;
 		this.galleryNo = galleryNo;
 		this.galleryTitle = galleryTitle;
@@ -24,6 +27,13 @@ public class Gallery {
 		this.galleryDate = galleryDate;
 		this.groupId = groupId;
 		this.galleryFilepath = galleryFilepath;
+		this.galleryFileName = galleryFileName;
+	}
+	public String getmName() {
+		return mName;
+	}
+	public void setmName(String mName) {
+		this.mName = mName;
 	}
 	public int getRnum() {
 		return rnum;
@@ -61,10 +71,10 @@ public class Gallery {
 	public void setGalleryDate(String galleryDate) {
 		this.galleryDate = galleryDate;
 	}
-	public String getGroupId() {
+	public int getGroupId() {
 		return groupId;
 	}
-	public void setGroupId(String groupId) {
+	public void setGroupId(int groupId) {
 		this.groupId = groupId;
 	}
 	public String getGalleryFilepath() {
@@ -72,6 +82,12 @@ public class Gallery {
 	}
 	public void setGalleryFilepath(String galleryFilepath) {
 		this.galleryFilepath = galleryFilepath;
+	}
+	public String getGalleryFileName() {
+		return galleryFileName;
+	}
+	public void setGalleryFileName(String galleryFileName) {
+		this.galleryFileName = galleryFileName;
 	}
 	
 	

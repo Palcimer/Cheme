@@ -7,6 +7,8 @@ import common.JDBCTemplate;
 import gallery.model.dao.GalleryDao;
 import gallery.model.vo.Gallery;
 import gallery.model.vo.GalleryPageData;
+import group.model.vo.Group;
+import member.model.vo.Member;
 
 public class GalleryService {
 
@@ -62,6 +64,19 @@ public class GalleryService {
 		JDBCTemplate.close(conn);
 		GalleryPageData gpd = new GalleryPageData(list,pageNavi);
 		return gpd;
+	}
+
+	public int insertGallery(Gallery ga) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new GalleryDao().insertGallery(conn,ga);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
 	}
 
 }

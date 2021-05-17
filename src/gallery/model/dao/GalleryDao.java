@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import gallery.model.vo.Gallery;
+import group.model.vo.Group;
+import member.model.vo.Member;
 
 public class GalleryDao {
 
@@ -15,7 +17,7 @@ public class GalleryDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Gallery> list = new ArrayList<Gallery>();
-		String qeury = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.*FROM (SELECT * FROM NOTICE ORDER BY NOTICE_NO DESC)N)WHERE RNUM BETWEEN ? AND ?";
+		String qeury = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.*FROM (SELECT * FROM GALLERY ORDER BY GALLERY_NO DESC)N)WHERE RNUM BETWEEN ? AND ?";
 		try {
 			pstmt = conn.prepareStatement(qeury);
 			pstmt.setInt(1, start);
@@ -23,13 +25,13 @@ public class GalleryDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Gallery g = new Gallery();
-				g.setGalleryContent(rset.getString("gallerycontent"));
-				g.setGalleryDate(rset.getString("gallerydate"));
-				g.setGalleryFilepath(rset.getString("galleryfilepath"));
-				g.setGalleryNo(rset.getInt("galleryno"));
-				g.setGalleryTitle(rset.getString("gallerytitle"));
-				g.setGalleryWriter(rset.getInt("gallerywriter"));
-				g.setGroupId(rset.getString("groupid"));
+				g.setGalleryContent(rset.getString("gallery_content"));
+				g.setGalleryDate(rset.getString("gallery_date"));
+				g.setGalleryFilepath(rset.getString("gallery_filepath"));
+				g.setGalleryNo(rset.getInt("gallery_no"));
+				g.setGalleryTitle(rset.getString("gallery_title"));
+				g.setGalleryWriter(rset.getInt("gallery_writer"));
+				g.setGroupId(rset.getInt("group_id"));
 				g.setRnum(rset.getInt("rnum"));
 				list.add(g);
 			}
@@ -62,6 +64,27 @@ public class GalleryDao {
 			JDBCTemplate.close(pstmt);
 		}
 		
+		return result;
+	}
+
+	public int insertGallery(Connection conn, Gallery ga) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into gallery values(gal_seq.nextval,1000,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		try {
+			pstmt = conn.prepareStatement(query);			
+			pstmt.setString(1, ga.getGalleryTitle()); 
+			pstmt.setString(2, ga.getGalleryContent());
+			pstmt.setInt(3, ga.getGalleryWriter());
+			pstmt.setString(4, ga.getGalleryFileName());
+			pstmt.setString(5, ga.getGalleryFilepath());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 
