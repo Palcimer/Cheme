@@ -14,7 +14,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
 		<fieldset>
 			<legend>공지사항</legend>
@@ -41,6 +41,7 @@
 			
 		</fieldset>	
 	</div>
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<style>
 		#boardList{
 			height : 50px;

@@ -14,7 +14,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
 		<form action="/boardUpdate" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="boardNo" value="<%=b.getBoardNo() %>">
@@ -60,6 +60,7 @@
 			</fieldset>
 		</form>
 	</div>
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script>
 		$("#delBtn").click(function(){
 			if(confirm("첨부파일을 삭제하시겠습니까?")){

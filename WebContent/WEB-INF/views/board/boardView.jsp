@@ -17,7 +17,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
 		<fieldset>
 			<legend>공지사항</legend>
@@ -143,6 +143,7 @@
 			<%} //전체댓글 반복문 끝나는 지점%>
 		</div>
 	</div>
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script>
 		$(".recShow").click(function(){
 			var idx = $(".recShow").index(this);	//클릭한게 몇번째 답글달기 버튼인지 구하는 코드

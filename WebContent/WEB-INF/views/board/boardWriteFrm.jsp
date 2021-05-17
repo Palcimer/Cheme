@@ -13,7 +13,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
 		<form action="/boardWrite" method="post" enctype="multipart/form-data">
 			<fieldset>
@@ -47,6 +47,6 @@
 			</fieldset>
 		</form>
 	</div>
-	
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
