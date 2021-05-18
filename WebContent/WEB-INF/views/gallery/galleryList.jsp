@@ -50,10 +50,10 @@
 			<div class="photoWrapper">
 				<%for(int i=0;i<list.size();i++) { %>
 					<div class="photo">
-						<a href="galleryView?galleryNo=<%=list.get(i).getGalleryNo()%>"><img src="/upload/photo/<%=list.get(i).getGalleryFilepath()%>"></a>
+						<a href="/galleryView?galleryNo=<%=list.get(i).getGalleryNo()%>"><img src="/upload/photo/<%=list.get(i).getGalleryFilepath()%>"></a>
 						<table class="table">
 						<tr>
-						<th scope="col">제목 : <a href="galleryView?galleryNo=<%=list.get(i).getGalleryNo()%>"><%=list.get(i).getGalleryTitle()%></a></th>
+						<th colspan="4">제목 : <a href="/galleryView?galleryNo=<%=list.get(i).getGalleryNo()%>"><%=list.get(i).getGalleryTitle()%></a></th>
 						</tr>
 						<tr>
 						<th scope="col">글쓴이 : <%=list.get(i).getGalleryWriter()%></th>

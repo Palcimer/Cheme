@@ -1,28 +1,23 @@
-package gallery.controller;
+package gnotice.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import gallery.model.service.GalleryService;
-import gallery.model.vo.GalleryViewData;
-
 /**
- * Servlet implementation class GalleryViewServlet
+ * Servlet implementation class GNoticeListServlet
  */
-@WebServlet(name = "GalleryView", urlPatterns = { "/galleryView" })
-public class GalleryViewServlet extends HttpServlet {
+@WebServlet(name = "GNoticeList", urlPatterns = { "/gNoticeList" })
+public class GNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryViewServlet() {
+    public GNoticeListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +26,7 @@ public class GalleryViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		System.out.println("test");
-		int galleryNo = Integer.parseInt(request.getParameter("galleryNo"));
-		
-		GalleryViewData gvd = new GalleryService().selectGalleryView(galleryNo);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gallery/galleryView.jsp");
-		request.setAttribute("g", gvd.getG());
-		request.setAttribute("list", gvd.getList());
-		rd.forward(request, response);
+		int page = Integer.parseInt(request.getParameter("Page"));
 		
 	}
 

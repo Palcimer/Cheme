@@ -1,4 +1,4 @@
-package gallery.controller;
+package member.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import gallery.model.service.GalleryService;
-import gallery.model.vo.GalleryViewData;
-
 /**
- * Servlet implementation class GalleryViewServlet
+ * Servlet implementation class JoinServlet
  */
-@WebServlet(name = "GalleryView", urlPatterns = { "/galleryView" })
-public class GalleryViewServlet extends HttpServlet {
+@WebServlet(name = "Join", urlPatterns = { "/join" })
+public class JoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryViewServlet() {
+    public JoinServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,16 +29,8 @@ public class GalleryViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		System.out.println("test");
-		int galleryNo = Integer.parseInt(request.getParameter("galleryNo"));
-		
-		GalleryViewData gvd = new GalleryService().selectGalleryView(galleryNo);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gallery/galleryView.jsp");
-		request.setAttribute("g", gvd.getG());
-		request.setAttribute("list", gvd.getList());
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/login.jsp");
 		rd.forward(request, response);
-		
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package gnotice.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -18,16 +19,16 @@ import gnotice.model.service.GNoticeService;
 import gnotice.model.vo.GNotice;
 
 /**
- * Servlet implementation class WriteGNoticeServlet
+ * Servlet implementation class UpdateGNoticeServlet
  */
-@WebServlet(name = "WriteGNotice", urlPatterns = { "/writeGNotice" })
-public class WriteGNoticeServlet extends HttpServlet {
+@WebServlet(name = "UpdateGNotice", urlPatterns = { "/updateGNotice" })
+public class UpdateGNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WriteGNoticeServlet() {
+    public UpdateGNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,25 +54,39 @@ public class WriteGNoticeServlet extends HttpServlet {
 		//매개변수: request 객체, 파일저장경로, 최대크기, 인코딩타입, 파일명 중복 처리 객체
 		MultipartRequest mRequest = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		//파일업로드 전처리 완료
-		//값 가져오기
 		GNotice notice = new GNotice();	
 		notice.setgNoticeWriter(Integer.parseInt(mRequest.getParameter("noticeWriter")));
+		notice.setgNoticeNo(Integer.parseInt(mRequest.getParameter("noticeNo")));
 		notice.setgNoticeContent(mRequest.getParameter("noticeContent"));
 		notice.setgNoticeTitle(mRequest.getParameter("noticeTitle"));
-		notice.setGroupId(Integer.parseInt(mRequest.getParameter("groupId")));
-		notice.setFilename(mRequest.getOriginalFileName("noticeFile"));
-		notice.setFilepath(mRequest.getFilesystemName("noticeFile"));
+		//새 파일 이름 및 경로
+		String filename = mRequest.getOriginalFileName("noticeFile");
+		String filepath = mRequest.getFilesystemName("noticeFile");
+		//기존 파일 이름 및 경로
+		String oldFilename = mRequest.getParameter("oldFilename");
+		String oldFilepath = mRequest.getParameter("oldFilepath");
+		//기존 파일 상태 확인
+		String status = mRequest.getParameter("status");
+		if(status.equals("del")) { //기존 첨부파일을 삭제했을 때
+			File delFile = new File(saveDir + "/" + oldFilepath);
+			delFile.delete();
+		} else if(oldFilename != null) { //기존 파일이 그대로일 때
+			filename = oldFilename;
+			filepath = oldFilepath;
+		}
+		//공지 객체에 파일 이름 및 경로 저장
+		notice.setFilename(mRequest.getParameter("filename"));
+		notice.setFilepath(mRequest.getParameter("filepath"));
 		
-		int result = new GNoticeService().insertNotice(notice);
-		
+		int result = new GNoticeService().updateGNotice(notice);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result > 0) {
-			request.setAttribute("msg", "공지사항 등록 성공");
+			request.setAttribute("msg", "공지사항이 수정되었습니다.");
 		} else {
-			request.setAttribute("msg", "공지사항 등록 실패");
+			request.setAttribute("msg", "수정에 실패했습니다.");
 		}
-		request.setAttribute("loc", "/noticeList?reqPage=1");
-		rd.forward(request, response);
+		request.setAttribute("loc", "/gNoticeView?noticeNo=" + notice.getgNoticeNo());
+		rd.forward(request, response);	
 	}
 
 	/**

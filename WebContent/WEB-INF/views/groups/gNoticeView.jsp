@@ -40,25 +40,69 @@
                 <%} %>
             </div>
             <div class="bg-light replies">
-            	<%for(GNoticeComment cmt : cmtList) {%> 
-            	<%if(cmt.getgNcLev() == 1) {%>           	
-                <div class="comments1">
-                	<span class="cmtWriter"><%=cmt.getgNcWriter() %></span>
-                	<span class="cmtContent"><%=cmt.getgNcContent() %></span>
-                	<span class="cmtDate"><%=cmt.getgNcDate() %></span>
-                </div>
-                <%} %>
-                <div class="comments2"><i class="fa fa-angle-double-right 2x"></i>댓글2</div>
-                <%} %>
+            	<table class="table">
+            		<%for(GNoticeComment cmt : cmtList) {%> 
+            		<%if(cmt.getgNcLev() == 1) {%>
+                    <tr>
+                        <th scope="row" style="width:150px"><%=cmt.getgNcWriterName() %></th>
+                        <td>
+                        	<%=cmt.getgNcContent() %>
+                        	<span class="cmtMenu">답글 수정 삭제</span>
+                        </td>
+                        <td style="text-align:center; width:100px;"><%=cmt.getgNcDate() %></td>
+                    </tr>
+	                    <%for(GNoticeComment cmtlv2 : cmtList) {%> 
+	                    <%if(cmtlv2.getgNcLev() == 2 && cmtlv2.getgNcRef() == cmt.getgNcNo()) {%>
+	                    <tr>
+	                        <th scope="row">
+	                        	<i class="fa fa-angle-double-right 5x"></i>
+	                        	<%=cmtlv2.getgNcWriterName() %>
+	                        </th>
+	                        <td>
+	                        	<%=cmtlv2.getgNcContent() %>
+	                        	<span class="cmtMenu">수정 삭제</span>
+	                        </td>
+	                        <td style="text-align:center"><%=cmtlv2.getgNcDate() %></td>
+	                    </tr>
+	                    <%} %>
+	                    <%} %>
+                    <%} %>
+                    <%} %>                    
+                </table>
                 <div class="replysubmit">
-                    <textarea class="form-control"></textarea>
-                    <button type="button" class="btn btn-secondary" style="width:100%">댓글 달기</button>                    
+                	<input type="hidden" id="rpLv" value="1">
+					<input type="hidden" id="rpWriter" value="3">
+					<input type="hidden" id="noticeNo" value="<%=gNotice.getgNoticeNo() %>">
+					<input type="hidden" id="rpRef" value="0">
+                    <textarea class="form-control" id="rpContent"></textarea>
+                    <button type="button" class="btn btn-secondary" id="rpCommit" style="width:100%; margin-top:3px">댓글 달기</button>                    
                 </div>
             </div>
-            <div class="board-list"><a href="/gNoticeList?Page=1" class="btn btn-outline-primary" style="width:200px">글 목록</a></div>
-            
+            <div class="board-tolist">
+            	<a href="/gNoticeList?Page=1" class="btn btn-outline-primary" style="width:40%">글 목록으로</a>
+            </div>
         </div>        
     </div>
+    <script>
+    	$("#rpCommit").click(function() {
+    		var rpLv = $("#rpLv").val();
+    		var rpWriter = $("#rpWriter").val();
+    		var noticeNo = $("#noticeNo").val();
+    		var rpRef = $("#rpRef").val();
+    		var rpContent = $("#rpContent").val();
+    		$.ajax({
+    			url : "/gNoticeComment",
+				type : "post",
+				data : {rpLv:rpLv, rpWriter:rpWriter, noticeNo:noticeNo, rpRef:rpRef, rpContent:rpContent},
+				success : function(data) {
+					console.log(data);
+				},
+				error : function() {
+					console.log("에러!!");
+				}
+    		})
+    	})
+    </script>
     <%@include file="/WEB-INF/views/common/footer.jsp" %>
     
 </body>

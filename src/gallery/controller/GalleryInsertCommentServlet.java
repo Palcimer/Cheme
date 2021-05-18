@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import gallery.model.service.GalleryService;
-import gallery.model.vo.GalleryViewData;
+import gallery.model.vo.GalleryComment;
 
 /**
- * Servlet implementation class GalleryViewServlet
+ * Servlet implementation class GalleryInsertCommentServlet
  */
-@WebServlet(name = "GalleryView", urlPatterns = { "/galleryView" })
-public class GalleryViewServlet extends HttpServlet {
+@WebServlet(name = "GalleryInsertComment", urlPatterns = { "/galleryInsertComment" })
+public class GalleryInsertCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryViewServlet() {
+    public GalleryInsertCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +32,27 @@ public class GalleryViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		System.out.println("test");
-		int galleryNo = Integer.parseInt(request.getParameter("galleryNo"));
 		
-		GalleryViewData gvd = new GalleryService().selectGalleryView(galleryNo);
+		GalleryComment gc = new GalleryComment();
+		gc.setGalleryCommentContent(request.getParameter("galleryCommentContent"));
+		gc.setGalleryCommentLevel(Integer.parseInt(request.getParameter("galleryComment")));
+		gc.setGalleryCommentWriter(Integer.parseInt(request.getParameter("galleryCommentWriter")));
+		gc.setGalleryNo(Integer.parseInt(request.getParameter("galleryNo")));
+		gc.setGalleryCommentRef(Integer.parseInt(request.getParameter("galleryCommentRef")));
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gallery/galleryView.jsp");
-		request.setAttribute("g", gvd.getG());
-		request.setAttribute("list", gvd.getList());
+		int result = new GalleryService().galleryInsertComment(gc);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result>0) {
+			request.setAttribute("msg", "등록성공");
+		}else {
+			request.setAttribute("msg", "등록실패");
+		}
+		request.setAttribute("loc", "/galleryView?galeryNo="+gc.getGalleryNo());
 		rd.forward(request, response);
 		
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

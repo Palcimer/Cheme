@@ -90,7 +90,7 @@ public class GNoticeDao {
 				cmt.setgNcLev(rset.getInt("g_notice_comment_lev"));
 				cmt.setgNcNo(rset.getInt("g_notice_comment_no"));
 				cmt.setgNcRef(rset.getInt("g_notice_comment_ref"));
-				cmt.setgNcWriter(rset.getString("member_name"));
+				cmt.setgNcWriterName(rset.getString("member_name"));
 				cmt.setgNoticeNo(rset.getInt("g_notice_no"));
 				cmt.setgNcDate(rset.getString("g_notice_comment_date"));
 				list.add(cmt);
@@ -160,6 +160,47 @@ public class GNoticeDao {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, noticeNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateNotice(Connection conn, GNotice notice) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "UPDATE G_NOTICE SET G_NOTICE_TITLE=?, G_NOTICE_CONTENT=?, G_NOTICE_FILENAME=?, G_NOTICE_FILEPATH=? WHERE G_NOTICE_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, notice.getgNoticeTitle());
+			pstmt.setString(2, notice.getgNoticeContent());
+			pstmt.setString(3, notice.getFilename());
+			pstmt.setString(4, notice.getFilepath());
+			pstmt.setInt(5, notice.getgNoticeNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertNoticeCmt(Connection conn, GNoticeComment cmt) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "INSERT INTO G_NOTICE_COMMENT VALUES(G_NOTICE_COMMENT_SEQ.NEXTVAL, ?, ?, ?, ?, NULL, DEFAULT)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cmt.getgNoticeNo());
+			pstmt.setString(2, cmt.getgNcContent());
+			pstmt.setInt(3, cmt.getgNcWriter());
+			pstmt.setInt(4, cmt.getgNcLev());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

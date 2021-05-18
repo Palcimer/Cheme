@@ -146,5 +146,15 @@
                 padding: 0;
                 margin: 0;
             }
+            .table{
+                text-align: center;
+            }
+            .table td, .table th{
+            	padding : 12px;
+            }
+            #main-notice{
+                color: black;
+                text-decoration: none;
+            }
 
     
