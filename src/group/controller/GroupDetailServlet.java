@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import gnotice.model.service.GNoticeService;
 import gnotice.model.vo.GNotice;
 import group.model.service.GroupService;
+import group.model.vo.Group;
 
 /**
  * Servlet implementation class GroupDetailServlet
@@ -43,6 +44,7 @@ public class GroupDetailServlet extends HttpServlet {
 		}
 		GNoticeService gns = new GNoticeService();
 		GroupService gs = new GroupService();
+		Group group = gs.selectOneGroup(groupId);
 		boolean isMem = gs.isMember(groupId, memberNo);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/groupDetail.jsp");
 		if(isMem) {

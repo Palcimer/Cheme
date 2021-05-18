@@ -28,7 +28,7 @@
 				<td><a href="javascript:gNoticeView(<%=n.getgNoticeNo()%>)"><%=n.getgNoticeTitle() %></a></td>
 				<td><%=n.getgNoticeDate() %></td>
 				<form id="transmitMem">
-					<input type="hidden" name="mem" val="<%=m.getMemberId() %>">
+					<input type="hidden" name="mem" val="5">
 					<input type="hidden" name="noticeNo" val="<%=n.getgNoticeNo()%>">
 				</form>
 			</tr>
