@@ -1,6 +1,9 @@
+<%@page import="member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <% %>
+    <% 
+    	Member m = (Member)session.getAttribute("m");
+    %>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
@@ -20,8 +23,13 @@
             <a href="#" class="tag" id="search">검색</a>
         </div>
         <div class="right">
-            <a href="#" class="tag">login</a>
-            <a href="#" class="tag">회원가입</a>    
+        	<%if(m != null){ %>
+        		<a href="#" class="tag"><%=m.getMemberId() %></a>
+            	<a href="#" class="tag">로그인시 미정</a> 
+        	<%}else{ %>
+        		<a href="/join" class="tag">login</a>
+            	<a href="#" class="tag">회원가입</a> 
+        	<%} %>
         </div>
         <div class="navbar">
         <ul class="nuderline-hover">
