@@ -132,7 +132,15 @@
             .footup{
                 height: 116px;
             }
-            
+            .footup h3{
+            	margin-top:10px;
+            	padding-top:20px;
+            	padding-bottom:10px;
+            }
+            .footup p{
+            	padding-top:10px;
+            	padding-bottom:10px;
+            }
             .footdown>ul{
                 margin: 0;
                 padding: 0;
