@@ -21,6 +21,7 @@
   line-height: 50px;
   padding-left: 20px;
   font-weight: bolder;
+  color: white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
   border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
@@ -31,6 +32,7 @@
   padding-right: 20px;
   width: 20%;
   text-align: right;
+  color: white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
   border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
@@ -51,20 +53,6 @@
 }
 .replies {
   padding: 15px 20px;
-}
-.comments1 {
-  padding: 3px 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-}
-.comments1:first-of-type {
-  padding: 3px 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
-}
-.comments2 {
-  padding: 3px 10px;
-  padding-left: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 .cmtWriter {
   font-weight: bold;
@@ -88,4 +76,15 @@
 }
 .replysubmit {
   margin-top: 10px;
+}
+.board-tolist {
+  margin-top: 30px;
+  text-align: center;
+}
+.board-table {
+  margin-bottom: 30px;
+}
+.page {
+  margin: 0 auto;
+  width: 175px;
 }

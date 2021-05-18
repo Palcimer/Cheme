@@ -71,4 +71,29 @@ public class GNoticeService {
 		return result;
 	}
 
+	public int updateGNotice(GNotice notice) {
+		Connection conn = JDBCTemplate.getConnection();
+		GNoticeDao dao = new GNoticeDao();
+		int result = dao.updateNotice(conn, notice);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public int insertNoticeCmt(GNoticeComment cmt) {
+		Connection conn = JDBCTemplate.getConnection();
+		GNoticeDao dao = new GNoticeDao();
+		System.out.println(cmt.getgNcContent());
+		int result = dao.insertNoticeCmt(conn, cmt);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
 }
