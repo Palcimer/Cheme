@@ -48,13 +48,13 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Board b = new Board();
-				b.setFileName(rset.getString("board_filename"));
+				b.setFileName(rset.getString("BOARD_FILENAME"));
 				b.setFilePath(rset.getString("BOARD_FILEPATH"));
-				b.setBoardContent(rset.getString("board_content"));
-				b.setDate(rset.getDate("board_date"));
-				b.setBoardNo(rset.getInt("board_no"));
-				b.setBoardTitle(rset.getString("board_title"));
-				b.setBoardWriter(rset.getString("board_writer"));
+				b.setBoardContent(rset.getString("BOARD_CONTENT"));
+				b.setDate(rset.getDate("BOARD_DATE"));
+				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				b.setBoardWriter(rset.getString("BOARD_WRITER"));
 				b.setRnum(rset.getInt("rnum"));
 				list.add(b);
 			}
@@ -79,13 +79,13 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				b = new Board();
-				b.setFileName(rset.getString("filename"));
-				b.setFilePath(rset.getString("filepath"));
-				b.setBoardContent(rset.getString("board_content"));
-				b.setDate(rset.getDate("board_date"));
-				b.setBoardNo(rset.getInt("board_no"));
-				b.setBoardTitle(rset.getString("board_title"));
-				b.setBoardWriter(rset.getString("board_writer"));				
+				b.setFileName(rset.getString("BOARD_FILENAME"));
+				b.setFilePath(rset.getString("BOARD_FILEPATH"));
+				b.setBoardContent(rset.getString("BOARD_CONTENT"));
+				b.setDate(rset.getDate("BOARD_DATE"));
+				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				b.setBoardWriter(rset.getString("BOARD_WRITER"));				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -241,5 +241,6 @@ public class BoardDao {
 		}
 		return result;
 	}
+
 
 }

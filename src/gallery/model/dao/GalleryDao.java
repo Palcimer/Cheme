@@ -106,7 +106,7 @@ public class GalleryDao {
 				g.setGalleryFilepath(rset.getString("gallery_filepath"));
 				g.setGalleryNo(rset.getInt("gallery_no"));
 				g.setGalleryTitle(rset.getString("gallery_title"));
-				g.setGalleryWriter(rset.getInt("gallery_write"));
+				g.setGalleryWriter(rset.getInt("gallery_writer"));
 				g.setGroupId(rset.getInt("gallery_id"));
 				
 				
@@ -125,7 +125,7 @@ public class GalleryDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<GalleryComment> list = new ArrayList<GalleryComment>();
-		String query = "select * from gallery_comment where notice_ref=?";
+		String query = "select * from gal_comment where notice_ref=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, galleryNo);
@@ -148,6 +148,79 @@ public class GalleryDao {
 			JDBCTemplate.close(rset);
 		}
 		return list;
+	}
+
+	public int updateGalleryComment(Connection conn, String galleryCommentContent, int galleryCommentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update gal_comment set gal_comment_content=? where gal_comment_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, galleryCommentContent);
+			pstmt.setInt(2, galleryCommentNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteGalleryComment(Connection conn, int galleryCommentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from gal_comment where gal_comment_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, galleryCommentNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteGallery(Connection conn, int galleryNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from gallery where gallery_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, galleryNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int galleryInsertComment(Connection conn, GalleryComment gc) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into gal_comment vlaues(gal_comment_seq.nextval,20,?,?,?,?"; //20변경해야함
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, gc.getGalleryCommentContentBr());
+			pstmt.setInt(2, gc.getGalleryCommentWriter());
+			pstmt.setInt(3, gc.getGalleryCommentLevel());
+			pstmt.setInt(4, gc.getGalleryCommentRef());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 }

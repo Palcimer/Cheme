@@ -14,6 +14,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import group.model.vo.Group;
+
 
 /**
  * Servlet implementation class InsertGroup
@@ -55,26 +57,20 @@ public class InsertGroup extends HttpServlet {
 		//3) request -> MultipartRequest변환 파일을 업로드
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory, maxSize,"UTF-8",new DefaultFileRenamePolicy());
 		
-		//
-		String moimName = mRequest.getParameter("moimName");
-		String moimCategori = mRequest.getParameter("moimCategori");
-		int moimMax = Integer.parseInt(mRequest.getParameter("moimMax"));
-		String moimIntro = mRequest.getParameter("moimIntro");
-		String moimKeyword1 = mRequest.getParameter("moimKeyword1");
-		String moimKeyword2 = mRequest.getParameter("moimKeyword2");
-		String moimKeyword3 = mRequest.getParameter("moimKeyword3");
-		String moimKeyword4 = mRequest.getParameter("moimKeyword4");
-		String moimKeyword5 = mRequest.getParameter("moimKeyword5");
-		String filename = mRequest.getFilesystemName("moimPicture");
+		Group g = new Group();
+		g.setGroupCategory(mRequest.getParameter("moimCategori")); //TODO: 정수로 값 변환해줘야함
+		g.setGroupDetail(mRequest.getParameter("moimIntro"));
+		g.setGroupId();//	TODO: 로그인 구현 후 수정 
+		g.setGroupImg(saveDirectory);
+		g.setGroupLeader(maxSize);
+		g.setGroupName( mRequest.getParameter("moimName"));
+		g.setKeyword1(mRequest.getParameter("moimKeyword1"));
+		g.setKeyword2(mRequest.getParameter("moimKeyword2"));
+		g.setKeyword3(mRequest.getParameter("moimKeyword3"));
+		g.setKeyword4(mRequest.getParameter("moimKeyword4"));
+		g.setKeyword5(mRequest.getParameter("moimKeyword5"));
+		g.setMaxMember(Integer.parseInt(mRequest.getParameter("moimMax")));
 		
-		
-		System.out.println(moimName);
-		System.out.println(moimCategori);
-		System.out.println(moimIntro);
-		System.out.println(moimMax);
-		System.out.println(moimKeyword1);
-		System.out.println(moimKeyword2);
-		System.out.println(filename);
 	}
 
 	/**

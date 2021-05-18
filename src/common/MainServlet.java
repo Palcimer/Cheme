@@ -1,6 +1,8 @@
-package gallery.controller;
+package common;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,20 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import gallery.model.service.GalleryService;
-import gallery.model.vo.GalleryViewData;
-
+import notice.model.dao.NoticeDao;
+import notice.model.vo.MainNotice;
+import board.model.dao.BoardDao;
 /**
- * Servlet implementation class GalleryViewServlet
+ * Servlet implementation class MainServlet
  */
-@WebServlet(name = "GalleryView", urlPatterns = { "/galleryView" })
-public class GalleryViewServlet extends HttpServlet {
+@WebServlet(name = "Main", urlPatterns = { "/main" })
+public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryViewServlet() {
+    public MainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +33,16 @@ public class GalleryViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1.인코딩
 		request.setCharacterEncoding("utf-8");
-		System.out.println("test");
-		int galleryNo = Integer.parseInt(request.getParameter("galleryNo"));
-		
-		GalleryViewData gvd = new GalleryService().selectGalleryView(galleryNo);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gallery/galleryView.jsp");
-		request.setAttribute("g", gvd.getG());
-		request.setAttribute("list", gvd.getList());
+		//2.값추출
+		//3.비지니스 로직
+		ArrayList<MainNotice> list = new NoticeDao().selectMainNotice();
+		//4.결과처리
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/main.jsp");
+		request.setAttribute("list", list);
 		rd.forward(request, response);
+		
 		
 	}
 
