@@ -14,6 +14,7 @@ import gnotice.model.service.GNoticeService;
 import gnotice.model.vo.GNotice;
 import gnotice.model.vo.GNoticeComment;
 import gnotice.model.vo.GNoticeViewData;
+import group.model.service.GroupService;
 
 /**
  * Servlet implementation class GNoticeViewServlet
@@ -35,13 +36,31 @@ public class GNoticeViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		int groupId = Integer.parseInt(request.getParameter("groupId"));
+		String memNo = request.getParameter("mem");
+		int memberNo;
+		if(memNo == null) {
+			memberNo = 0;
+		} else {
+			memberNo = Integer.parseInt(memNo);
+		}
 		GNoticeService gns = new GNoticeService();
-		GNoticeViewData gnvd = gns.selectNoticeData(noticeNo);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/gNoticeView.jsp");
-		request.setAttribute("gName", gnvd.getGroupName());
-		request.setAttribute("gNotice", gnvd.getNotice());
-		request.setAttribute("cmtList", gnvd.getCmtList());
-		rd.forward(request, response);
+		GroupService gs = new GroupService();
+		boolean isMem = gs.isMember(groupId, memberNo);
+				
+		if(isMem) {			
+			GNoticeViewData gnvd = gns.selectNoticeData(noticeNo);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/gNoticeView.jsp");
+			request.setAttribute("gName", gnvd.getGroupName());
+			request.setAttribute("gNotice", gnvd.getNotice());
+			request.setAttribute("cmtList", gnvd.getCmtList());
+			rd.forward(request, response);
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			request.setAttribute("msg", "모임에 가입되어 있지 않습니다.");
+			request.setAttribute("loc", "/");
+			rd.forward(request, response);
+		}
 	}
 
 	/**

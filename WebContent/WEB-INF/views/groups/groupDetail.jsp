@@ -42,15 +42,16 @@
 		<table>
 			<%for(GNotice n : noticeList) {%>
 			<tr>
-				<td><a href="/gNoticeView?noticeNo=<%=n.getgNoticeNo()%>"><%=n.getgNoticeTitle() %></a></td>
+				<td><a href="/gNoticeView?groupId=<%=info.getGroupId() %>&noticeNo=<%=n.getgNoticeNo()%>&mem=5"><%=n.getgNoticeTitle() %></a></td>
 				<td><a href="javascript:gNoticeView(<%=n.getgNoticeNo()%>)"><%=n.getgNoticeTitle() %></a></td>
 				<td><%=n.getgNoticeDate() %></td>
-				<form id="transmitMem">
-					<input type="hidden" name="mem" val="5">
-					<input type="hidden" name="noticeNo" val="<%=n.getgNoticeNo()%>">
-				</form>
 			</tr>
 			<%} %>
+			<form action="/gNoticeView" name="transmitMem">
+					<input type="hidden" name="groupId" value="<%=info.getGroupId() %>">
+					<input type="hidden" name="noticeNo">
+					<input type="hidden" name="mem" value="5">					
+			</form>
 		</table>
 		<table>
 		
@@ -59,7 +60,8 @@
 	</div>
 	<script>
 		function gNoticeView(noticeNo) {
-			var form = $("#transmitMem");
+			var form = $("[name=transmitMem]");
+			$("[name=noticeNo]").val(noticeNo);
 			form.method = "post";
 			form.action = "/gNoticeView";
 			form.submit();
