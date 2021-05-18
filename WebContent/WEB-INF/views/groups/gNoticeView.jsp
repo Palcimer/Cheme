@@ -27,11 +27,13 @@
                 <div class="bg-success board-title"><%=gNotice.getgNoticeTitle() %></div>
                 <div class="bg-success board-date"><%=gNotice.getgNoticeDate() %></div>
             </div>
+            <%if(m != null && m.getMemberNo() == gNotice.getgNoticeWriter()) {%>
             <div class="board-buttons">
             	<a href="/writeGNoticeFrm?groupId=<%=gNotice.getGroupId() %>" class="btn btn-outline-primary" style="width:140px">새 공지 작성</a>
                 <a href="/modGNotice?noticeNo=<%=gNotice.getgNoticeNo() %>" class="btn btn-outline-primary" style="width:140px">글 수정</a>
                 <a href="/delGNotice?noticeNo=<%=gNotice.getgNoticeNo() %>" class="btn btn-outline-primary" style="width:140px">글 삭제</a>
-            </div>             
+            </div>          
+            <%} %>   
             <div class="board-body"><%=gNotice.getgNoticeContentBr() %>
             	<%if(gNotice.getFilename() != null) {%>
                 <div class="bg-light files">
@@ -70,12 +72,14 @@
                     <%} %>                    
                 </table>
                 <div class="replysubmit">
-                	<input type="hidden" id="rpLv" value="1">
-					<input type="hidden" id="rpWriter" value="3">
-					<input type="hidden" id="noticeNo" value="<%=gNotice.getgNoticeNo() %>">
-					<input type="hidden" id="rpRef" value="0">
-                    <textarea class="form-control" id="rpContent"></textarea>
-                    <button type="button" class="btn btn-secondary" id="rpCommit" style="width:100%; margin-top:3px">댓글 달기</button>                    
+                	<form action="/gNoticeComment" method="post">                
+	                	<input type="hidden" name="rpLv" value="1">
+						<input type="hidden" name="rpWriter" value="3">
+						<input type="hidden" name="noticeNo" value="<%=gNotice.getgNoticeNo() %>">
+						<input type="hidden" name="rpRef" value="0">
+	                    <textarea class="form-control" name="rpContent"></textarea>
+	                    <button type="submit" class="btn btn-secondary" style="width:100%; margin-top:3px">댓글 달기</button>                    
+	                </form>                    
                 </div>
             </div>
             <div class="board-tolist">
@@ -83,26 +87,6 @@
             </div>
         </div>        
     </div>
-    <script>
-    	$("#rpCommit").click(function() {
-    		var rpLv = $("#rpLv").val();
-    		var rpWriter = $("#rpWriter").val();
-    		var noticeNo = $("#noticeNo").val();
-    		var rpRef = $("#rpRef").val();
-    		var rpContent = $("#rpContent").val();
-    		$.ajax({
-    			url : "/gNoticeComment",
-				type : "post",
-				data : {rpLv:rpLv, rpWriter:rpWriter, noticeNo:noticeNo, rpRef:rpRef, rpContent:rpContent},
-				success : function(data) {
-					console.log(data);
-				},
-				error : function() {
-					console.log("에러!!");
-				}
-    		})
-    	})
-    </script>
     <%@include file="/WEB-INF/views/common/footer.jsp" %>
     
 </body>

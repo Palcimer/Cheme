@@ -14,11 +14,13 @@
 <title>Insert title here</title>
 </head>
 <style>
-	.photo{
+	.view-photo{
 		text-align: center;
+	}
+	#photo{
 		border-bottom: none;
 	}
-	.photo>img{
+	.view-photo>img{
 		width : 750px;
 		margin : 0 auto;
 	}
@@ -38,7 +40,8 @@
 	}
 </style>
 <body>
-	<%@include file="/WEB-INF/views/gallery/freeHeader.jsp" %>
+	<%@include file="/WEB-INF/views/common/header.jsp" %>
+	<br><br><br>	
 	<div class="container">
 		<fieldset>
 			<table class="table" id="galleryView" style="width:100%;">
@@ -49,11 +52,11 @@
 				</tr>
 				<tr>
 				</tr>
-				<tr class="table">
-					<th colspan="5" class="photo"><img src="/upload/photo/<%=g.getGalleryFilepath() %>"></th>
+				<tr>
+					<th colspan="5" class="view-photo" id="photo"><img src="/upload/photo/<%=g.getGalleryFilepath() %>"></th>
 				</tr>
 				<tr>
-					<th colspan="5"><%=g.getGalleryContentBr() %></th>
+					<td colspan="5"><%=g.getGalleryContentBr() %></td>
 				</tr>
 			</table>
 			<div class="list">

@@ -1,6 +1,8 @@
 package gallery.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,8 +37,9 @@ public class GalleryUpdateFrmServlet extends HttpServlet {
 		
 		Gallery g = new GalleryService().selectOneGallery(galleryNo);
 		
-		
-		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gallery/galleryUpdateFrm.jsp");
+		request.setAttribute("g", g);
+		rd.forward(request, response);
 		
 	}
 
