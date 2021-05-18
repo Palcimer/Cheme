@@ -16,7 +16,7 @@
     
 	<div class="head">
         <div class="left">
-            <a href="/main"><img src="img/mainlogo.jpg"></a>
+            <a href="/main"><img src="img/logo.png"></a>
         </div>
         <div class="center">
             <input type="text" id="searchBox" name="searchBox" placeholder="&#61442;">
@@ -25,7 +25,7 @@
         <div class="right">
         	<%if(m != null){ %>
         		<a href="#" class="tag"><%=m.getMemberId() %></a>
-            	<a href="#" class="tag">로그인시 미정</a> 
+            	<a href="/logout" class="tag">로그아웃</a> 
         	<%}else{ %>
         		<a href="/join" class="tag">login</a>
             	<a href="#" class="tag">회원가입</a> 

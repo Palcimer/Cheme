@@ -6,7 +6,7 @@
     <%
     ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
     String pageNavi = (String)request.getAttribute("pageNavi");
-    Member m = (Member)session.getAttribute("m");
+    
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">

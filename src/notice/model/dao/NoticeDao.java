@@ -18,15 +18,15 @@ public class NoticeDao {
 		Connection conn = JDBCTemplate.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rset  = null;
-		String query = "select board_title,board_date,board_no from board_test where rownum<=5 order by board_no desc";
+		String query = "select notice_title,notice_date,notice_no from notice where rownum<=5 order by notice_no desc";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				MainNotice n = new MainNotice();
-				n.setMainNoticeTitle(rset.getString("board_title"));
-				n.setMainNoticeDate(rset.getString("board_date"));
-				n.setMainNoticeNo(rset.getInt("board_no"));
+				n.setMainNoticeTitle(rset.getString("notice_title"));
+				n.setMainNoticeDate(rset.getString("notice_date"));
+				n.setMainNoticeNo(rset.getInt("notice_no"));
 				list.add(n);
 			}
 		} catch (SQLException e) {
