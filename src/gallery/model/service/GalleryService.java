@@ -135,4 +135,16 @@ public class GalleryService {
 		
 		return result;
 	}
+
+	public int galleryInsertComment(GalleryComment gc) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new GalleryDao().galleryInsertComment(conn , gc);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }

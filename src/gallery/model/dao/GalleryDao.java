@@ -202,4 +202,25 @@ public class GalleryDao {
 		return result;
 	}
 
+	public int galleryInsertComment(Connection conn, GalleryComment gc) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into gal_comment vlaues(gal_comment_seq.nextval,20,?,?,?,?"; //20변경해야함
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, gc.getGalleryCommentContentBr());
+			pstmt.setInt(2, gc.getGalleryCommentWriter());
+			pstmt.setInt(3, gc.getGalleryCommentLevel());
+			pstmt.setInt(4, gc.getGalleryCommentRef());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }

@@ -87,7 +87,7 @@
 					<%} //로그인 되어있는경우%>
 					</p>
 					<%if(m != null) {%>
-					<form action="/insertComment" class="recoment">
+					<form action="/galleryInsertComment" class="recoment">
 						<input type="hidden" name="galleryCommentLevel" value="2">
 						<input type="hidden" name="galleryCommentWriter" value="<%=m.getMemberId() %>">
 						<input type="hidden" name="galleryNo" value="<%=g.getGalleryNo() %>">
