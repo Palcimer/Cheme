@@ -29,7 +29,7 @@
             <li><a href="/insertGroupFrm">모임 만들기</a></li>
             <li><a href="#">공지사항</a></li>
             <li><a href="/board?reqPage=1">자유게시판</a></li>
-            <li><a href="#">회사소개</a></li>
+            <li><a href="/">회사소개</a></li>
         </ul>
     </div>
     </div>
