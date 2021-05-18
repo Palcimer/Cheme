@@ -49,9 +49,11 @@ public class GroupDetailServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/groupDetail.jsp");
 		if(isMem) {
 			ArrayList<GNotice> noticeList = gns.selectNoticeList(groupId);
+			request.setAttribute("groupInfo", group);
 			request.setAttribute("noticeList", noticeList);
 			request.setAttribute("isMem", isMem);
 		} else {
+			request.setAttribute("groupInfo", group);
 			request.setAttribute("isMem", isMem);
 		}
 		rd.forward(request, response);

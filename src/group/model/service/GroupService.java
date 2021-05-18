@@ -30,4 +30,12 @@ public class GroupService {
 		return result;
 	}
 
+	public Group selectOneGroup(int groupId) {
+		Connection conn = JDBCTemplate.getConnection();
+		GroupDao dao = new GroupDao();
+		Group group = dao.selectOneGroup(conn, groupId);
+		JDBCTemplate.close(conn);
+		return group;
+	}
+
 }
