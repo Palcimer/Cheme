@@ -5,6 +5,15 @@ pageEncoding="UTF-8"%>
   <head>
     <meta charset="UTF-8" />
     <title>모임 개설하기</title>
+    <link rel="stylesheet" href="/bootstrap.css" />
+    <!-- TODO: 작업 후 빼기 -->
+    <link rel="stylesheet" href="/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-3.3.1.js"
+    ></script>
+
     <style>
       .content-wrap {
         padding: 100px;
@@ -27,8 +36,8 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <%@include file="/WEB-INF/views/common/header.jsp"%>
-    <form action ="/myPageFrm">
-    	<button>마이페이지</button>
+    <form action="/myPageFrm">
+      <button>마이페이지</button>
     </form>
     <div class="content-wrap">
       <div class="content">
@@ -67,10 +76,12 @@ pageEncoding="UTF-8"%>
                 id="moim-leader"
                 value="ㅇㅇ"
               />
-              <!-- TODO: value에 m.getMemberName 넣기 -->
+              <!-- TODO: m.getMemberName 넣기 -->
             </fieldset>
           </div>
-          <!-- 멤버 번호 값 DB에 넘겨주는 용도 -->
+
+          <hr />
+          <!-- 멤버 번호 값 DB에 넘겨줘야 함 -->
           <input type="hidden" value="ㅇㅇ2" name="memberNo" />
           <!-- TODO: m.gemMemberNo 넣기 -->
           <div class="form-group">
@@ -78,10 +89,20 @@ pageEncoding="UTF-8"%>
               >모임 카테고리 설정</label
             >
             <select class="form-select" id="moim-categori" name="moimCategori">
-              <option>운동</option>
-              <option>뷰티</option>
-              <option>개발</option>
-              <option>공부</option>
+              <option>여행</option>
+              <option>스포츠</option>
+              <option>공연전시</option>
+              <option>이벤트</option>
+              <option>게임</option>
+              <option>공예</option>
+              <option>음악</option>
+              <option>그림</option>
+              <option>사진</option>
+              <option>어학</option>
+              <option>독서</option>
+              <option>기술</option>
+              <option>제태크</option>
+              <option>기타</option>
             </select>
           </div>
 
@@ -90,14 +111,14 @@ pageEncoding="UTF-8"%>
               >모임 설정인원</label
             >
             <select class="form-select" id="exampleSelect1" name="moimMax">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+              <option>30</option>
+              <option>40</option>
+              <option>50</option>
             </select>
           </div>
-
+          <hr />
           <div class="form-group">
             <label for="formFile" class="form-label mt-4"
               >모임 대표사진 설정(?x?)</label
@@ -118,6 +139,7 @@ pageEncoding="UTF-8"%>
             </div>
             <div id="noSpace2"></div>
           </div>
+          <hr />
 
           <div class="form-group">
             <label for="moim-intro" class="form-label mt-4"
@@ -131,7 +153,7 @@ pageEncoding="UTF-8"%>
             ></textarea>
             <div id="noSpace3"></div>
           </div>
-
+          <hr />
           <div class="form-group">
             <label
               class="col-form-label col-form-label-sm mt-1"
@@ -216,6 +238,7 @@ pageEncoding="UTF-8"%>
             <div id="error-msg9"></div>
             <div id="error-msg10"></div>
           </div>
+          <hr />
 
           <div class="button-form">
             <button class="btn btn-primary btn-lg">모임등록</button>
@@ -262,7 +285,7 @@ pageEncoding="UTF-8"%>
         self.nameBool = true;
         console.log(self.nameBool);
       } else if (!Reg.test(name)) {
-        $(this).attr("class", "form-control is-invalid");
+        $(this).attr("class", "form-control form-control-lg is-invalid");
         $("[id = nameReg ]").attr("class", "invalid-feedback");
         $("[id = nameReg]").html("최대 20글자");
         self.nameBool = false;

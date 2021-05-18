@@ -1,4 +1,4 @@
-package gallery.controller;
+package member.controller;
 
 import java.io.IOException;
 
@@ -8,21 +8,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import gallery.model.service.GalleryService;
-import gallery.model.vo.Gallery;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class GalleryUpdateFrmServlet
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet(name = "GalleryUpdateFrm", urlPatterns = { "/galleryUpdateFrm" })
-public class GalleryUpdateFrmServlet extends HttpServlet {
+@WebServlet(name = "Logout", urlPatterns = { "/logout" })
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryUpdateFrmServlet() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +29,15 @@ public class GalleryUpdateFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("uft-8");
-		
-		int galleryNo = Integer.parseInt(request.getParameter("galleryNo"));
-		
-		Gallery g = new GalleryService().selectOneGallery(galleryNo);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gallery/galleryUpdateFrm.jsp");
-		request.setAttribute("g", g);
-		rd.forward(request, response);
-		
+		HttpSession session = request.getSession(false);
+		if(session != null) {//로그인 한적이 있는경우
+			//세션을 파기
+			session.invalidate();
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			request.setAttribute("msg", "로그아웃성공");
+			request.setAttribute("loc", "/index.jsp");
+			rd.forward(request, response);
 	}
 
 	/**

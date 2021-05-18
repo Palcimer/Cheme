@@ -22,7 +22,6 @@ public class MemberDao {
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, memberPw);
 			rset = pstmt.executeQuery();
-			System.out.println(memberId + memberPw);
 			if(rset.next()) {
 				m = new Member();
 				m.setMemberNo(rset.getInt("member_no"));

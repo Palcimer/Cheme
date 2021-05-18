@@ -1,4 +1,4 @@
-package gallery.controller;
+package member.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import gallery.model.service.GalleryService;
-import gallery.model.vo.Gallery;
-
 /**
- * Servlet implementation class GalleryUpdateFrmServlet
+ * Servlet implementation class MyPageFrm
  */
-@WebServlet(name = "GalleryUpdateFrm", urlPatterns = { "/galleryUpdateFrm" })
-public class GalleryUpdateFrmServlet extends HttpServlet {
+@WebServlet("/myPageFrm")
+public class MyPageFrm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryUpdateFrmServlet() {
+    public MyPageFrm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +28,10 @@ public class GalleryUpdateFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("uft-8");
-		
-		int galleryNo = Integer.parseInt(request.getParameter("galleryNo"));
-		
-		Gallery g = new GalleryService().selectOneGallery(galleryNo);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gallery/galleryUpdateFrm.jsp");
-		request.setAttribute("g", g);
+		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/myPage.jsp");
 		rd.forward(request, response);
-		
 	}
 
 	/**

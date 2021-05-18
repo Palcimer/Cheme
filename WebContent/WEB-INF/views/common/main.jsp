@@ -13,9 +13,64 @@
 
 </head>
 <body>
+
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+    	.table{
+                text-align: center;
+            }
+            .table td, .table th{
+            	padding : 12px;
+            }
+            #main-notice{
+                color: black;
+                text-decoration: none;
+            }
+			.carousel-inner img{
+                width: 1100px;
+                height: 600px;
+            }
+            #img-h2{
+                text-align: center;
+                font-weight: bolder;
+            }
+    </style>
 	<div class="container">
 	<br><br>
+		<h2 id="img-h2">HOT</h2>
+        <br><br>
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <li data-target="#demo" data-slide-to="1"></li>
+                <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                <div class="carousel-item active" >
+                    <img src="/img/trip.jpg" alt="게임">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/game.jpg" alt="여행">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/run.jpg" alt="운동">
+                </div>
+            </div>
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+		<br><br>
 		<a href="#" id="main-notice"><h2>공지사항</h2></a>
         <table class="table">
         <thead>
@@ -40,6 +95,7 @@
             </tbody>
         </table>
 	</div>
+	<br><br>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
 </body>
