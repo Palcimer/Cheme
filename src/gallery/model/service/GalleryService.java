@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
-import gallery.controller.GallerViewData;
 import gallery.model.dao.GalleryDao;
 import gallery.model.vo.Gallery;
 import gallery.model.vo.GalleryComment;

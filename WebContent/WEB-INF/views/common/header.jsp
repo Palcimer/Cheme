@@ -13,7 +13,7 @@
     
 	<div class="head">
         <div class="left">
-            <a href="#"><img src="img/mainlogo.jpg"></a>
+            <a href="/main"><img src="img/mainlogo.jpg"></a>
         </div>
         <div class="center">
             <input type="text" id="searchBox" name="searchBox" placeholder="&#61442;">
@@ -29,7 +29,7 @@
             <li><a href="/insertGroupFrm">모임 만들기</a></li>
             <li><a href="#">공지사항</a></li>
             <li><a href="/board?reqPage=1">자유게시판</a></li>
-            <li><a href="#">회사소개</a></li>
+            <li><a href="/">회사소개</a></li>
         </ul>
     </div>
     </div>
