@@ -13,7 +13,7 @@
     
 	<div class="head">
         <div class="left">
-            <a href="#"><img src="img/mainlogo.jpg"></a>
+            <a href="/main"><img src="img/mainlogo.jpg"></a>
         </div>
         <div class="center">
             <input type="text" id="searchBox" name="searchBox" placeholder="&#61442;">
