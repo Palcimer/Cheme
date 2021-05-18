@@ -15,7 +15,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-	<div class="container">
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<div class="container">	
 	테스트테스트<br>
 	아무나 보이는 영역<br>
 		<%if(isMem) {%>
@@ -24,7 +25,12 @@
 			<%for(GNotice n : noticeList) {%>
 			<tr>
 				<td><a href="/gNoticeView?noticeNo=<%=n.getgNoticeNo()%>"><%=n.getgNoticeTitle() %></a></td>
+				<td><a href="javascript:gNoticeView(<%=n.getgNoticeNo()%>)"><%=n.getgNoticeTitle() %></a></td>
 				<td><%=n.getgNoticeDate() %></td>
+				<form id="transmitMem">
+					<input type="hidden" name="mem" val="<%=m.getMemberId() %>">
+					<input type="hidden" name="noticeNo" val="<%=n.getgNoticeNo()%>">
+				</form>
 			</tr>
 			<%} %>
 		</table>
@@ -33,5 +39,14 @@
 		</table>
 		<%} %>
 	</div>
+	<script>
+		function gNoticeView(noticeNo) {
+			var form = $("#transmitMem");
+			form.method = "post";
+			form.action = "/gNoticeView";
+			form.submit();
+		}
+	</script>
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

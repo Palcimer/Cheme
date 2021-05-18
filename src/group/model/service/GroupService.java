@@ -3,6 +3,7 @@ package group.model.service;
 import java.sql.Connection;
 
 import common.JDBCTemplate;
+import gnotice.model.dao.GNoticeDao;
 import group.model.dao.GroupDao;
 import group.model.vo.Group;
 
@@ -19,6 +20,14 @@ public class GroupService {
 				}
 				JDBCTemplate.close(conn);
 				return result;
+	}
+
+	public boolean isMember(int groupId, int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GroupDao dao = new GroupDao();
+		boolean result = dao.isMember(conn, groupId, memberNo);
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }
