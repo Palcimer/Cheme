@@ -33,11 +33,23 @@ public class GroupDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int groupId = Integer.parseInt(request.getParameter("Id"));
+		String memNo = request.getParameter("mem");
+		int memberNo;
+		if(memNo == null) {
+			memberNo = 0;
+		} else {
+			memberNo = Integer.parseInt(memNo);
+		}
 		GNoticeService gns = new GNoticeService();
-		ArrayList<GNotice> list = gns.selectNoticeList(groupId);
-		System.out.println(list.get(0).getgNoticeTitle());
+		boolean isMem = gns.isMember(groupId, memberNo);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/groupDetail.jsp");
-		request.setAttribute("list", list);
+		if(isMem) {
+			ArrayList<GNotice> noticeList = gns.selectNoticeList(groupId);
+			request.setAttribute("noticeList", noticeList);
+			request.setAttribute("isMem", isMem);
+		} else {
+			request.setAttribute("isMem", isMem);
+		}
 		rd.forward(request, response);
 	}
 

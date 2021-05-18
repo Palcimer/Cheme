@@ -86,13 +86,20 @@ public class GNoticeService {
 	public int insertNoticeCmt(GNoticeComment cmt) {
 		Connection conn = JDBCTemplate.getConnection();
 		GNoticeDao dao = new GNoticeDao();
-		System.out.println(cmt.getgNcContent());
 		int result = dao.insertNoticeCmt(conn, cmt);
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
+		return result;
+	}
+
+	public boolean isMember(int groupId, int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GNoticeDao dao = new GNoticeDao();
+		boolean result = dao.isMember(conn, groupId, memberNo);
+		JDBCTemplate.close(conn);
 		return result;
 	}
 
