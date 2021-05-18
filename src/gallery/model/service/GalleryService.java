@@ -90,4 +90,49 @@ public class GalleryService {
 		GalleryViewData gvd = new GalleryViewData(g,list);
 		return gvd;
 	}
+
+	public int updateGalleryComment(String galleryCommentContent, int galleryCommentNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new GalleryDao().updateGalleryComment(conn, galleryCommentContent , galleryCommentNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteGalleryComment(int galleryCommentNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new GalleryDao().deleteGalleryComment(conn, galleryCommentNo);
+		if (result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public Gallery selectOneGallery(int galleryNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GalleryDao dao = new GalleryDao();
+		Gallery g = dao.selectOneGallery(conn, galleryNo);
+		JDBCTemplate.close(conn);
+		return g;
+	}
+
+	public int deleteGallery(int galleryNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new GalleryDao().deleteGallery(conn, galleryNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 }

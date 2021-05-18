@@ -41,6 +41,9 @@ public class GalleryComment {
 	public void setGalleryNo(int galleryNo) {
 		this.galleryNo = galleryNo;
 	}
+	public String getGalleryCommentContentBr() {
+		return galleryCommentContent.replaceAll("\r\n","<br>");
+	}
 	public String getGalleryCommentContent() {
 		return galleryCommentContent;
 	}

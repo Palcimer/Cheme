@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import gallery.model.service.GalleryService;
-import gallery.model.vo.GalleryViewData;
+import gallery.model.vo.GalleryComment;
 
 /**
- * Servlet implementation class GalleryViewServlet
+ * Servlet implementation class GalleryCommentUpdateServlet
  */
-@WebServlet(name = "GalleryView", urlPatterns = { "/galleryView" })
-public class GalleryViewServlet extends HttpServlet {
+@WebServlet(name = "GalleryCommentUpdate", urlPatterns = { "/galleryCommentUpdate" })
+public class GalleryCommentUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryViewServlet() {
+    public GalleryCommentUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +32,24 @@ public class GalleryViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		System.out.println("test");
+		
 		int galleryNo = Integer.parseInt(request.getParameter("galleryNo"));
+		int galleryCommentNo = Integer.parseInt(request.getParameter("galleryCommentNo"));
+		String galleryCommentContent = request.getParameter("galleryCommentContent");
 		
-		GalleryViewData gvd = new GalleryService().selectGalleryView(galleryNo);
+		int result = new GalleryService().updateGalleryComment(galleryCommentContent,galleryCommentNo);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gallery/galleryView.jsp");
-		request.setAttribute("g", gvd.getG());
-		request.setAttribute("list", gvd.getList());
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result>0) {
+			request.setAttribute("msg", "수정완료");
+		}else {
+			request.setAttribute("msg", "수정실패");
+		}
+		request.setAttribute("loc", "/galleryView?galleryNo="+galleryNo);
 		rd.forward(request, response);
 		
-	}
+		
+	}  
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

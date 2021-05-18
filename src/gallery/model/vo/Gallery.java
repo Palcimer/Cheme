@@ -59,6 +59,9 @@ public class Gallery {
 	public void setGalleryWriter(int galleryWriter) {
 		this.galleryWriter = galleryWriter;
 	}
+	public String getGalleryContentBr() {
+		return galleryContent.replaceAll("\r\n", "<br>");
+	}
 	public String getGalleryContent() {
 		return galleryContent;
 	}
