@@ -92,7 +92,7 @@ public class InsertGroup extends HttpServlet {
 		
 		g.setGroupDetail(mRequest.getParameter("moimIntro"));
 		g.setGroupImg(mRequest.getFilesystemName("moimPicture"));
-		g.setGroupLeader(9999); // TODO: 로그인 구현 후 수정
+		g.setGroupLeader(1); // TODO: 로그인 구현 후 수정
 		g.setGroupName(mRequest.getParameter("moimName"));
 		g.setKeyword1(mRequest.getParameter("moimKeyword1"));
 		g.setKeyword2(mRequest.getParameter("moimKeyword2"));
