@@ -101,16 +101,16 @@ public class InsertGroup extends HttpServlet {
 		g.setKeyword5(mRequest.getParameter("moimKeyword5"));
 		g.setMaxMember(Integer.parseInt(mRequest.getParameter("moimMax")));
 		
-		//3.비지니스 로직
+//		3.비지니스 로직
 		int result = new GroupService().insertGroup(g);
-		//4.결과처리
+//		4.결과처리
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result>0) {
 			request.setAttribute("msg", "성공");
 		}else {
 			request.setAttribute("msg", "오류");
 		}
-		request.setAttribute("loc", "/photoList");
+		request.setAttribute("loc", "/");
 		rd.forward(request, response);
 	}
 
