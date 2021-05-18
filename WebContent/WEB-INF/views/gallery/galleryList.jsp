@@ -28,17 +28,19 @@
 		overflow : hidden;
 		textalign : center;
 	}
-	.photo>img{
+	.photo img{
 		width : 100%;
 		height : 70%;
 	}
 	#pageNavi>* {
 		justify-content: center !important;
 	}
+
+
 </style>
 </head>
 <body>
-	
+	<%@include file="/WEB-INF/views/gallery/freeHeader.jsp" %>
 	<div class="container">
 		<fieldset>
 			<legend>갤러리</legend>
@@ -48,10 +50,10 @@
 			<div class="photoWrapper">
 				<%for(int i=0;i<list.size();i++) { %>
 					<div class="photo">
-						<a href=""><img src="/upload/photo/<%=list.get(i).getGalleryFilepath()%>"></a>
+						<a href="galleryView?galleryNo=<%=list.get(i).getGalleryNo()%>"><img src="/upload/photo/<%=list.get(i).getGalleryFilepath()%>"></a>
 						<table class="table">
 						<tr>
-						<th scope="col">제목 : <%=list.get(i).getGalleryTitle()%></th>
+						<th scope="col">제목 : <a href="galleryView?galleryNo=<%=list.get(i).getGalleryNo()%>"><%=list.get(i).getGalleryTitle()%></a></th>
 						</tr>
 						<tr>
 						<th scope="col">글쓴이 : <%=list.get(i).getGalleryWriter()%></th>
