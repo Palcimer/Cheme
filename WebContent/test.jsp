@@ -11,6 +11,7 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
+	테스트 from sort222
 		<form action="/groupDetail" method="post">
 			그룹번호<input type="text" name="Id">
 			멤버번호<input type="text" name="mem">
