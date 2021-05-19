@@ -13,14 +13,43 @@
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <title>Insert title here</title>
+<style>
+	.photoWrapper{
+		padding-top : 20px;
+		clear : right;
+		display : flex;
+		justify-content : space-around;
+		flex-wrap : wrap;
+	}
+	.photo{
+		border : 1px solid #ccc;
+		margin-top : 30px;
+		width : 18%;
+		height : 122px;
+		overflow : hidden;
+		transition-duration : 1s;
+	}
+	.photo>img{
+		width : 100%;
+		height : 100px;
+	}
+	.photo>p{
+		text-align : center;
+	}
+	.photo>img:hover{
+		transform : scale(1.4);
+	}
+</style>
 </head>
 <body>
+	
 	<div class="container">
 		<fieldset>
 			<legend>갤러리</legend>
-			<table class="table-hover" style="width:100%;">
-			
-			</table>
+				<div class="photoWrapper">
+					<img src="/upload/photo/"+p.filepath>;
+					<p class="caption">+p.photoContent+"</p>";
+				</div>
 			<div id="pageNavi"><%=pageNavi %></div>
 		</fieldset>
 	</div>
