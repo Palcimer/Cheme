@@ -38,14 +38,16 @@ public class GNoticeCommentServlet extends HttpServlet {
 		int rpRef = Integer.parseInt(request.getParameter("rpRef"));
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		String rpContent = request.getParameter("rpContent");
+		int mem = Integer.parseInt(request.getParameter("mem"));
+		int groupId = Integer.parseInt(request.getParameter("groupId"));
 		GNoticeComment cmt = new GNoticeComment(0, rpLv, rpRef, noticeNo, null, rpWriter, rpContent, null);
 		int result = new GNoticeService().insertNoticeCmt(cmt);
 		if(result > 0) {
-			response.sendRedirect("/gNoticeView?noticeNo=" + noticeNo);
+			response.sendRedirect("/gNoticeView?groupId=" + groupId + "&noticeNo=" + noticeNo + "&mem=" + mem);
 		} else {			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-			request.setAttribute("msg", "에러가 발생했습니다.");
-			request.setAttribute("loc", "/gNoticeView?noticeNo=" + noticeNo);
+			request.setAttribute("msg", "댓글을 다는 중 에러가 발생했습니다.");
+			request.setAttribute("loc", "/gNoticeView?groupId=" + groupId + "&noticeNo=" + noticeNo + "&mem=" + mem);
 			rd.forward(request, response);
 		}
 		

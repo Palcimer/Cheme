@@ -51,7 +51,7 @@
                         	<span><%=cmt.getgNcContent() %></span>
                         	<textarea name="gNcContent" class="form-control" style="display:none"><%=cmt.getgNcContent() %></textarea>
                         	<span class="cmtMenu"> 
-                        		<a href="javascript:void(0)" onclick="modCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>)">수정</a>
+                        		<a href="javascript:void(0)" onclick="modCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">수정</a>
                         		<a href="javascript:void(0)" onclick="delCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">삭제</a>
                         		<a>답글</a>
                         	</span>
@@ -82,6 +82,8 @@
 						<input type="hidden" name="rpWriter" value="3">
 						<input type="hidden" name="noticeNo" value="<%=gNotice.getgNoticeNo() %>">
 						<input type="hidden" name="rpRef" value="0">
+						<input type="hidden" name="groupId" value="<%=gNotice.getGroupId() %>">
+						<input type="hidden" name="mem" value="5">
 	                    <textarea class="form-control" name="rpContent"></textarea>
 	                    <button type="submit" class="btn btn-secondary" style="width:100%; margin-top:3px">댓글 달기</button>                    
 	                </form>                    
@@ -93,29 +95,31 @@
         </div>        
     </div>
     <script>
-    	function modCmt(obj, cmtNo, noticeNo) {
+    	function modCmt(obj, cmtNo, noticeNo, groupId, mem) {
     		$(obj).parent().prev().prev().hide();
-    		$("[name=gNcContent]").show();
+    		$(obj).parent().prev().show();
     		$(obj).html("수정완료");
-    		$(obj).attr("onclick", "modComplete(this, " + cmtNo + ", " + noticeNo + ")");
+    		$(obj).attr("onclick", "modComplete(this, " + cmtNo + ", " + noticeNo + ", " + groupId + ", " + mem + ")");
     		$(obj).next().html("수정취소");
-    		$(obj).next().attr("onclick", "modCancel(this, " + cmtNo + ", " + noticeNo + ")");
+    		$(obj).next().attr("onclick", "modCancel(this, " + cmtNo + ", " + noticeNo + ", " + groupId + ", " + mem + ")");
     		$(obj).next().next().hide();
     	}
-    	function modCancel(obj, cmtNo, noticeNo) {
-    		$("[name=gNcContent]").hide();
+    	function modCancel(obj, cmtNo, noticeNo, groupId, mem) {
+    		$(obj).parent().prev().hide();
     		$(obj).parent().prev().prev().show();
     		$(obj).prev().html("수정");
-    		$(obj).prev().attr("onclick", "modCmt(this, " + cmtNo + ", " + noticeNo + ")");
+    		$(obj).prev().attr("onclick", "modCmt(this, " + cmtNo + ", " + noticeNo + ", " + groupId + ", " + mem + ")");
     		$(obj).html("삭제");
-    		$(obj).attr("onclick", "delCmt(this, " + cmtNo + ", " + noticeNo + ")");
+    		$(obj).attr("onclick", "delCmt(this, " + cmtNo + ", " + noticeNo + ", " + groupId + ", " + mem + ")");
     		$(obj).next().show();
     	}
-    	function modComplete(obj, cmtNo, noticeNo) {
+    	function modComplete(obj, cmtNo, noticeNo, groupId, mem) {
     		var form = $("<form action='/modGNoticeComment' method='post'></form>");
     		form.append($("<input type='hidden' name='cmtNo' value='" + cmtNo + "'>"));
     		form.append($("<input type='hidden' name='noticeNo' value='" + noticeNo + "'>"));
-    		form.append($("[name=gNcContent]"));
+    		form.append($("<input type='hidden' name='groupId' value='" + groupId + "'>"));
+    		form.append($("<input type='hidden' name='mem' value='" + mem + "'>"));
+    		form.append($(obj).parent().prev());
     		$("body").append(form);
     		form.submit();
     	}
