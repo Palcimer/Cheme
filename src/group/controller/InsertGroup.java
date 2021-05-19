@@ -29,7 +29,6 @@ public class InsertGroup extends HttpServlet {
 	 */
 	public InsertGroup() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -38,7 +37,6 @@ public class InsertGroup extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 //		2.값추출
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
@@ -92,7 +90,7 @@ public class InsertGroup extends HttpServlet {
 		
 		g.setGroupDetail(mRequest.getParameter("moimIntro"));
 		g.setGroupImg(mRequest.getFilesystemName("moimPicture"));
-		g.setGroupLeader(1); // TODO: 로그인 구현 후 수정
+		g.setGroupLeader(Integer.parseInt(mRequest.getParameter("memberNo")));
 		g.setGroupName(mRequest.getParameter("moimName"));
 		g.setKeyword1(mRequest.getParameter("moimKeyword1"));
 		g.setKeyword2(mRequest.getParameter("moimKeyword2"));
@@ -120,7 +118,6 @@ public class InsertGroup extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

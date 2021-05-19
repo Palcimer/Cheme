@@ -1,45 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> <% Member member =
+(Member)request.getAttribute("member"); %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>모임 개설하기</title>
-    <link rel="stylesheet" href="/bootstrap.css" />
-    <!-- TODO: 작업 후 빼기 -->
-    <link rel="stylesheet" href="/bootstrap.min.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script
       type="text/javascript"
       src="http://code.jquery.com/jquery-3.3.1.js"
     ></script>
-
+ <script
+              src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+              integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+              crossorigin="anonymous"
+            ></script>
     <style>
       .content-wrap {
-        padding: 100px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        background-color: #F8F9FA;
       }
       .content {
         width: 770px;
         margin: 0 auto;
         padding-left: 100px;
         padding-right: 100px;
-        border: 1px solid #ccc;
-        border-radius: 1.5%;
       }
       .button-form {
-        padding: 50px;
+        padding-top: 30px;
+        padding-bottom: 30px;
         display: flex;
         justify-content: center;
-        justify-content: space-around;
+      }
+      button {
+        width: 284px;
+      }
+      .card-header {
+        width: 568;
       }
     </style>
   </head>
   <body>
     <%@include file="/WEB-INF/views/common/header.jsp"%>
+
     <form action="/myPageFrm">
+   		
       <button>마이페이지</button>
     </form>
     <div class="content-wrap">
+      <hr />
       <div class="content">
         <form
           action="/insertGroup"
@@ -47,6 +57,25 @@ pageEncoding="UTF-8"%>
           enctype="multipart/form-data"
           id="moimForm"
         >
+        <div class="modal" id="modal">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">모임 등록 확인</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true"></span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <p>이대로 등록하시겠습니까?</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="submit" class="btn btn-primary" id = submit>네</button>
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
           <legend>모임 만들기</legend>
 
           <div class="form-group">
@@ -74,16 +103,18 @@ pageEncoding="UTF-8"%>
                 class="form-control form-control-lg"
                 type="text"
                 id="moim-leader"
-                value="ㅇㅇ"
+                value="<%=member.getMemberId() %>"
               />
-              <!-- TODO: m.getMemberName 넣기 -->
             </fieldset>
           </div>
 
           <hr />
           <!-- 멤버 번호 값 DB에 넘겨줘야 함 -->
-          <input type="hidden" value="ㅇㅇ2" name="memberNo" />
-          <!-- TODO: m.gemMemberNo 넣기 -->
+          <input
+            type="hidden"
+            value="<%=member.getMemberNo() %>"
+            name="memberNo"
+          />
           <div class="form-group">
             <label for="moim-categori" class="form-label mt-4"
               >모임 카테고리 설정</label
@@ -123,6 +154,7 @@ pageEncoding="UTF-8"%>
             <label for="formFile" class="form-label mt-4"
               >모임 대표사진 설정(?x?)</label
             >
+            <!-- TODO: 리스트 나오면 변경 -->
             <input
               class="form-control"
               type="file"
@@ -131,7 +163,11 @@ pageEncoding="UTF-8"%>
               onchange="loadImg(this);"
             />
             <div id="img-viewer">
-              <div class="card border-success mb-3" style="max-width: 568px">
+              <div
+                class="card border mb-3"
+                style="max-width: 564px"
+                id="imageCard"
+              >
                 <div class="card-header">대표사진</div>
 
                 <img id="img-view" width="568px" />
@@ -241,7 +277,7 @@ pageEncoding="UTF-8"%>
           <hr />
 
           <div class="button-form">
-            <button class="btn btn-primary btn-lg">모임등록</button>
+            <button id="sb"  class="btn btn-primary btn-lg">모임등록</button>
 
             <button type="reset" class="btn btn-secondary btn-lg">
               다시하기
@@ -251,6 +287,7 @@ pageEncoding="UTF-8"%>
           </div>
         </form>
       </div>
+      <hr />
     </div>
 
     <%@include file="/WEB-INF/views/common/footer.jsp"%>
@@ -266,6 +303,7 @@ pageEncoding="UTF-8"%>
         reader.onload = function (e) {
           $("#img-view").attr("src", e.target.result);
           $("[name = moimPicture]").attr("class", "form-control is-valid");
+          $("#imageCard").attr("class", "card border-success mb-3");
         };
       } else {
         //첨부파일이 없는경우
@@ -278,23 +316,21 @@ pageEncoding="UTF-8"%>
     $("[name = moimName]").keyup(function () {
       var Reg = /^[a-zA-Z0-9가-힣\s]{1,}$/;
       var name = $(this).val();
-      var Reg2 = /^.{0,20}$/;
-
+      console.log(name.length);
       if (Reg.test(name)) {
         $(this).attr("class", "form-control form-control-lg is-valid");
         self.nameBool = true;
-        console.log(self.nameBool);
-      } else if (!Reg.test(name)) {
-        $(this).attr("class", "form-control form-control-lg is-invalid");
-        $("[id = nameReg ]").attr("class", "invalid-feedback");
-        $("[id = nameReg]").html("최대 20글자");
-        self.nameBool = false;
+        if (name.length > 20) {
+          $(this).attr("class", "form-control form-control-lg is-invalid");
+          $("[id = nameReg ]").attr("class", "invalid-feedback");
+          $("[id = nameReg]").html("최대 20글자");
+          self.nameBool = false;
+        }
       } else if (!Reg.test(name)) {
         $(this).attr("class", "form-control form-control-lg is-invalid");
         $("[id = nameReg]").attr("class", "invalid-feedback");
         $("[id = nameReg]").html("특수문자 및 자음, 모음 제한");
         self.nameBool = false;
-        console.log(self.nameBool);
       }
     });
 
@@ -317,7 +353,7 @@ pageEncoding="UTF-8"%>
     });
 
     $("[name = moimKeyword1]").keyup(function () {
-      var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,}$/;
+      var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,11}$/;
       var name = $(this).val();
       var Reg2 = /^.{0,12}$/;
       if (Reg.test(name)) {
@@ -337,7 +373,7 @@ pageEncoding="UTF-8"%>
     });
 
     $("[name = moimKeyword2]").keyup(function () {
-      var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,}$/;
+      var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,11}$/;
       var name = $(this).val();
       var Reg2 = /^.{0,12}$/;
       if (Reg.test(name)) {
@@ -357,7 +393,7 @@ pageEncoding="UTF-8"%>
     });
 
     $("[name = moimKeyword3]").keyup(function () {
-      var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,}$/;
+      var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,11}$/;
       var name = $(this).val();
       var Reg2 = /^.{0,12}$/;
       if (Reg.test(name)) {
@@ -377,7 +413,7 @@ pageEncoding="UTF-8"%>
     });
 
     $("[name = moimKeyword4]").keyup(function () {
-      var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,}$/;
+      var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,11}$/;
       var name = $(this).val();
       var Reg2 = /^.{0,12}$/;
       if (Reg.test(name)) {
@@ -397,7 +433,7 @@ pageEncoding="UTF-8"%>
     });
 
     $("[name = moimKeyword5]").keyup(function () {
-      var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,}$/;
+      var Reg = /^#[a-zA-Z0-9가-힣ㄱ-ㅎ]{1,11}$/;
       var name = $(this).val();
       var Reg2 = /^.{0,12}$/;
       if (Reg.test(name)) {
@@ -416,7 +452,7 @@ pageEncoding="UTF-8"%>
       }
     });
 
-    $("#moimForm").submit(function () {
+    $("#sb").click(function (e) {
       if (
         !self.nameBool ||
         !self.bool ||
@@ -430,7 +466,7 @@ pageEncoding="UTF-8"%>
         if ($("#moim-name").val() == "") {
           $("#moim-name").attr(
             "class",
-            "form-control form-control-sm is-invalid"
+            "form-control form-control-lg is-invalid"
           );
           $("#noSpace1").attr("class", "invalid-feedback");
           $("#noSpace1").html("필수 입력항목입니다.");
@@ -438,7 +474,7 @@ pageEncoding="UTF-8"%>
         if ($("#formFile").val() == "") {
           $("#formFile").attr(
             "class",
-            "form-control form-control-sm is-invalid"
+            "form-control form-control is-invalid"
           );
           $("[id = noSpace2]").attr("class", "invalid-feedback");
           $("[id = noSpace2]").html("필수 입력항목입니다.");
@@ -446,14 +482,15 @@ pageEncoding="UTF-8"%>
         if ($("#moim-intro").val() == "") {
           $("#moim-intro").attr(
             "class",
-            "form-control form-control-sm is-invalid"
+            "form-control form-control is-invalid"
           );
           $("[id = noSpace3]").attr("class", "invalid-feedback");
           $("[id = noSpace3]").html("필수 입력항목입니다.");
         }
         return false;
       }
-      alert("dd");
+      	e.preventDefault();
+		$('#modal').modal("show");
       return true;
     });
   </script>
