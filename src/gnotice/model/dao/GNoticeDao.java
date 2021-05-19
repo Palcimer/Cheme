@@ -16,7 +16,7 @@ public class GNoticeDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<GNotice> list = new ArrayList<GNotice>();
-		String query = "SELECT ROWNUM, GN.* FROM (SELECT * FROM G_NOTICE WHERE GROUP_ID=? ORDER BY 1 DESC) GN WHERE ROWNUM BETWEEN ? AND ?";
+		String query = "SELECT ROWNUM, GNN.* FROM (SELECT ROWNUM AS G_NOTICE_NO_DESC, GN.* FROM (SELECT * FROM G_NOTICE WHERE GROUP_ID=? ORDER BY 1) GN ORDER BY 1 DESC) GNN WHERE ROWNUM BETWEEN ? AND ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, groupId);
@@ -33,7 +33,7 @@ public class GNoticeDao {
 				gn.setgNoticeTitle(rset.getString("g_notice_title"));
 				gn.setgNoticeWriter(rset.getInt("g_notice_writer"));
 				gn.setGroupId(rset.getInt("group_id"));	
-				gn.setRnum(rset.getInt("rownum"));
+				gn.setRnum(rset.getInt("g_notice_no_desc"));
 				list.add(gn);
 			}
 		} catch (SQLException e) {
@@ -294,6 +294,28 @@ public class GNoticeDao {
 		}
 		
 		return gName;
+	}
+
+	public int totalNotice(Connection conn, int groupId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT COUNT(*) AS CNT FROM G_NOTICE WHERE GROUP_ID=?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, groupId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 

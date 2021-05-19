@@ -48,8 +48,11 @@ public class GNoticeListServlet extends HttpServlet {
 		boolean isMem = gs.isMember(groupId, memberNo);
 		if(isMem) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/gNoticeList.jsp");
-			GNoticeListData pageData = gns.selectGNoticeList(groupId, page); 
-			request.setAttribute("list", list);
+			GNoticeListData pageData = gns.selectGNoticeList(groupId, page);
+			String pageNavi = pageData.getPageNavi().replace("page=", "mem=" + memberNo + "&page=");
+			request.setAttribute("groupName", pageData.getGroupName());
+			request.setAttribute("list", pageData.getList());
+			request.setAttribute("pageNavi", pageNavi);
 			rd.forward(request, response);
 			
 		} else {
