@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@include file="/WEB-INF/views/gallery/freeHeader.jsp" %>
+	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
 		<form action="/galleryWrite" method="post" enctype="multipart/form-data">
 			<fieldset>
@@ -23,12 +23,13 @@
 						<th>작성자</th>
 						<td>
 							<input type="hidden" name="galleryWriter" value="1">작성자
-						</td>
-						<th>첨부파일</th>
-						<td style="text-align:left">
-							<input type="file" name="filename" onchange="loadImg(this);">
-						</td>
-					</tr>				
+						</td>						
+					</tr>
+					<tr class="table-active" id="file-form">						
+						<td colspan="3">												
+						<input class="form-control" type="file" id="formFile" name="filename" onchange="loadImg(this);">							
+						</td>					
+					</tr>		
 					<tr class="table-active">
 						<th>이미지</th>
 						<td colspan="3">
@@ -44,8 +45,8 @@
 						</td>
 					</tr>
 					<tr class="table-active">
-						<th colspan="4">
-							<button type="submit" class="btn btn-primary btn btn-block">등록하기</button>	
+						<th class="on-btn"colspan="4">
+							<button type="submit" class="btn btn-primary">등록하기</button>	
 						</th>
 					</tr>
 				</table>

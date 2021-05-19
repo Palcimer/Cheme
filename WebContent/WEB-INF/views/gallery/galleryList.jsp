@@ -26,7 +26,7 @@
 		width : 30%;
 		height: 300px;
 		overflow : hidden;
-		textalign : center;
+		
 	}
 	.photo img{
 		width : 100%;
@@ -35,18 +35,20 @@
 	#pageNavi>* {
 		justify-content: center !important;
 	}
-
+	.write-btn{
+		text-align : right;
+	}
 
 </style>
 </head>
 <body>
-	<%@include file="/WEB-INF/views/gallery/freeHeader.jsp" %>
+	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
 		<fieldset>
-			<legend>갤러리</legend>
-			<div>
+			<legend>갤러리</legend>			
+			<div class="write-btn">
 				<a class="btn btn-info writeBtn" href="/galleryWriteFrm">글쓰기</a>
-			</div>
+			</div>			
 			<div class="photoWrapper">
 				<%for(int i=0;i<list.size();i++) { %>
 					<div class="photo">
