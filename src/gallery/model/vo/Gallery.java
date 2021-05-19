@@ -1,6 +1,7 @@
 package gallery.model.vo;
 
 public class Gallery {
+	
 	private String mName;
 	private int rnum;
 	private int galleryNo;

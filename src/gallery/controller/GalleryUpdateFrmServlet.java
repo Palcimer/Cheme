@@ -31,7 +31,7 @@ public class GalleryUpdateFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("uft-8");
+		request.setCharacterEncoding("utf-8");
 		
 		int galleryNo = Integer.parseInt(request.getParameter("galleryNo"));
 		
