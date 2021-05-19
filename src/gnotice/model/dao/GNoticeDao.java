@@ -33,6 +33,7 @@ public class GNoticeDao {
 				gn.setgNoticeTitle(rset.getString("g_notice_title"));
 				gn.setgNoticeWriter(rset.getInt("g_notice_writer"));
 				gn.setGroupId(rset.getInt("group_id"));	
+				gn.setRnum(rset.getInt("rownum"));
 				list.add(gn);
 			}
 		} catch (SQLException e) {
@@ -106,7 +107,7 @@ public class GNoticeDao {
 		return list;
 	}
 
-	public String selectGroupName(Connection conn, int noticeNo) {
+	public String selectGroupNameByNoticeNo(Connection conn, int noticeNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String gName = null;
@@ -269,6 +270,30 @@ public class GNoticeDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public String selectGroupNameByGroupId(Connection conn, int groupId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String gName = null;
+		String query = "SELECT GROUP_NAME FROM GROUPS WHERE GROUP_ID=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, groupId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				gName = rset.getString("group_name");
+			}
+			System.out.println(gName);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return gName;
 	}
 
 

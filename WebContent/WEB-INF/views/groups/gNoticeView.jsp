@@ -23,6 +23,7 @@
         <div>
             <h6><%=gName %></h6>
             <h3>공지사항</h3>
+            <!-- 공지 본문 -->
             <div>
                 <div class="bg-success board-title"><%=gNotice.getgNoticeTitle() %></div>
                 <div class="bg-success board-date"><%=gNotice.getgNoticeDate() %></div>
@@ -41,6 +42,7 @@
                 </div>
                 <%} %>
             </div>
+            <!-- 댓글 -->
             <div class="bg-light replies">
             	<table class="table">
             		<%for(GNoticeComment cmt : cmtList) {%> 
@@ -53,10 +55,10 @@
                         	<span class="cmtMenu"> 
                         		<a href="javascript:void(0)" onclick="modCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">수정</a>
                         		<a href="javascript:void(0)" onclick="delCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">삭제</a>
-                        		<a>답글</a>
+                        		<a href="javascript:void(0)" onclick="delCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">댓글</a>
                         	</span>
                         </td>
-                        <td style="text-align:center; width:100px;"><%=cmt.getgNcDate() %></td>
+                        <td style="text-align:center; width:120px;"><%=cmt.getgNcDate() %></td>
                     </tr>
 	                    <%for(GNoticeComment cmtlv2 : cmtList) {%> 
 	                    <%if(cmtlv2.getgNcLev() == 2 && cmtlv2.getgNcRef() == cmt.getgNcNo()) {%>
@@ -90,7 +92,7 @@
                 </div>
             </div>
             <div class="board-tolist">
-            	<a href="/gNoticeList?Page=1" class="btn btn-outline-primary" style="width:40%">글 목록으로</a>
+            	<a href="/gNoticeList?groupId=1&mem=5&page=1" class="btn btn-outline-primary" style="width:40%">글 목록으로</a>
             </div>
         </div>        
     </div>

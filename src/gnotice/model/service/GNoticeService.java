@@ -7,6 +7,7 @@ import common.JDBCTemplate;
 import gnotice.model.dao.GNoticeDao;
 import gnotice.model.vo.GNotice;
 import gnotice.model.vo.GNoticeComment;
+import gnotice.model.vo.GNoticeListData;
 import gnotice.model.vo.GNoticeViewData;
 
 public class GNoticeService {
@@ -23,7 +24,7 @@ public class GNoticeService {
 	public GNoticeViewData selectNoticeData(int noticeNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		GNoticeDao dao = new GNoticeDao();
-		String gName = dao.selectGroupName(conn, noticeNo);
+		String gName = dao.selectGroupNameByNoticeNo(conn, noticeNo);
 		GNotice notice = dao.selectNotice(conn, noticeNo);
 		ArrayList<GNoticeComment> list = dao.selectNoticeCmtList(conn, noticeNo);
 		JDBCTemplate.close(conn);
@@ -125,6 +126,22 @@ public class GNoticeService {
 			JDBCTemplate.rollback(conn);
 		}
 		return result;
+	}
+
+	public GNoticeListData selectGNoticeList(int groupId, int page) {
+		Connection conn = JDBCTemplate.getConnection();
+		GNoticeDao dao = new GNoticeDao();
+		int numPerPage = 8;
+		int end = page * numPerPage;
+		int start = end - numPerPage + 1;
+		
+		//to do: 페이지 내비게이션		
+		
+		String groupName = dao.selectGroupNameByGroupId(conn, groupId);
+		ArrayList<GNotice> list = dao.selectNoticeList(conn, start, end, groupId);
+		JDBCTemplate.close(conn);
+		//to do: 리턴값
+		return null;
 	}
 
 }
