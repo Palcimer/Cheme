@@ -17,12 +17,14 @@ public class GBoard {
     private String gBoardFilename;
     // 그룹게시글파일명(시스템명) 
     private String gBoardFilepath;
+    //그룹게시글 작성자 이름
+    private String gBoardWriterName;
 	public GBoard() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public GBoard(int gBoardNo, int groupId, String gBoardTitle, String gBoardContent, int gBoardWriter,
-			String gBoardDate, String gBoardFilename, String gBoardFilepath) {
+			String gBoardDate, String gBoardFilename, String gBoardFilepath, String gBoardWriterName) {
 		super();
 		this.gBoardNo = gBoardNo;
 		this.groupId = groupId;
@@ -32,6 +34,7 @@ public class GBoard {
 		this.gBoardDate = gBoardDate;
 		this.gBoardFilename = gBoardFilename;
 		this.gBoardFilepath = gBoardFilepath;
+		this.gBoardWriterName = gBoardWriterName;
 	}
 	public int getgBoardNo() {
 		return gBoardNo;
@@ -81,6 +84,12 @@ public class GBoard {
 	public void setgBoardFilepath(String gBoardFilepath) {
 		this.gBoardFilepath = gBoardFilepath;
 	}
-    
+	public String getgBoardWriterName() {
+		return gBoardWriterName;
+	}
+	public void setgBoardWriterName(String gBoardWriterName) {
+		this.gBoardWriterName = gBoardWriterName;
+	}
+	
 
 }

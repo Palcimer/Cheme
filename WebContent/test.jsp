@@ -21,6 +21,7 @@
 			<input type="submit" value="상세페이지">
 		</form>
     	<a href="/groupDetail?Id=1">모임 상세페이지</a>
+    	<a href="/writeGBoardFrm?groupId=1">모임 게시글 쓰기 페이지</a>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>

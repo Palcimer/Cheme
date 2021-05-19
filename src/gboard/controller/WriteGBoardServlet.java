@@ -1,4 +1,4 @@
-package gnotice.controller;
+package gboard.controller;
 
 import java.io.IOException;
 
@@ -14,20 +14,20 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import gnotice.model.service.GNoticeService;
-import gnotice.model.vo.GNotice;
+import gboard.model.service.GBoardService;
+import gboard.model.vo.GBoard;
 
 /**
- * Servlet implementation class WriteGNoticeServlet
+ * Servlet implementation class WriteGBoardServlet
  */
-@WebServlet(name = "WriteGNotice", urlPatterns = { "/writeGNotice" })
-public class WriteGNoticeServlet extends HttpServlet {
+@WebServlet(name = "WriteGBoard", urlPatterns = { "/writeGBoard" })
+public class WriteGBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WriteGNoticeServlet() {
+    public WriteGBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,24 +53,24 @@ public class WriteGNoticeServlet extends HttpServlet {
 		//매개변수: request 객체, 파일저장경로, 최대크기, 인코딩타입, 파일명 중복 처리 객체
 		MultipartRequest mRequest = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		//파일업로드 전처리 완료
-		//값 가져오기
-		GNotice notice = new GNotice();	
-		notice.setgNoticeWriter(Integer.parseInt(mRequest.getParameter("noticeWriter")));
-		notice.setgNoticeContent(mRequest.getParameter("noticeContent"));
-		notice.setgNoticeTitle(mRequest.getParameter("noticeTitle"));
-		notice.setGroupId(Integer.parseInt(mRequest.getParameter("groupId")));
-		notice.setFilename(mRequest.getOriginalFileName("noticeFile"));
-		notice.setFilepath(mRequest.getFilesystemName("noticeFile"));
 		
-		int result = new GNoticeService().insertNotice(notice);
+		GBoard board = new GBoard();
+		board.setgBoardContent(mRequest.getParameter("boardContent"));
+		board.setgBoardTitle(mRequest.getParameter("boardTitle"));
+		board.setgBoardFilename(mRequest.getOriginalFileName("boardFile"));
+		board.setgBoardFilepath(mRequest.getFilesystemName("boardFile"));
+		board.setgBoardWriter(Integer.parseInt(mRequest.getParameter("boardWriter")));
+		board.setGroupId(Integer.parseInt(mRequest.getParameter("groupId")));
+		
+		int result = new GBoardService().insertBoard(board);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result > 0) {
-			request.setAttribute("msg", "공지사항 등록 성공");
+			request.setAttribute("msg", "게시글 등록 성공");
 		} else {
-			request.setAttribute("msg", "공지사항 등록 실패");
+			request.setAttribute("msg", "게시글 등록 실패");
 		}
-		request.setAttribute("loc", "/noticeList?page=1");
+		request.setAttribute("loc", "/gBoardList?page=1");
 		rd.forward(request, response);
 	}
 

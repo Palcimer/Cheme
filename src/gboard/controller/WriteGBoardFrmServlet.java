@@ -1,4 +1,4 @@
-package gnotice.controller;
+package gboard.controller;
 
 import java.io.IOException;
 
@@ -12,18 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import group.model.service.GroupService;
 import group.model.vo.Group;
 
-
 /**
- * Servlet implementation class WriteGNoticeFrmServlet
+ * Servlet implementation class WriteGBoardFrmServlet
  */
-@WebServlet(name = "WriteGNoticeFrm", urlPatterns = { "/writeGNoticeFrm" })
-public class WriteGNoticeFrmServlet extends HttpServlet {
+@WebServlet(name = "WriteGBoardFrm", urlPatterns = { "/writeGBoardFrm" })
+public class WriteGBoardFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WriteGNoticeFrmServlet() {
+    public WriteGBoardFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,11 +33,10 @@ public class WriteGNoticeFrmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int groupId = Integer.parseInt(request.getParameter("groupId"));
 		Group group = new GroupService().selectOneGroup(groupId);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/writeGNotice.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/writeGBoard.jsp");
 		request.setAttribute("groupId", groupId);
 		request.setAttribute("groupName", group.getGroupName());
 		rd.forward(request, response);
-		
 	}
 
 	/**
