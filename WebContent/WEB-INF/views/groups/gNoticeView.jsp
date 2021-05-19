@@ -55,8 +55,22 @@
                         	<span class="cmtMenu"> 
                         		<a href="javascript:void(0)" onclick="modCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">수정</a>
                         		<a href="javascript:void(0)" onclick="delCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">삭제</a>
-                        		<a href="javascript:void(0)" onclick="delCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">댓글</a>
+                        		<a href="javascript:void(0)" onclick="recShow(this)">댓글</a>
                         	</span>
+                        	
+                        	<form action = "/gNoticeComment" style="display:none">
+								<input type="hidden" name="rpLv" value="2">
+								<input type="hidden" name="rpWriter" value="3">
+								<input type="hidden" name="noticeNo" value="<%=gNotice.getgNoticeNo() %>">
+								<input type="hidden" name="rpRef" value="<%=cmt.getgNcNo() %>">
+								<input type="hidden" name="groupId" value="<%=gNotice.getGroupId() %>">
+								<input type="hidden" name="mem" value="5">
+								<textarea class="form-control" name="rpContent"></textarea>
+								<span class="cmtMenu"> 
+									<a href="javascript:void(0)" onclick="reCmt(this)">댓글 달기</a>
+									<a href="javascript:void(0)" onclick="cancelCmt(this)">취소</a>
+								</span>
+							</form>					
                         </td>
                         <td style="text-align:center; width:120px;"><%=cmt.getgNcDate() %></td>
                     </tr>
@@ -68,8 +82,12 @@
 	                        	<%=cmtlv2.getgNcWriterName() %>
 	                        </th>
 	                        <td>
-	                        	<%=cmtlv2.getgNcContent() %>
-	                        	<span class="cmtMenu">수정 삭제</span>
+	                        	<span><%=cmtlv2.getgNcContent() %></span>
+	                        	<textarea name="gNcContent" class="form-control" style="display:none"><%=cmtlv2.getgNcContent() %></textarea>
+	                        	<span class="cmtMenu">
+	                        		<a href="javascript:void(0)" onclick="modCmt(this, <%=cmtlv2.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">수정</a>
+	                        		<a href="javascript:void(0)" onclick="delCmt(this, <%=cmtlv2.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">삭제</a>
+	                        	</span>
 	                        </td>
 	                        <td style="text-align:center"><%=cmtlv2.getgNcDate() %></td>
 	                    </tr>
@@ -97,6 +115,18 @@
         </div>        
     </div>
     <script>
+    	function recShow(obj) {
+    		$(obj).parent().next().show();
+    		$(obj).parent().hide();
+    	}
+    	function cancelCmt(obj) {
+    		$(obj).parent().parent().hide();
+    		$(obj).parent().parent().prev().show();
+    	}
+    	function reCmt(obj) {
+    		var form = $(obj).parent().parent();
+    		form.submit();
+    	}
     	function modCmt(obj, cmtNo, noticeNo, groupId, mem) {
     		$(obj).parent().prev().prev().hide();
     		$(obj).parent().prev().show();

@@ -195,13 +195,18 @@ public class GNoticeDao {
 	public int insertNoticeCmt(Connection conn, GNoticeComment cmt) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO G_NOTICE_COMMENT VALUES(G_NOTICE_COMMENT_SEQ.NEXTVAL, ?, ?, ?, ?, NULL, DEFAULT)";
+		String query = "INSERT INTO G_NOTICE_COMMENT VALUES(G_NOTICE_COMMENT_SEQ.NEXTVAL, ?, ?, ?, ?, ?, DEFAULT)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, cmt.getgNoticeNo());
 			pstmt.setString(2, cmt.getgNcContent());
 			pstmt.setInt(3, cmt.getgNcWriter());
 			pstmt.setInt(4, cmt.getgNcLev());
+			if(cmt.getgNcRef() == 0) {
+				pstmt.setString(5, null);
+			} else {
+				pstmt.setInt(5, cmt.getgNcRef());
+			}			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
