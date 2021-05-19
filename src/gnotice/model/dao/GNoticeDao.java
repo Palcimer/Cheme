@@ -234,5 +234,22 @@ public class GNoticeDao {
 		return result;
 	}
 
+	public int deleteNoticeCmt(Connection conn, int cmtNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM G_NOTICE_COMMENT WHERE G_NOTICE_COMMENT_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cmtNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 
 }

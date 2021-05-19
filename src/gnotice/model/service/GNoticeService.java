@@ -103,4 +103,17 @@ public class GNoticeService {
 		return result;
 	}
 
+	public int deleteNoticeCmt(int cmtNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GNoticeDao dao = new GNoticeDao();
+		System.out.println(cmtNo);
+		int result = dao.deleteNoticeCmt(conn, cmtNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
 }

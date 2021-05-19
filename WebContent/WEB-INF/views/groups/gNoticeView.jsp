@@ -48,8 +48,13 @@
                     <tr>
                         <th scope="row" style="width:150px"><%=cmt.getgNcWriterName() %></th>
                         <td>
-                        	<%=cmt.getgNcContent() %>
-                        	<span class="cmtMenu">답글 수정 삭제</span>
+                        	<span><%=cmt.getgNcContent() %></span>
+                        	<textarea name="gNcContent" class="form-control" style="display:none"><%=cmt.getgNcContent() %></textarea>
+                        	<span class="cmtMenu"> 
+                        		<a href="javascript:void(0)" onclick="modCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>)">수정</a>
+                        		<a href="javascript:void(0)" onclick="delCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">삭제</a>
+                        		<a>답글</a>
+                        	</span>
                         </td>
                         <td style="text-align:center; width:100px;"><%=cmt.getgNcDate() %></td>
                     </tr>
@@ -87,6 +92,39 @@
             </div>
         </div>        
     </div>
+    <script>
+    	function modCmt(obj, cmtNo, noticeNo) {
+    		$(obj).parent().prev().prev().hide();
+    		$("[name=gNcContent]").show();
+    		$(obj).html("수정완료");
+    		$(obj).attr("onclick", "modComplete(this, " + cmtNo + ", " + noticeNo + ")");
+    		$(obj).next().html("수정취소");
+    		$(obj).next().attr("onclick", "modCancel(this, " + cmtNo + ", " + noticeNo + ")");
+    		$(obj).next().next().hide();
+    	}
+    	function modCancel(obj, cmtNo, noticeNo) {
+    		$("[name=gNcContent]").hide();
+    		$(obj).parent().prev().prev().show();
+    		$(obj).prev().html("수정");
+    		$(obj).prev().attr("onclick", "modCmt(this, " + cmtNo + ", " + noticeNo + ")");
+    		$(obj).html("삭제");
+    		$(obj).attr("onclick", "delCmt(this, " + cmtNo + ", " + noticeNo + ")");
+    		$(obj).next().show();
+    	}
+    	function modComplete(obj, cmtNo, noticeNo) {
+    		var form = $("<form action='/modGNoticeComment' method='post'></form>");
+    		form.append($("<input type='hidden' name='cmtNo' value='" + cmtNo + "'>"));
+    		form.append($("<input type='hidden' name='noticeNo' value='" + noticeNo + "'>"));
+    		form.append($("[name=gNcContent]"));
+    		$("body").append(form);
+    		form.submit();
+    	}
+    	function delCmt(obj, cmtNo, noticeNo, groupId, mem) {
+    		if(confirm("댓글을 삭제하시겠습니까?")) {
+				location.href="/delGNoticeComment?cmtNo=" + cmtNo + "&noticeNo=" + noticeNo + "&groupId=" + groupId + "&mem=" + mem;
+			}
+    	}
+    </script>
     <%@include file="/WEB-INF/views/common/footer.jsp" %>
     
 </body>
