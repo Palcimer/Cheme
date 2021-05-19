@@ -234,5 +234,42 @@ public class GNoticeDao {
 		return result;
 	}
 
+	public int deleteNoticeCmt(Connection conn, int cmtNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM G_NOTICE_COMMENT WHERE G_NOTICE_COMMENT_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cmtNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateNoticeCmt(Connection conn, int cmtNo, String gNcContent) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		System.out.println(cmtNo);
+		System.out.println(gNcContent);
+		String query = "UPDATE G_NOTICE_COMMENT SET G_NOTICE_COMMENT_CONTENT=? WHERE G_NOTICE_COMMENT_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, gNcContent);
+			pstmt.setInt(2, cmtNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 
 }
