@@ -18,38 +18,51 @@
 		padding-top : 20px;
 		clear : right;
 		display : flex;
-		justify-content : space-around;
+		justify-content: space-around;
 		flex-wrap : wrap;
 	}
-	.photo{
-		border : 1px solid #ccc;
+	.photo{	
 		margin-top : 30px;
-		width : 18%;
-		height : 122px;
+		width : 30%;
+		height: 300px;
 		overflow : hidden;
-		transition-duration : 1s;
+		textalign : center;
 	}
-	.photo>img{
+	.photo img{
 		width : 100%;
-		height : 100px;
+		height : 70%;
 	}
-	.photo>p{
-		text-align : center;
+	#pageNavi>* {
+		justify-content: center !important;
 	}
-	.photo>img:hover{
-		transform : scale(1.4);
-	}
+
+
 </style>
 </head>
 <body>
-	
+	<%@include file="/WEB-INF/views/gallery/freeHeader.jsp" %>
 	<div class="container">
 		<fieldset>
 			<legend>갤러리</legend>
-				<div class="photoWrapper">
-					<img src="/upload/photo/"+p.filepath>;
-					<p class="caption">+p.photoContent+"</p>";
-				</div>
+			<div>
+				<a class="btn btn-info writeBtn" href="/galleryWriteFrm">글쓰기</a>
+			</div>
+			<div class="photoWrapper">
+				<%for(int i=0;i<list.size();i++) { %>
+					<div class="photo">
+						<a href="/galleryView?galleryNo=<%=list.get(i).getGalleryNo()%>"><img src="/upload/photo/<%=list.get(i).getGalleryFilepath()%>"></a>
+						<table class="table">
+						<tr>
+						<th colspan="4">제목 : <a href="/galleryView?galleryNo=<%=list.get(i).getGalleryNo()%>"><%=list.get(i).getGalleryTitle()%></a></th>
+						</tr>
+						<tr>
+						<th scope="col">글쓴이 : <%=list.get(i).getGalleryWriter()%></th>
+						<th scope="col">작성일 : <%=list.get(i).getGalleryDate()%></th>
+						</tr>
+						</table>
+					</div>
+				<%} %>
+			</div>
 			<div id="pageNavi"><%=pageNavi %></div>
 		</fieldset>
 	</div>
