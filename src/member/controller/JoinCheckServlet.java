@@ -45,7 +45,7 @@ public class JoinCheckServlet extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 				//로그인 성공한경우(memberLevel==3,!==3, 로그인 실패한경우
 				//해당하는 경우에 따라서 msg.jsp에서 사용할 변수의 값을 다르게 적용
-				if(m !=null ) {
+				if(m != null ) {
 					//로그인성공
 					HttpSession session = request.getSession();
 					session.setAttribute("m", m);
