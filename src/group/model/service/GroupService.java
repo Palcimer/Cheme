@@ -86,4 +86,28 @@ public class GroupService {
 		
 	}
 
+	public int insertMember(int groupId, int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new GroupDao().insertMember(conn, groupId, memberNo);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteMember(int groupId, int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new GroupDao().deleteMember(conn, groupId, memberNo);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

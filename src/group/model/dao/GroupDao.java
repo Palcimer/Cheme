@@ -260,6 +260,38 @@ public class GroupDao {
 	   }
 	   return result;
    }
+
+   public int insertMember(Connection conn, int groupId, int memberNo) {
+	   PreparedStatement pstmt = null;
+	   int result = 0;
+	   String query = "INSERT INTO G_MEMBER VALUES (?, ?)";
+	   try {
+		   pstmt = conn.prepareStatement(query);
+		   pstmt.setInt(1, memberNo);
+		   pstmt.setInt(2, groupId);
+		   result = pstmt.executeUpdate();
+	   } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		   e.printStackTrace();
+	   }
+	   return result;
+   }
+
+	public int deleteMember(Connection conn, int groupId, int memberNo) {
+		PreparedStatement pstmt = null;
+		   int result = 0;
+		   String query = "DELETE FROM G_MEMBER WHERE MEMBER_NO=? AND GROUP_ID=?";
+		   try {
+			   pstmt = conn.prepareStatement(query);
+			   pstmt.setInt(1, memberNo);
+			   pstmt.setInt(2, groupId);
+			   result = pstmt.executeUpdate();
+		   } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			   e.printStackTrace();
+		   }
+		   return result;
+	}
    
 
 }
