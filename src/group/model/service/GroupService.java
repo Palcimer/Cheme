@@ -24,7 +24,6 @@ public class GroupService {
 				return result;
 	}
 
-<<<<<<< HEAD
 	public ArrayList<Integer> selectGroupId(int memberNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Integer> groupIdList  = new GroupDao().selectGroupId(conn, memberNo);
@@ -49,7 +48,6 @@ public class GroupService {
 
 
 
-=======
 	public boolean isMember(int groupId, int memberNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		GroupDao dao = new GroupDao();
@@ -66,5 +64,4 @@ public class GroupService {
 		return group;
 	}
 
->>>>>>> main
 }

@@ -1,3 +1,4 @@
+  
 package group.model.dao;
 
 import java.sql.Connection;
@@ -40,7 +41,6 @@ public class GroupDao {
 
 	}
 
-<<<<<<< HEAD
 	public ArrayList<Integer> selectGroupId(Connection conn, int memberNo) {
 
 		PreparedStatement pstmt = null;
@@ -56,20 +56,6 @@ public class GroupDao {
 				int groupId = (rset.getInt("group_id"));
 				groupIdList.add(groupId);
 
-=======
-	public boolean isMember(Connection conn, int groupId, int memberNo) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		boolean result = false;
-		String query = "SELECT * FROM G_MEMBER WHERE MEMBER_NO=? AND GROUP_ID=?";
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, memberNo);
-			pstmt.setInt(2, groupId);
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				result = true;
->>>>>>> main
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -78,7 +64,6 @@ public class GroupDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-<<<<<<< HEAD
 		return groupIdList;
 	}
 
@@ -132,7 +117,68 @@ public class GroupDao {
 					g.setRecom(rset.getInt("recom"));
 					GroupAsMemberList.add(g);
 				}
-=======
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return GroupAsMemberList;
+	}
+	
+	public int insertGroup(Group g,Connection conn) {
+
+		PreparedStatement pstmt = null;
+		String query = "insert into groups values(group_seq.nextval,?,?,?,?,?,?,0,?,?,?,?,?)";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, g.getGroupName());
+			pstmt.setString(2, g.getGroupDetail());
+			pstmt.setInt(3, g.getGroupLeader());
+			pstmt.setString(4, g.getGroupImg());
+			pstmt.setInt(5, g.getMaxMember());
+			pstmt.setInt(6, g.getGroupCategory());
+			pstmt.setString(7, g.getKeyword1());
+			pstmt.setString(8, g.getKeyword2());
+			pstmt.setString(9, g.getKeyword3());
+			pstmt.setString(10, g.getKeyword4());
+			pstmt.setString(11, g.getKeyword5());
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+
+	}
+
+	public boolean isMember(Connection conn, int groupId, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean result = false;
+		String query = "SELECT * FROM G_MEMBER WHERE MEMBER_NO=? AND GROUP_ID=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, groupId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 
@@ -166,7 +212,6 @@ public class GroupDao {
 				group.setGroupLeader(rset.getInt("group_leader"));
 				group.setMaxMember(rset.getInt("max_member"));
 				group.setRecom(rset.getInt("recom"));				
->>>>>>> main
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -175,12 +220,9 @@ public class GroupDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-<<<<<<< HEAD
-		return GroupAsMemberList;
-	}
-
-=======
 		return group;
 	}
->>>>>>> main
+
+	
+
 }
