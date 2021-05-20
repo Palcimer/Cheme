@@ -33,7 +33,7 @@ ArrayList<String> colorList = new ArrayList<String>(Arrays.asList("primary","sec
                 justify-content: center;
               }
               .nav-item {
-                width: 50%;
+                width: 341.33px;
                 text-align: center;
               }
               .nav-link active{
@@ -42,6 +42,17 @@ ArrayList<String> colorList = new ArrayList<String>(Arrays.asList("primary","sec
               .updateMyInfo {
                 height: 900px;
                 display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0;
+                border: 1px solid #ddd;
+                border-top: 0;
+                border-bottom-left-radius: 1.5%;
+                border-bottom-right-radius: 1.5%;
+              }
+              .deleteId{
+              height: 450px;
+               display: flex;
                 justify-content: center;
                 align-items: center;
                 margin: 0;
@@ -88,8 +99,8 @@ ArrayList<String> colorList = new ArrayList<String>(Arrays.asList("primary","sec
               }
               img {
                 width: 100%;
-			    height: 100%;
-			    object-fit: cover;
+                height: 100%;
+                object-fit: cover;
               }
               .moimRow {
                 display: flex;
@@ -133,6 +144,14 @@ ArrayList<String> colorList = new ArrayList<String>(Arrays.asList("primary","sec
                       data-bs-toggle="tab"
                       href="#updateMyInfo"
                       >내 정보수정</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      data-bs-toggle="tab"
+                      href="#deleteMyId"
+                      >회원 탈퇴</a
                     >
                   </li>
                 </ul>
@@ -364,24 +383,24 @@ ArrayList<String> colorList = new ArrayList<String>(Arrays.asList("primary","sec
                             </div>
                           </div>
                          <div class="modal" id="modal">
-						  <div class="modal-dialog" role="document">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <h5 class="modal-title">회원 정보 변경확인</h5>
-						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-						          <span aria-hidden="true"></span>
-						        </button>
-						      </div>
-						      <div class="modal-body">
-						        <p>이대로 등록하시겠습니까?</p>
-						      </div>
-						      <div class="modal-footer">
-						        <button type="submit" class="btn btn-primary" id = "smbtn">네</button>
-						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">회원 정보 변경확인</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"></span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>이대로 등록하시겠습니까?</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="submit" class="btn btn-primary" id = "smbtn">네</button>
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
+                                </div>
+                              </div>
+                            </div>
+						            </div>
 
                           <div class="button-form">
                             <button
@@ -403,6 +422,60 @@ ArrayList<String> colorList = new ArrayList<String>(Arrays.asList("primary","sec
                       </div>
                     </div>
                   </div>
+                    <div class="tab-pane fade" id="deleteMyId">
+	                    <div class="checkPage">
+	                      <div class="deleteId">
+	                        <form action="/deleteMyId">
+	                          <div class="form-group">
+	                           
+	                            <input
+	                              type="password"
+	                              class="form-control form-control-lg"
+	                              id="memberPwDelete"
+	                              placeholder="비밀번호를 입력해주세요."
+	                              name="memberPwDelete"
+	                            />
+	                              <input
+                            type="hidden"
+                            value= "<%=member.getMemberId()%>"
+                            name="memberIdDelete"
+                            id="memberIdDelete"
+                          />
+                                   <input
+                            type="hidden"
+                            value= "<%=member.getMemberNo()%>"
+                            name="memberNo"
+                          />
+	                            <div class="d-grid gap-2">
+ 									 <button class="btn btn-lg btn-danger" type="button" id="modalbtn">확인</button>
+									</div>
+	                            <div id="error-msg1"></div>
+	                            <div id="noSpace1"></div>
+	                          </div>
+	                             <div class="modal" id="modalDelete">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">회원 정보 삭제확인</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"></span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>해당 정보는 복구할 수 없습니다.
+                                 정말 삭제하시겠습니까?</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="submit" class="btn btn-primary" id = "deleteBtn">네</button>
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
+                                </div>
+                              </div>
+                            </div>
+						            </div>
+	                        </form>
+	                      </div>
+	                    </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -518,6 +591,35 @@ ArrayList<String> colorList = new ArrayList<String>(Arrays.asList("primary","sec
               e.preventDefault();
       		$('#modal').modal("show");
             });
+            $("#modalbtn").click(function (e){
+            	if($("#memberPwDelete").val()==""){
+            		  alert("작성한 내용을 다시 확인해주세요.");
+            	}else{
+            		var id = $("#memberIdDelete").val();
+                    var pw = $("#memberPwDelete").val();
+            	        $.ajax({
+            	          url: "/pwCheck",
+            	          type: "post",
+            	          data: {
+            	        	  memberIdDelete: id,
+            	        	  memberPwDelete: pw,
+            	            },
+            	          success: function (data) {
+            	        	  if(data==0){
+            	        		  alert("비밀번호를 잘못 입력하셨습니다.");
+            	        		  return
+            	        	  }else if (data==1){
+            	        		  e.preventDefault();
+                	        	  $("#modalDelete").modal("show");
+            	        	  }
+            	          },
+            	          error: function () {
+            	          alert("서버 연결 이상");
+            	          }
+            	        });
+            	}
+            });
+         
         
           </script>
         </html>

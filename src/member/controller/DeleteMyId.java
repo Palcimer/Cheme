@@ -33,6 +33,7 @@ public class DeleteMyId extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		System.out.println(memberNo);
 		//3.비지니스 로직
 		int result = new MemberService().deleteMember(memberNo);
 		
