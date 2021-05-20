@@ -22,7 +22,7 @@
 	<br>
 	<div class="container">
 		<fieldset>
-			<legend>자유고뭐고</legend>
+			<legend>공지사항</legend>
 			<%if(m != null && m.getMemberLv() == 1) {%>
 			<div id ="createBtn">
 				<a class="btn btn-info writeBt" href="/boardWriteFrm">글쓰기</a>
