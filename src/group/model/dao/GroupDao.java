@@ -192,7 +192,7 @@ public class GroupDao {
 
 	public int modifyGroup(Group g, Connection conn) {
 		PreparedStatement pstmt = null;
-		String query = "update groups set group_name=?, group_img=? , group_detail=?, max_member=? , keyword1=? ,keyword2=? ,keyword3=? ,keyword4=? ,keyword5=?";
+		String query = "update groups set group_name=?, group_img=? , group_detail=?, max_member=? , keyword1=? ,keyword2=? ,keyword3=? ,keyword4=? ,keyword5=? where group_id=? ";
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -205,6 +205,7 @@ public class GroupDao {
 			pstmt.setString(7, g.getKeyword3());
 			pstmt.setString(8, g.getKeyword4());
 			pstmt.setString(9, g.getKeyword5());
+			pstmt.setInt(10, g.getGroupId());
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {

@@ -59,6 +59,9 @@ public class GroupUpdateServlet extends HttpServlet {
 		Group g = new Group();
 		
 		String filename = mRequest.getOriginalFileName("moimPicture");
+		if(filename == null) {
+			filename= mRequest.getParameter("oldFilename");
+		}
 				
 		g.setGroupDetail(mRequest.getParameter("moimIntro"));
 		g.setGroupImg(filename);
@@ -70,7 +73,7 @@ public class GroupUpdateServlet extends HttpServlet {
 		g.setKeyword4(mRequest.getParameter("moimKeyword4"));
 		g.setKeyword5(mRequest.getParameter("moimKeyword5"));
 		g.setMaxMember(Integer.parseInt(mRequest.getParameter("moimMax")));
-		
+		g.setGroupId(Integer.parseInt(mRequest.getParameter("groupId")));
 		
 		
 //		3.비지니스 로직

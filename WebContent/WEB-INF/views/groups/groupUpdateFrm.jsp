@@ -48,19 +48,7 @@ pageEncoding="UTF-8"%>
   <body>
     <%@include file="/WEB-INF/views/common/header.jsp"%>
 
-    <form action="/myPageFrm">
-         
-      <button>마이페이지</button>
-    </form>
-    <div class="content-wrap">
-      <hr />
-      <div class="content">
-        <form
-          action="/groupUpdate"
-          method="post"
-          enctype="multipart/form-data"
-          id="moimForm"
-        >
+         <input type="hidden" value="<%=g.getGroupId() %>" name="groupId">
         <div class="modal" id="modal">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -90,7 +78,7 @@ pageEncoding="UTF-8"%>
               class="form-control form-control-lg"
               type="text"
               id="moim-name"
-              placeholder=<%=g.getGroupName() %>
+              value ="<%=g.getGroupName() %>"
               name="moimName"
             />
             <div id="nameReg"></div>
@@ -472,7 +460,7 @@ pageEncoding="UTF-8"%>
         !self.nameBool ||
         !self.bool ||
         $("#moim-name").val() == "" ||
-        $("#formFile").val() == "" ||
+        /* $("#formFile").val() == "" || */
         $("#moim-intro").val() == ""
       ) {
         console.log(bool);
@@ -486,14 +474,14 @@ pageEncoding="UTF-8"%>
           $("#noSpace1").attr("class", "invalid-feedback");
           $("#noSpace1").html("필수 입력항목입니다.");
         }
-        if ($("#formFile").val() == "") {
+        /* if ($("#formFile").val() == "") {
           $("#formFile").attr(
             "class",
             "form-control form-control is-invalid"
           );
           $("[id = noSpace2]").attr("class", "invalid-feedback");
           $("[id = noSpace2]").html("필수 입력항목입니다.");
-        }
+        } */
         if ($("#moim-intro").val() == "") {
           $("#moim-intro").attr(
             "class",
