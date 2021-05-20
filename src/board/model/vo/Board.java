@@ -2,21 +2,25 @@ package board.model.vo;
 
 import java.sql.Date;
 
+import member.model.vo.Member;
+
 public class Board {
 	private int rnum;
 	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
-	private String boardWriter;
+	private int boardWriter;
 	private Date date;
 	private String fileName;
 	private String filePath;
+	private String boardMember;
+	
 	public Board() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Board(int rnum, int boardNo, String boardTitle, String boardContent, String boardWriter, Date date,
-			String fileName, String filePath) {
+	public Board(int rnum, int boardNo, String boardTitle, String boardContent, int boardWriter, Date date,
+			String fileName, String filePath, String boardMember) {
 		super();
 		this.rnum = rnum;
 		this.boardNo = boardNo;
@@ -26,6 +30,7 @@ public class Board {
 		this.date = date;
 		this.fileName = fileName;
 		this.filePath = filePath;
+		this.boardMember = boardMember;
 	}
 	public int getRnum() {
 		return rnum;
@@ -51,10 +56,10 @@ public class Board {
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
-	public String getBoardWriter() {
+	public int getBoardWriter() {
 		return boardWriter;
 	}
-	public void setBoardWriter(String boardWriter) {
+	public void setBoardWriter(int boardWriter) {
 		this.boardWriter = boardWriter;
 	}
 	public Date getDate() {
@@ -75,7 +80,12 @@ public class Board {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-	
+	public String getBoardMember() {
+		return boardMember;
+	}
+	public void setBoardMember(String boardMember) {
+		this.boardMember = boardMember;
+	}
 	
 	
 }

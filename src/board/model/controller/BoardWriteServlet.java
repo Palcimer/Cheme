@@ -16,6 +16,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import board.model.service.BoardService;
 import board.model.vo.Board;
+import member.model.vo.Member;
 
 
 
@@ -62,14 +63,15 @@ public class BoardWriteServlet extends HttpServlet {
 				MultipartRequest mRequest 
 				= new MultipartRequest(request, saveDirectory,maxSize,"UTF-8", new DefaultFileRenamePolicy());
 				Board b = new Board();
+				Member m = new Member();
 				b.setBoardTitle(mRequest.getParameter("boardTitle"));
-				b.setBoardWriter(mRequest.getParameter("boardWriter"));
+//				b.setBoardWriter((Integer.parseInt(mRequest.getParameter("boardWriter"))));//이게 잘못인가..
 				b.setBoardContent(mRequest.getParameter("boardContent"));
 				b.setFileName(mRequest.getOriginalFileName("filename"));//사용자가 업로드한 파일 명
 				b.setFilePath(mRequest.getFilesystemName("filename"));	//실제 업로드 된 파일 이름
 				//getOriginalFileName,getFilesystemName 매개변수는 <input type="file" name="">name속성값
 				//3. 비지니스로직
-				int result = new BoardService().insertBoard(b);
+				int result = new BoardService().insertBoard(b,m);
 				System.out.println("servlet ");
 				System.out.println(result);
 				//4. 결과처리

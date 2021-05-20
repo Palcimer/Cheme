@@ -41,7 +41,11 @@
 				<%for(Group g : list){ %>			
 				<div class ="listImg">
 				<img src = "img/sample.JPG" class = "groupListImg">
-				<a style="text-align: center;" href="/groupDetail?Id=<%=g.getGroupId()%>&mem=<%=m.getMemberNo()%>"><%=g.getGroupName() %></a>
+				<%if(m != null) {%>
+       <a style="text-align: center;" href="/groupDetail?Id=1&mem=<%=m.getMemberNo()%>">모임 상세페이지</a>
+       <% } else {%>
+       <a  style="text-align: center;" href="/groupDetail?Id=1">모임 상세페이지</a>
+       <%} %>
 				</div>
 				<%} %>			
 			
