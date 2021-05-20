@@ -70,7 +70,7 @@ public class WriteGNoticeServlet extends HttpServlet {
 		} else {
 			request.setAttribute("msg", "공지사항 등록 실패");
 		}
-		request.setAttribute("loc", "/noticeList?page=1");
+		request.setAttribute("loc", "/gNoticeList?groupId=" + notice.getGroupId() + "&mem=" + notice.getgNoticeWriter() + "&page=1");
 		rd.forward(request, response);
 	}
 

@@ -64,6 +64,9 @@ public class GNoticeComment {
 	public String getgNcContent() {
 		return gNcContent;
 	}
+	public String getgNcContentBr() {
+		return gNcContent.replaceAll("\r\n", "<br>");
+	}
 	public void setgNcContent(String gNcContent) {
 		this.gNcContent = gNcContent;
 	}

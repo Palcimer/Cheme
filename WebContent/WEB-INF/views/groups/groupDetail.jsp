@@ -42,7 +42,7 @@
 		<table>
 			<%for(GNotice n : noticeList) {%>
 			<tr>
-				<td><a href="/gNoticeView?groupId=<%=info.getGroupId() %>&noticeNo=<%=n.getgNoticeNo()%>&mem=5"><%=n.getgNoticeTitle() %></a></td>
+				<td><a href="/gNoticeView?groupId=<%=info.getGroupId() %>&noticeNo=<%=n.getgNoticeNo()%>&mem=<%=m.getMemberNo()%>"><%=n.getgNoticeTitle() %></a></td>
 				<td><a href="javascript:gNoticeView(<%=n.getgNoticeNo()%>)"><%=n.getgNoticeTitle() %></a></td>
 				<td><%=n.getgNoticeDate() %></td>
 			</tr>
@@ -50,7 +50,7 @@
 			<form action="/gNoticeView" name="transmitMem">
 					<input type="hidden" name="groupId" value="<%=info.getGroupId() %>">
 					<input type="hidden" name="noticeNo">
-					<input type="hidden" name="mem" value="5">					
+					<input type="hidden" name="mem" value="<%=m.getMemberNo()%>">					
 			</form>
 		</table>
 		<table>

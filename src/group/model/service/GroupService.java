@@ -38,4 +38,12 @@ public class GroupService {
 		return group;
 	}
 
+	public boolean isLeader(int groupId, int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GroupDao dao = new GroupDao();
+		boolean isLeader = dao.isLeader(conn, groupId, memberNo);
+		JDBCTemplate.close(conn);
+		return isLeader;
+	}
+
 }

@@ -50,21 +50,23 @@
                     <tr>
                         <th scope="row" style="width:150px"><%=cmt.getgNcWriterName() %></th>
                         <td>
-                        	<span><%=cmt.getgNcContent() %></span>
+                        	<span><%=cmt.getgNcContentBr() %></span>
                         	<textarea name="gNcContent" class="form-control" style="display:none"><%=cmt.getgNcContent() %></textarea>
                         	<span class="cmtMenu"> 
-                        		<a href="javascript:void(0)" onclick="modCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">수정</a>
-                        		<a href="javascript:void(0)" onclick="delCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">삭제</a>
+                        		<%if(m != null && m.getMemberNo() == cmt.getgNcWriter()) {%>
+                        		<a href="javascript:void(0)" onclick="modCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, <%=m.getMemberNo()%>)">수정</a>
+                        		<a href="javascript:void(0)" onclick="delCmt(this, <%=cmt.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, <%=m.getMemberNo()%>)">삭제</a>
+                        		<%} %>
                         		<a href="javascript:void(0)" onclick="recShow(this)">댓글</a>
                         	</span>
                         	
                         	<form action = "/gNoticeComment" style="display:none">
 								<input type="hidden" name="rpLv" value="2">
-								<input type="hidden" name="rpWriter" value="3">
+								<input type="hidden" name="rpWriter" value="<%=m.getMemberNo()%>">
 								<input type="hidden" name="noticeNo" value="<%=gNotice.getgNoticeNo() %>">
 								<input type="hidden" name="rpRef" value="<%=cmt.getgNcNo() %>">
 								<input type="hidden" name="groupId" value="<%=gNotice.getGroupId() %>">
-								<input type="hidden" name="mem" value="5">
+								<input type="hidden" name="mem" value="<%=m.getMemberNo()%>">
 								<textarea class="form-control" name="rpContent"></textarea>
 								<span class="cmtMenu"> 
 									<a href="javascript:void(0)" onclick="reCmt(this)">댓글 달기</a>
@@ -82,11 +84,13 @@
 	                        	<%=cmtlv2.getgNcWriterName() %>
 	                        </th>
 	                        <td>
-	                        	<span><%=cmtlv2.getgNcContent() %></span>
+	                        	<span><%=cmtlv2.getgNcContentBr() %></span>
 	                        	<textarea name="gNcContent" class="form-control" style="display:none"><%=cmtlv2.getgNcContent() %></textarea>
 	                        	<span class="cmtMenu">
-	                        		<a href="javascript:void(0)" onclick="modCmt(this, <%=cmtlv2.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">수정</a>
-	                        		<a href="javascript:void(0)" onclick="delCmt(this, <%=cmtlv2.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, 5)">삭제</a>
+	                        		<%if(m != null && m.getMemberNo() == cmtlv2.getgNcWriter()) {%>
+	                        		<a href="javascript:void(0)" onclick="modCmt(this, <%=cmtlv2.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, <%=m.getMemberNo()%>)">수정</a>
+	                        		<a href="javascript:void(0)" onclick="delCmt(this, <%=cmtlv2.getgNcNo()%>, <%=gNotice.getgNoticeNo()%>, <%=gNotice.getGroupId()%>, <%=m.getMemberNo()%>)">삭제</a>
+	                        		<%} %>
 	                        	</span>
 	                        </td>
 	                        <td style="text-align:center"><%=cmtlv2.getgNcDate() %></td>
@@ -99,18 +103,18 @@
                 <div class="replysubmit">
                 	<form action="/gNoticeComment" method="post">                
 	                	<input type="hidden" name="rpLv" value="1">
-						<input type="hidden" name="rpWriter" value="3">
+						<input type="hidden" name="rpWriter" value="<%=m.getMemberNo()%>">
 						<input type="hidden" name="noticeNo" value="<%=gNotice.getgNoticeNo() %>">
 						<input type="hidden" name="rpRef" value="0">
 						<input type="hidden" name="groupId" value="<%=gNotice.getGroupId() %>">
-						<input type="hidden" name="mem" value="5">
+						<input type="hidden" name="mem" value="<%=m.getMemberNo()%>">
 	                    <textarea class="form-control" name="rpContent"></textarea>
 	                    <button type="submit" class="btn btn-secondary" style="width:100%; margin-top:3px">댓글 달기</button>                    
 	                </form>                    
                 </div>
             </div>
             <div class="board-tolist">
-            	<a href="/gNoticeList?groupId=1&mem=5&page=1" class="btn btn-outline-primary" style="width:40%">글 목록으로</a>
+            	<a href="/gNoticeList?groupId=1&mem=<%=m.getMemberNo()%>&page=1" class="btn btn-outline-primary" style="width:40%">글 목록으로</a>
             </div>
         </div>        
     </div>

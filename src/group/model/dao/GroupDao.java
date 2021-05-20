@@ -103,4 +103,28 @@ public class GroupDao {
 		}
 		return group;
 	}
+
+	public boolean isLeader(Connection conn, int groupId, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean isLeader = false;
+		String query = "SELECT * FROM GROUPS WHERE GROUP_LEADER=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				if(rset.getInt("group_id") == groupId) {
+					isLeader = true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return isLeader;
+	}
 }

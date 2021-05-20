@@ -57,6 +57,7 @@ public class UpdateGNoticeServlet extends HttpServlet {
 		GNotice notice = new GNotice();	
 		notice.setgNoticeWriter(Integer.parseInt(mRequest.getParameter("noticeWriter")));
 		notice.setgNoticeNo(Integer.parseInt(mRequest.getParameter("noticeNo")));
+		notice.setGroupId(Integer.parseInt(mRequest.getParameter("groupId")));
 		notice.setgNoticeContent(mRequest.getParameter("noticeContent"));
 		notice.setgNoticeTitle(mRequest.getParameter("noticeTitle"));
 		//새 파일 이름 및 경로
@@ -85,7 +86,8 @@ public class UpdateGNoticeServlet extends HttpServlet {
 		} else {
 			request.setAttribute("msg", "수정에 실패했습니다.");
 		}
-		request.setAttribute("loc", "/gNoticeView?noticeNo=" + notice.getgNoticeNo());
+		System.out.println(notice.getGroupId());
+		request.setAttribute("loc", "/gNoticeView?groupId=" + notice.getGroupId() + "&noticeNo=" + notice.getgNoticeNo() + "&mem=" + notice.getgNoticeWriter());
 		rd.forward(request, response);	
 	}
 

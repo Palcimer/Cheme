@@ -20,7 +20,8 @@
                     <fieldset>
                         <legend><div class="bg-success legend">공지사항 수정</div></legend>
                         <div class="form-group">
-                            <input type="hidden" name="noticeWriter" value="3">
+                        	<input type="hidden" name="groupId" value="<%=notice.getGroupId()%>">
+                            <input type="hidden" name="noticeWriter" value="<%=m.getMemberNo()%>">
                             <input type="hidden" name="noticeNo" value="<%=notice.getgNoticeNo() %>">
                             <label for="noticeTitle" class="form-label mt-4">제목</label>
                             <input type="text" class="form-control" name="noticeTitle" value="<%=notice.getgNoticeTitle() %>">

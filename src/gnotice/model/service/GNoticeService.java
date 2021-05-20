@@ -146,7 +146,7 @@ public class GNoticeService {
 			totalPage = totalNotice/numPerPage + 1;
 		}		
 		int pageNaviSize = 5; //페이지 내비게이션에 보여줄 페이지 수
-		String pageNavi = "<ul class='pagination pagination-sm'>"; //페이지 내비게이션 태그 스트링
+		String pageNavi = "<ul class='pagination pagination-sm justify-content-center' style='margin:0 auto;'>"; //페이지 내비게이션 태그 스트링
 		//페이지 내비게이션의 시작 페이지 번호 구하기: 1에서 5 페이지 요청 시 페이지 내비 시작번호는 1, 6~10 페이지 요청 시 시작번호 6, ....
 		int pageNo = ((page - 1)/pageNaviSize) * pageNaviSize + 1;
 		//이전 버튼
