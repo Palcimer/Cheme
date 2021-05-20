@@ -1,6 +1,10 @@
+<%@page import="group.model.vo.Group"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <% Member member =
-(Member)request.getAttribute("member"); %>
+pageEncoding="UTF-8"%> 
+<%
+	Group g = (Group)request.getAttribute("g");
+%>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -52,7 +56,7 @@ pageEncoding="UTF-8"%> <% Member member =
       <hr />
       <div class="content">
         <form
-          action="/groupUpdateFrm"
+          action="/groupUpdate"
           method="post"
           enctype="multipart/form-data"
           id="moimForm"
@@ -86,7 +90,7 @@ pageEncoding="UTF-8"%> <% Member member =
               class="form-control form-control-lg"
               type="text"
               id="moim-name"
-              placeholder="모임명을 입력해주세요."
+              placeholder=<%=g.getGroupName() %>
               name="moimName"
             />
             <div id="nameReg"></div>
@@ -103,38 +107,27 @@ pageEncoding="UTF-8"%> <% Member member =
                 class="form-control form-control-lg"
                 type="text"
                 id="moim-leader"
-                value="<%=member.getMemberId() %>"
+                value="<%=m.getMemberId()%>"
               />
             </fieldset>
           </div>
-
           <hr />
           <!-- 멤버 번호 값 DB에 넘겨줘야 함 -->
           <input
             type="hidden"
-            value="<%=member.getMemberNo() %>"
+            value="<%=m.getMemberNo() %>"
             name="memberNo"
           />
           <div class="form-group">
             <label for="moim-categori" class="form-label mt-4"
               >모임 카테고리 설정</label
             >
-            <select class="form-select" id="moim-categori" name="moimCategori">
-              <option>여행</option>
-              <option>스포츠</option>
-              <option>공연전시</option>
-              <option>이벤트</option>
-              <option>게임</option>
-              <option>공예</option>
-              <option>음악</option>
-              <option>그림</option>
-              <option>사진</option>
-              <option>어학</option>
-              <option>독서</option>
-              <option>기술</option>
-              <option>제태크</option>
-              <option>기타</option>
-            </select>
+            <input
+                class="form-control form-control-lg"
+                type="text"
+                id="moim-leader"
+                value="<%=g.getGroupCategory()%>" readonly
+              />
           </div>
 
           <div class="form-group">
@@ -155,6 +148,8 @@ pageEncoding="UTF-8"%> <% Member member =
               >모임 대표사진 설정(?x?)</label
             >
             <!-- TODO: 리스트 나오면 변경 -->
+            <input type="hidden" name="status" value="stay">
+            <input type="hidden" name="oldFilename" value="<%=g.getGroupImg() %>">
             <input
               class="form-control"
               type="file"
@@ -199,9 +194,14 @@ pageEncoding="UTF-8"%> <% Member member =
             <input
               class="form-control form-control-sm"
               type="text"
+              <%if(g.getKeyword1() == null) {%>
               placeholder="ex) #여행홀릭"
+              <%}else {%>
+              value ="<%=g.getKeyword1() %>"
+              <%} %>
               id="inputSmall"
               name="moimKeyword1"
+              
             />
             <div id="error-msg1"></div>
             <div id="error-msg2"></div>
@@ -216,7 +216,11 @@ pageEncoding="UTF-8"%> <% Member member =
             <input
               class="form-control form-control-sm"
               type="text"
+              <%if(g.getKeyword2() == null) {%>
               placeholder="ex) #여행홀릭"
+              <%}else {%>
+              value ="<%=g.getKeyword2() %>"
+              <%} %>
               id="inputSmall"
               name="moimKeyword2"
             />
@@ -233,7 +237,11 @@ pageEncoding="UTF-8"%> <% Member member =
             <input
               class="form-control form-control-sm"
               type="text"
+              <%if(g.getKeyword3() == null) {%>
               placeholder="ex) #여행홀릭"
+              <%}else {%>
+              value ="<%=g.getKeyword3() %>"
+              <%} %>
               id="inputSmall"
               name="moimKeyword3"
             />
@@ -250,7 +258,11 @@ pageEncoding="UTF-8"%> <% Member member =
             <input
               class="form-control form-control-sm"
               type="text"
+              <%if(g.getKeyword4() == null) {%>
               placeholder="ex) #여행홀릭"
+              <%}else {%>
+              value ="<%=g.getKeyword4() %>"
+              <%} %>
               id="inputSmall"
               name="moimKeyword4"
             />
@@ -267,7 +279,11 @@ pageEncoding="UTF-8"%> <% Member member =
             <input
               class="form-control form-control-sm"
               type="text"
+              <%if(g.getKeyword5() == null) {%>
               placeholder="ex) #여행홀릭"
+              <%}else {%>
+              value ="<%=g.getKeyword5() %>"
+              <%} %>
               id="inputSmall"
               name="moimKeyword5"
             />
@@ -277,8 +293,7 @@ pageEncoding="UTF-8"%> <% Member member =
           <hr />
 
           <div class="button-form">
-            <button id="sb"  class="btn btn-primary btn-lg">모임등록</button>
-
+            <button id="sb" class="btn btn-primary btn-lg">모임수정</button>
             <button type="reset" class="btn btn-secondary btn-lg">
               다시하기
             </button>
