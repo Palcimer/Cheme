@@ -1,6 +1,8 @@
 package gboard.model.vo;
 
 public class GBoard {
+	//일련번호용 변수
+	private int rnum;
 	 // 그룹게시글번호 
     private int gBoardNo;
     // 모임번호 
@@ -23,9 +25,10 @@ public class GBoard {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public GBoard(int gBoardNo, int groupId, String gBoardTitle, String gBoardContent, int gBoardWriter,
+	public GBoard(int rnum, int gBoardNo, int groupId, String gBoardTitle, String gBoardContent, int gBoardWriter,
 			String gBoardDate, String gBoardFilename, String gBoardFilepath, String gBoardWriterName) {
 		super();
+		this.rnum = rnum;
 		this.gBoardNo = gBoardNo;
 		this.groupId = groupId;
 		this.gBoardTitle = gBoardTitle;
@@ -35,6 +38,12 @@ public class GBoard {
 		this.gBoardFilename = gBoardFilename;
 		this.gBoardFilepath = gBoardFilepath;
 		this.gBoardWriterName = gBoardWriterName;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getgBoardNo() {
 		return gBoardNo;
@@ -56,6 +65,9 @@ public class GBoard {
 	}
 	public String getgBoardContent() {
 		return gBoardContent;
+	}
+	public String getgBoardContentBr() {
+		return gBoardContent.replaceAll("\r\n", "<br>");
 	}
 	public void setgBoardContent(String gBoardContent) {
 		this.gBoardContent = gBoardContent;
@@ -90,6 +102,7 @@ public class GBoard {
 	public void setgBoardWriterName(String gBoardWriterName) {
 		this.gBoardWriterName = gBoardWriterName;
 	}
+	
 	
 
 }

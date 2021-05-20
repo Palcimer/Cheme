@@ -40,7 +40,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form action="/joinCheck" method="post" name="loginFrm">
+				<form action="/loginCheck" method="post" name="loginFrm">
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="memberId">아이디</label>
@@ -71,8 +71,7 @@
         <ul class="nuderline-hover">
             <li><a href="/groupList?reqPage=1">모임 리스트</a></li>
             <li><a href="/insertGroupFrm">모임 만들기</a></li>
-            <li><a href="#">공지사항</a></li>
-            <li><a href="/board?reqPage=1">자유게시판</a></li>
+            <li><a href="/board?reqPage=1">공지사항</a></li>
             <li><a href="/">회사소개</a></li>
         </ul>
     	</div>

@@ -27,7 +27,7 @@
 				</tr>	
 				<tr class="table-light">
 					<th>작성자</th>
-					<th><%=b.getBoardWriter() %></th>
+					<th><%=b.getBoardMember() %></th>
 					<th>작성일</th>
 					<th><%=b.getDate() %></th>
 				</tr>
@@ -49,7 +49,7 @@
 				<tr class="table-light">
 					<th colspan="4" style="text-align:center;">
 						<button class="btn btn-info" onclick="history.go(-1);">이전화면</button>
-						<%if(m!=null && m.getMemberId().equals(b.getBoardWriter())){ %>
+						<%if(m!=null && m.getMemberId().equals(b.getBoardMember())){ %>
 						<a class="btn btn-info" href="/boardUpdateFrm?boardNo=<%=b.getBoardNo() %>">수정하기</a>
 						<a class="btn btn-info" href="/boardDelete?boardNo=<%=b.getBoardNo() %>">삭제하기</a>
 						<%} %>

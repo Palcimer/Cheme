@@ -16,7 +16,7 @@ public class GNoticeDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<GNotice> list = new ArrayList<GNotice>();
-		String query = "SELECT ROWNUM, GNN.* FROM (SELECT ROWNUM AS G_NOTICE_NO_DESC, GN.* FROM (SELECT * FROM G_NOTICE WHERE GROUP_ID=? ORDER BY 1) GN ORDER BY 1 DESC) GNN WHERE ROWNUM BETWEEN ? AND ?";
+		String query = "SELECT * FROM (SELECT ROWNUM AS RNUM, GNN.* FROM (SELECT ROWNUM AS G_NOTICE_NO_DESC, GN.* FROM (SELECT * FROM G_NOTICE WHERE GROUP_ID=? ORDER BY 1) GN ORDER BY 1 DESC) GNN) WHERE RNUM BETWEEN ? AND ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, groupId);
@@ -91,6 +91,7 @@ public class GNoticeDao {
 				cmt.setgNcLev(rset.getInt("g_notice_comment_lev"));
 				cmt.setgNcNo(rset.getInt("g_notice_comment_no"));
 				cmt.setgNcRef(rset.getInt("g_notice_comment_ref"));
+				cmt.setgNcWriter(rset.getInt("g_notice_comment_writer"));
 				cmt.setgNcWriterName(rset.getString("member_name"));
 				cmt.setgNoticeNo(rset.getInt("g_notice_no"));
 				cmt.setgNcDate(rset.getString("g_notice_comment_date"));
@@ -260,8 +261,6 @@ public class GNoticeDao {
 	public int updateNoticeCmt(Connection conn, int cmtNo, String gNcContent) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		System.out.println(cmtNo);
-		System.out.println(gNcContent);
 		String query = "UPDATE G_NOTICE_COMMENT SET G_NOTICE_COMMENT_CONTENT=? WHERE G_NOTICE_COMMENT_NO=?";
 		try {
 			pstmt = conn.prepareStatement(query);

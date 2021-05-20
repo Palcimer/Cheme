@@ -86,5 +86,6 @@
 }
 .page {
   margin: 0 auto;
+  padding-top: 20px;
   width: 175px;
 }

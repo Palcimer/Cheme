@@ -64,4 +64,25 @@ public class GroupService {
 		return group;
 	}
 
+	public boolean isLeader(int groupId, int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GroupDao dao = new GroupDao();
+		boolean isLeader = dao.isLeader(conn, groupId, memberNo);
+		JDBCTemplate.close(conn);
+		return isLeader;
+	}
+
+	public int modifyGroup(Group g) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new GroupDao().modifyGroup(g, conn);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+		
+	}
+
 }

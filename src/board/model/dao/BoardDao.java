@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import board.model.vo.Board;
 import board.model.vo.BoardComment;
 import common.JDBCTemplate;
+import member.model.vo.Member;
 
 
 
@@ -18,7 +19,7 @@ public class BoardDao {
 	public int totalCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select count(*) as cnt from board_test";
+		String query = "select count(*) as cnt from board";
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -40,22 +41,27 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board> list = new ArrayList<Board>();
-		String query = "select * from (select rownum as rnum, b.* from (select * from board_test order by board_no desc)b) where rnum between ? and ?";
+		String query = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.*FROM (select b.*,member_name from board b join member on ( board_writer = member_no) ORDER BY board_no DESC)N)WHERE RNUM BETWEEN ? AND ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
+				
 				Board b = new Board();
+				Member m = new Member();
+				
 				b.setFileName(rset.getString("BOARD_FILENAME"));
 				b.setFilePath(rset.getString("BOARD_FILEPATH"));
 				b.setBoardContent(rset.getString("BOARD_CONTENT"));
 				b.setDate(rset.getDate("BOARD_DATE"));
 				b.setBoardNo(rset.getInt("BOARD_NO"));
 				b.setBoardTitle(rset.getString("BOARD_TITLE"));
-				b.setBoardWriter(rset.getString("BOARD_WRITER"));
+				b.setBoardWriter(rset.getInt("BOARD_WRITER"));
 				b.setRnum(rset.getInt("rnum"));
+				b.setBoardMember(rset.getString("member_name"));
+//				b.setBoardMember(rset.getString("m.getMemberId()"));
 				list.add(b);
 			}
 		} catch (SQLException e) {
@@ -64,14 +70,15 @@ public class BoardDao {
 		}finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
-		}		
+		}	
+		System.out.println(list.size());
 		return list;
 	}
 
 	public Board selectOneBoard(Connection conn, int boardNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from board_test where board_no=?";
+		String query = "select * from board where board_no=?";
 		Board b = null;
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -85,7 +92,7 @@ public class BoardDao {
 				b.setDate(rset.getDate("BOARD_DATE"));
 				b.setBoardNo(rset.getInt("BOARD_NO"));
 				b.setBoardTitle(rset.getString("BOARD_TITLE"));
-				b.setBoardWriter(rset.getString("BOARD_WRITER"));				
+				b.setBoardWriter(rset.getInt("BOARD_WRITER"));				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -100,14 +107,14 @@ public class BoardDao {
 	public int insertComment(Connection conn, BoardComment bc) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into board_comment values(bc_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		String query = "insert into board_comment values(board_comment_seq.nextval,?,?,1,?,?,to_char(sysdate,'yyyy-mm-dd'))";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, bc.getLevel());
-			pstmt.setString(2, bc.getCommentWriter());
-			pstmt.setString(3, bc.getCommentContent());
+			pstmt.setInt(1, bc.getNo());
+//			pstmt.setString(2, bc.getCommentWriter());
+			pstmt.setString(2, bc.getCommentContent());
+			pstmt.setInt(3, bc.getLevel());
 			pstmt.setInt(4, bc.getBoardRef());
-			pstmt.setString(5, (bc.getBcRef() == 0)?null:String.valueOf(bc.getBcRef()));
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -156,7 +163,7 @@ public class BoardDao {
 	public int deleteBoard(Connection conn, int boardNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "delete from board_test where board_no=?";
+		String query = "delete from board where board_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, boardNo);
@@ -173,7 +180,7 @@ public class BoardDao {
 	public int updateNotice(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "update board_test set board_title=?, board_content=?, filename=?,filepath=? where board_no=?";
+		String query = "update board set board_title=?, board_content=?, filename=?,filepath=? where board_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, b.getBoardTitle());
@@ -221,17 +228,18 @@ public class BoardDao {
 		return list;
 	}
 
-	public int insertBoard(Connection conn, Board b) {
+	public int insertBoard(Connection conn, Board b ,Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into board_test values(board_test_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		
+		String query = "insert into board values(board_seq.nextval,?,?,1,to_char(sysdate,'yyyy-mm-dd'),?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, b.getBoardTitle());
-			pstmt.setString(2, b.getBoardWriter());
-			pstmt.setString(3, b.getBoardContent());
-			pstmt.setString(4, b.getFileName());
-			pstmt.setString(5, b.getFilePath());
+			pstmt.setString(2, b.getBoardContent());
+			
+			pstmt.setString(3, b.getFileName());
+			pstmt.setString(4, b.getFilePath());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {

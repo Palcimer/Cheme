@@ -15,12 +15,14 @@ public class GBoardComment {
     private int gBoardCommentLev;
     // 그룹게시판댓글구분 
     private int gBoardCommentRef;
+    // 댓글작성자이름
+    private String gBoardCommentWriterName;
 	public GBoardComment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public GBoardComment(int gBoardCommentNo, int gBoardNo, String gBoardCommentContent, int gBoardCommentWriter,
-			String gBoardCommentDate, int gBoardCommentLev, int gBoardCommentRef) {
+			String gBoardCommentDate, int gBoardCommentLev, int gBoardCommentRef, String gBoardCommentWriterName) {
 		super();
 		this.gBoardCommentNo = gBoardCommentNo;
 		this.gBoardNo = gBoardNo;
@@ -29,6 +31,7 @@ public class GBoardComment {
 		this.gBoardCommentDate = gBoardCommentDate;
 		this.gBoardCommentLev = gBoardCommentLev;
 		this.gBoardCommentRef = gBoardCommentRef;
+		this.gBoardCommentWriterName = gBoardCommentWriterName;
 	}
 	public int getgBoardCommentNo() {
 		return gBoardCommentNo;
@@ -44,6 +47,9 @@ public class GBoardComment {
 	}
 	public String getgBoardCommentContent() {
 		return gBoardCommentContent;
+	}
+	public String getgBoardCommentContentBr() {
+		return gBoardCommentContent.replaceAll("\r\n", "<br>");
 	}
 	public void setgBoardCommentContent(String gBoardCommentContent) {
 		this.gBoardCommentContent = gBoardCommentContent;
@@ -71,6 +77,12 @@ public class GBoardComment {
 	}
 	public void setgBoardCommentRef(int gBoardCommentRef) {
 		this.gBoardCommentRef = gBoardCommentRef;
+	}
+	public String getgBoardCommentWriterName() {
+		return gBoardCommentWriterName;
+	}
+	public void setgBoardCommentWriterName(String gBoardCommentWriterName) {
+		this.gBoardCommentWriterName = gBoardCommentWriterName;
 	}
     
 }

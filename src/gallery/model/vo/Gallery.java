@@ -12,6 +12,7 @@ public class Gallery {
 	private int groupId;
 	private String galleryFilepath;
 	private String galleryFileName;
+	private String galleryNickName;
 	public Gallery() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -92,6 +93,12 @@ public class Gallery {
 	}
 	public void setGalleryFileName(String galleryFileName) {
 		this.galleryFileName = galleryFileName;
+	}
+	public String getGalleryNickName() {
+		return galleryNickName;
+	}
+	public void setGalleryNickName(String galleryNickName) {
+		this.galleryNickName = galleryNickName;
 	}
 	
 	

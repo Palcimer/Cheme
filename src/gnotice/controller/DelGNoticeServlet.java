@@ -45,10 +45,10 @@ public class DelGNoticeServlet extends HttpServlet {
 				delFile.delete();
 			}
 			request.setAttribute("msg", "삭제되었습니다.");
-			request.setAttribute("loc", "/gNoticeList?reqPage=1");
+			request.setAttribute("loc", "/gNoticeList?groupId=" + gn.getGroupId() + "&mem=" + gn.getgNoticeWriter() + "&page=1");
 		} else {
 			request.setAttribute("msg", "삭제에 실패했습니다.");
-			request.setAttribute("loc", "/gNoticeView?noticeNo=" + noticeNo);
+			request.setAttribute("loc", "/gNoticeView?noticeNo=" + noticeNo + "&groupId=" + gn.getGroupId() + "&mem=" + gn.getgNoticeWriter());
 		}
 		rd.forward(request, response);	
 	}

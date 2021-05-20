@@ -8,6 +8,7 @@ public class GalleryComment {
 	private int galleryCommentWriter;
 	private int galleryCommentLevel;
 	private int galleryCommentRef;
+	private String galleryName;
 	public GalleryComment() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -22,6 +23,7 @@ public class GalleryComment {
 		this.galleryCommentWriter = galleryCommentWriter;
 		this.galleryCommentLevel = galleryCommentLevel;
 		this.galleryCommentRef = galleryCommentRef;
+		
 	}
 	public int getRnum() {
 		return rnum;
@@ -67,6 +69,12 @@ public class GalleryComment {
 	}
 	public void setGalleryCommentRef(int galleryCommentRef) {
 		this.galleryCommentRef = galleryCommentRef;
+	}
+	public String getGalleryName() {
+		return galleryName;
+	}
+	public void setGalleryName(String galleryName) {
+		this.galleryName = galleryName;
 	}
 	
 	
