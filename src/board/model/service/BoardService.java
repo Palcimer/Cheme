@@ -9,6 +9,7 @@ import board.model.vo.BoardComment;
 import board.model.vo.BoardPageData;
 import board.model.vo.BoardViewData;
 import common.JDBCTemplate;
+import member.model.vo.Member;
 
 
 
@@ -175,9 +176,10 @@ public class BoardService {
 
 
 
-	public int insertBoard(Board b) {
+	public int insertBoard(Board b , Member m) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new BoardDao().insertBoard(conn, b);
+		
+		int result = new BoardDao().insertBoard(conn, b,m);
 		System.out.println("서비스 ");
 		System.out.println(result);
 		if(result>0) {

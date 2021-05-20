@@ -12,6 +12,7 @@ public class BoardComment {
 	private int boardRef;
 	private int bcRef;
 	
+	
 	public BoardComment() {
 		super();
 		// TODO Auto-generated constructor stub
