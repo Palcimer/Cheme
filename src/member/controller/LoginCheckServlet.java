@@ -17,14 +17,14 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class JoinCheckServlet
  */
-@WebServlet(name = "JoinCheck", urlPatterns = { "/joinCheck" })
-public class JoinCheckServlet extends HttpServlet {
+@WebServlet(name = "LoginCheck", urlPatterns = { "/loginCheck" })
+public class LoginCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinCheckServlet() {
+    public LoginCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

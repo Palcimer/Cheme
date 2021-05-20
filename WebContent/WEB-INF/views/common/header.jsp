@@ -40,7 +40,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form action="/joinCheck" method="post" name="loginFrm">
+				<form action="/loginCheck" method="post" name="loginFrm">
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="memberId">아이디</label>
