@@ -38,6 +38,22 @@
 	.list{
 		text-align: right;
 	}
+	li{
+		list-style-type: none;
+		margin-left: 5px;
+	}
+	.profile{
+		width: 100px;
+        height: 100px;
+	}
+	.commentWrap{
+		display : flex;
+	}
+	.btn-box{
+		display: flex;
+		align-items: flex-end;
+	}
+	
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -46,7 +62,7 @@
 		<fieldset>
 			<table class="table" id="galleryView" style="width:100%;">
 				<tr class="table-light">
-					<th scope="col" class=writer>작성자 : <%=g.getGalleryWriter() %></th>
+					<th scope="col" class=writer>작성자 : <%=g.getGalleryNickName() %></th>
 					<th colspan="3" class=title><%=g.getGalleryTitle() %></th>
 					<th scope="col" class="date">작성일 : <%=g.getGalleryDate() %></th>
 				</tr>
@@ -66,6 +82,7 @@
 				<a class="btn btn-secondary" href="/galleryDelete?galleryNo=<%=g.getGalleryNo()%>">삭제하기</a>
 			<%} %>
 			</div>
+			<br><br><br>
 			
 		</fieldset>
 		<%--댓글 출력 시작 --%>
@@ -74,7 +91,6 @@
 			<%if(gc.getGalleryCommentLevel() == 1) {%>
 			<ul class="comments">
 				<li>
-					<i class="far fa-user fa-3x"></i>
 					<p><%=gc.getGalleryCommentWriter() %></p>
 				</li>
 				<li>
@@ -132,20 +148,20 @@
 		</div>
 		<%if(m!=null) { %>
 		<div class="inputCommentBox">
-			<form action="/insertComment" method="post">
-				<ul>
+			<form action="/galleryInsertComment" method="post">
+				<ul class="commentWrap">
 					<li>
-						<i class="far fa-user fa-5x"></i>
+						<img class="profile" src="/img/user2.png">
 					</li>
 					<li>
-						<input type="hidden" name="ncLevel" value="1">
-						<input type="hidden" name="ncWriter" value="<%=m.getMemberId() %>">
-						<input type="hidden" name="noticeRef" value="<%=g.getGalleryNo() %>">
-						<input type="hidden" name="ncRef" value="0">
-						<textarea class="form-control" name="ncContent"></textarea>
+						<input type="hidden" name="galleryCommentLevel" value="1">
+						<input type="hidden" name="galleryCommentWriter" value="<%=m.getMemberName() %>">
+						<input type="hidden" name="galleryNo" value="<%=g.getGalleryNo() %>">
+						<input type="hidden" name="galleryCommentRef" value="0">
+						<textarea class="form-control" name="galleryCommentContent" style = "resize: none; width: 900px; height: 100px"></textarea>
 					</li>
-					<li>
-						<button type="submit" class="btn btn-primary btn-lg btn btn-block">등록</button>
+					<li class="btn-box">
+						<button type="submit" class="btn btn-primary btn-lg btn btn-block down-btn">등록</button>
 					</li>
 				</ul>
 			</form>

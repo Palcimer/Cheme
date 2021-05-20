@@ -18,7 +18,8 @@ public class GalleryDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Gallery> list = new ArrayList<Gallery>();
-		String qeury = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.*FROM (SELECT * FROM GALLERY ORDER BY GALLERY_NO DESC)N)WHERE RNUM BETWEEN ? AND ?";
+		String qeury = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.*FROM (select g.*,member_name from gallery g join member  on (gallery_writer = member_no) ORDER BY GALLERY_NO DESC)N)WHERE RNUM BETWEEN ? AND ?";
+		 	
 		try {
 			pstmt = conn.prepareStatement(qeury);
 			pstmt.setInt(1, start);
@@ -32,6 +33,8 @@ public class GalleryDao {
 				g.setGalleryNo(rset.getInt("gallery_no"));
 				g.setGalleryTitle(rset.getString("gallery_title"));
 				g.setGalleryWriter(rset.getInt("gallery_writer"));
+				g.setGalleryNickName(rset.getString("member_name"));
+				
 				g.setGroupId(rset.getInt("group_id"));
 				g.setRnum(rset.getInt("rnum"));
 				list.add(g);
@@ -92,7 +95,7 @@ public class GalleryDao {
 	public Gallery selectOneGallery(Connection conn, int galleryNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from gallery where gallery_no=?";
+		String query = "select g.*,member_name from gallery g join member  on (gallery_writer = member_no)  where gallery_no=?";
 		Gallery g =null;
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -108,6 +111,7 @@ public class GalleryDao {
 				g.setGalleryTitle(rset.getString("gallery_title"));
 				g.setGalleryWriter(rset.getInt("gallery_writer"));
 				g.setGroupId(rset.getInt("group_id"));
+				g.setGalleryNickName(rset.getString("member_name"));
 				
 				
 			}
@@ -125,7 +129,7 @@ public class GalleryDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<GalleryComment> list = new ArrayList<GalleryComment>();
-		String query = "select * from gal_comment where notice_ref=?";
+		String query = "select g.*,member_name from gal_comment g join member on (member_name = gal_comment_writer) where gal_comment_ref=?;";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, galleryNo);
@@ -138,6 +142,7 @@ public class GalleryDao {
 				gc.setGalleryCommentWriter(rset.getInt("gal_comment_writer"));
 				gc.setGalleryCommentLevel(rset.getInt("gal_comment_lev"));
 				gc.setGalleryCommentRef(rset.getInt("gal_comment_ref"));
+				gc.setGalleryName(rset.getString("member_name"));
 				list.add(gc);
 			}
 		} catch (SQLException e) {

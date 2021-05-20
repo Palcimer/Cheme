@@ -48,7 +48,7 @@ public class GalleryUpdateServlet extends HttpServlet {
 		String root = getServletContext().getRealPath("/");
 		String saveDirectory = root+"upload/gallery";
 		
-		int maxSize = 10*10*1024;
+		int maxSize = 10*1024*1024;
 		
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		int galleryNo = Integer.parseInt(mRequest.getParameter("galleryNo"));
