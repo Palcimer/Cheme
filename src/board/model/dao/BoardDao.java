@@ -237,9 +237,9 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, b.getBoardTitle());
 			pstmt.setString(2, b.getBoardContent());
-			pstmt.setInt(3, m.getMemberNo());
-			pstmt.setString(4, b.getFileName());
-			pstmt.setString(5, b.getFilePath());
+			
+			pstmt.setString(3, b.getFileName());
+			pstmt.setString(4, b.getFilePath());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
