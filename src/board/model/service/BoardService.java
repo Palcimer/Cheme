@@ -177,7 +177,9 @@ public class BoardService {
 
 	public int insertBoard(Board b) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new BoardDao().insertBoard(conn,b);
+		int result = new BoardDao().insertBoard(conn, b);
+		System.out.println("서비스 ");
+		System.out.println(result);
 		if(result>0) {
 			JDBCTemplate.commit(conn);
 		}else {

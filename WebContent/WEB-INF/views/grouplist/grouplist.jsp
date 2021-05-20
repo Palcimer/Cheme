@@ -41,7 +41,7 @@
 				<%for(Group g : list){ %>			
 				<div class ="listImg">
 				<img src = "img/sample.JPG" class = "groupListImg">
-				<a style="text-align: center;" href="#"><%=g.getGroupName() %></a>
+				<a style="text-align: center;" href="/groupDetail?Id=<%=g.getGroupId()%>&mem=<%=m.getMemberNo()%>"><%=g.getGroupName() %></a>
 				</div>
 				<%} %>			
 			

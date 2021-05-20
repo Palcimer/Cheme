@@ -224,7 +224,7 @@ public class BoardDao {
 	public int insertBoard(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into board_test values(board_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		String query = "insert into board_test values(board_test_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, b.getBoardTitle());
@@ -233,12 +233,15 @@ public class BoardDao {
 			pstmt.setString(4, b.getFileName());
 			pstmt.setString(5, b.getFilePath());
 			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
 		}
+		System.out.println("dao ");
+		System.out.println(result);
 		return result;
 	}
 
