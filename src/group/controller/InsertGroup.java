@@ -82,7 +82,7 @@ public class InsertGroup extends HttpServlet {
 			g.setGroupCategory(11);
 		}else if(cate.equals("가술")) {
 			g.setGroupCategory(12);
-		}else if(cate.equals("제태크")) {
+		}else if(cate.equals("재태크")) {
 			g.setGroupCategory(13);
 		}else if(cate.equals("기타")) {
 			g.setGroupCategory(14);

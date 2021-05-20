@@ -244,6 +244,22 @@ public class GroupDao {
 		}
 		return isLeader;
 	}
+
+   public int insertInitMem(int groupId, int groupLeader, Connection conn) {
+	   PreparedStatement pstmt = null;
+	   int result = 0;
+	   String query = "INSERT INTO G_MEMBER VALUES (?, ?)";
+	   try {
+		   pstmt = conn.prepareStatement(query);
+		   pstmt.setInt(1, groupLeader);
+		   pstmt.setInt(2, groupId);
+		   result = pstmt.executeUpdate();
+	   } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		   e.printStackTrace();
+	   }
+	   return result;
+   }
    
 
 }

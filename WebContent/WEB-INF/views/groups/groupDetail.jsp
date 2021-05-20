@@ -30,7 +30,7 @@
                    <!-- (info.getGroupLeader() == m.getMemberNo()) -->                    
                     <a href="/groupUpdateFrm?groupNo=<%=info.getGroupId()%>" class="btn btn-success">모임정보수정</a> <!-- if문 걸어줘야함 -->
                     <button type="button" class="btn btn-success">모임 탈퇴</button>
-                    <p class="group-content"><%=info.getGroupDetail() %></p>
+                    <p class="group-content"><%=info.getGroupDetailBr() %></p>
                     <div class="group-info">
                     	<%if(info.getKeyword1() != null) {%>
                         <span class="badge rounded-pill bg-secondary"><%=info.getKeyword1() %></span>

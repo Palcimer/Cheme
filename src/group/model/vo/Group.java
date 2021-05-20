@@ -70,6 +70,9 @@ public class Group {
 	public String getGroupDetail() {
 		return groupDetail;
 	}
+	public String getGroupDetailBr() {
+		return groupDetail.replaceAll("\r\n", "<br>");
+	}
 	public void setGroupDetail(String groupDetail) {
 		this.groupDetail = groupDetail;
 	}
