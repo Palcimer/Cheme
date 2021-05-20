@@ -29,8 +29,8 @@
         		<a href="#" class="tag"><%=m.getMemberId() %></a>
             	<a href="/logout" class="tag">로그아웃</a> 
         	<%}else{ %>
-        		<a href="/join" class="tag" data-toggle="modal" data-target=".modal">login</a>
-            	<a href="#" class="tag">회원가입</a> 
+        		<a href="/login" class="tag" data-toggle="modal" data-target=".modal">login</a>
+            	<a href="/joinFrm" class="tag">회원가입</a> 
             	<div class="modal">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
