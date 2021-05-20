@@ -96,4 +96,40 @@ public class GBoardService {
 		return data;
 	}
 
+	public int deleteBoardCmt(int cmtNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GBoardDao dao = new GBoardDao();
+		int result = dao.deleteBoardCmt(conn, cmtNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public int updateBoardCmt(int cmtNo, String gNcContent) {
+		Connection conn = JDBCTemplate.getConnection();
+		GBoardDao dao = new GBoardDao();
+		int result = dao.updateBoardCmt(conn, cmtNo, gNcContent);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public int insertBoardCmt(GBoardComment cmt) {
+		Connection conn = JDBCTemplate.getConnection();
+		GBoardDao dao = new GBoardDao();
+		int result = dao.insertBoardCmt(conn, cmt);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
 }

@@ -31,14 +31,14 @@
             <%if(m != null && m.getMemberNo() == board.getgBoardWriter()) {%>
             <div class="board-buttons">
             	<a href="/writeGBoardFrm?groupId=<%=board.getGroupId() %>" class="btn btn-outline-primary" style="width:140px">새 공지 작성</a>
-                <a href="/modGBoard?No=<%=board.getgBoardNo() %>" class="btn btn-outline-primary" style="width:140px">글 수정</a>
-                <a href="/delGBoard?No=<%=board.getgBoardNo() %>" class="btn btn-outline-primary" style="width:140px">글 삭제</a>
+                <a href="/modGBoard?boardNo=<%=board.getgBoardNo() %>" class="btn btn-outline-primary" style="width:140px">글 수정</a>
+                <a href="/delGBoard?boardNo=<%=board.getgBoardNo() %>" class="btn btn-outline-primary" style="width:140px">글 삭제</a>
             </div>          
             <%} %>   
             <div class="board-body"><%=board.getgBoardContentBr() %>
             	<%if(board.getgBoardFilename() != null) {%>
                 <div class="bg-light files">
-                   	첨부파일 : <i class="fas fa-clone"></i> <a href="file?No=<%=board.getgBoardNo() %>"><%=board.getgBoardFilename() %></a>
+                   	첨부파일 : <i class="fas fa-clone"></i> <a href="file?boardNo=<%=board.getgBoardNo() %>"><%=board.getgBoardFilename() %></a>
                 </div>
                 <%} %>
             </div>
@@ -63,7 +63,7 @@
                         	<form action = "/gComment" style="display:none">
 								<input type="hidden" name="rpLv" value="2">
 								<input type="hidden" name="rpWriter" value="<%=m.getMemberNo()%>">
-								<input type="hidden" name="No" value="<%=board.getgBoardNo()%>">
+								<input type="hidden" name="boardNo" value="<%=board.getgBoardNo()%>">
 								<input type="hidden" name="rpRef" value="<%=cmt.getgBoardCommentNo()%>">
 								<input type="hidden" name="groupId" value="<%=board.getGroupId()%>">
 								<input type="hidden" name="mem" value="<%=m.getMemberNo()%>">
@@ -104,7 +104,7 @@
                 	<form action="/gComment" method="post">                
 	                	<input type="hidden" name="rpLv" value="1">
 						<input type="hidden" name="rpWriter" value="<%=m.getMemberNo()%>">
-						<input type="hidden" name="No" value="<%=board.getgBoardNo()%>">
+						<input type="hidden" name="boardNo" value="<%=board.getgBoardNo()%>">
 						<input type="hidden" name="rpRef" value="0">
 						<input type="hidden" name="groupId" value="<%=board.getGroupId()%>">
 						<input type="hidden" name="mem" value="<%=m.getMemberNo()%>">
@@ -152,7 +152,7 @@
     	function modComplete(obj, cmtNo, boardNo, groupId, mem) {
     		var form = $("<form action='/modGBoardComment' method='post'></form>");
     		form.append($("<input type='hidden' name='cmtNo' value='" + cmtNo + "'>"));
-    		form.append($("<input type='hidden' name='No' value='" + boardNo + "'>"));
+    		form.append($("<input type='hidden' name='boardNo' value='" + boardNo + "'>"));
     		form.append($("<input type='hidden' name='groupId' value='" + groupId + "'>"));
     		form.append($("<input type='hidden' name='mem' value='" + mem + "'>"));
     		form.append($(obj).parent().prev());

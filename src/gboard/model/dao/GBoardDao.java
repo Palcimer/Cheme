@@ -171,4 +171,64 @@ public class GBoardDao {
 		return list;
 	}
 
+	public int deleteBoardCmt(Connection conn, int cmtNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM G_BOARD_COMMENT WHERE G_BOARD_COMMENT_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cmtNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateBoardCmt(Connection conn, int cmtNo, String gNcContent) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "UPDATE G_BOARD_COMMENT SET G_BOARD_COMMENT_CONTENT=? WHERE G_BOARD_COMMENT_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, gNcContent);
+			pstmt.setInt(2, cmtNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertBoardCmt(Connection conn, GBoardComment cmt) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "INSERT INTO G_BOARD_COMMENT VALUES(G_BOARD_COMMENT_SEQ.NEXTVAL, ?, ?, ?, ?, ?, DEFAULT)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cmt.getgBoardNo());
+			pstmt.setString(2, cmt.getgBoardCommentContent());
+			pstmt.setInt(3, cmt.getgBoardCommentWriter());
+			pstmt.setInt(4, cmt.getgBoardCommentLev());
+			if(cmt.getgBoardCommentRef() == 0) {
+				pstmt.setString(5, null);
+			} else {
+				pstmt.setInt(5, cmt.getgBoardCommentRef());
+			}			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }
