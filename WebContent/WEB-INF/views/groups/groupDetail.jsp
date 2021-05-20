@@ -23,7 +23,7 @@
         <div style="margin-top:50px; margin-bottom:50px">
             <div class="group-wrap d-flex">
                 <div class="group-image">
-                    <img src="img03.jpg" width="500px">
+                    <img src="/upload/grouprepresenphoto/<%=info.getGroupImg() %>" width="500px">
                 </div>
                 <div class="group-detail">
                     <p class="group-name"><%=info.getGroupName() %></p>
