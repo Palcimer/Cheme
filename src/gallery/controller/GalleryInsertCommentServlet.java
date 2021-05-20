@@ -35,8 +35,8 @@ public class GalleryInsertCommentServlet extends HttpServlet {
 		
 		GalleryComment gc = new GalleryComment();
 		gc.setGalleryCommentContent(request.getParameter("galleryCommentContent"));
-		gc.setGalleryCommentLevel(Integer.parseInt(request.getParameter("galleryComment")));
-		gc.setGalleryCommentWriter(Integer.parseInt(request.getParameter("galleryCommentWriter")));
+		gc.setGalleryCommentLevel(Integer.parseInt(request.getParameter("galleryCommentLevel")));
+		gc.setGalleryName(request.getParameter("galleryCommentWriter"));
 		gc.setGalleryNo(Integer.parseInt(request.getParameter("galleryNo")));
 		gc.setGalleryCommentRef(Integer.parseInt(request.getParameter("galleryCommentRef")));
 		

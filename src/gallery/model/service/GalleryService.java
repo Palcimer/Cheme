@@ -20,7 +20,7 @@ public class GalleryService {
 		int end = reqPage * numPerPage;
 		int start = end -numPerPage + 1;
 		GalleryDao dao = new GalleryDao();
-		ArrayList<Gallery> list = dao.selectGalleryList(conn , start , end);
+		ArrayList<Gallery> list = dao.selectGalleryList(conn , start , end);		
 		//페이지 네비게이션 제작
 		//1) 전체 페이지수를 구해야함 
 		int totalCount = dao.totalCount(conn);

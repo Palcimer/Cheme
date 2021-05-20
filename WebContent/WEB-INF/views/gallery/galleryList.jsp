@@ -16,7 +16,7 @@
 <style>
 	.photoWrapper{
 		padding-top : 20px;
-		clear : right;
+		
 		display : flex;
 		justify-content: space-around;
 		flex-wrap : wrap;
@@ -45,10 +45,12 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
 		<fieldset>
-			<legend>갤러리</legend>			
+			<legend>갤러리</legend>
+			<%if (m != null ) {%>			
 			<div class="write-btn">
 				<a class="btn btn-info writeBtn" href="/galleryWriteFrm">글쓰기</a>
 			</div>			
+			<%} %>
 			<div class="photoWrapper">
 				<%for(int i=0;i<list.size();i++) { %>
 					<div class="photo">
@@ -58,7 +60,7 @@
 						<th colspan="4">제목 : <a href="/galleryView?galleryNo=<%=list.get(i).getGalleryNo()%>"><%=list.get(i).getGalleryTitle()%></a></th>
 						</tr>
 						<tr>
-						<th scope="col">글쓴이 : <%=list.get(i).getGalleryWriter()%></th>
+						<th scope="col">글쓴이 : <%=list.get(i).getGalleryNickName()%></th>
 						<th scope="col">작성일 : <%=list.get(i).getGalleryDate()%></th>
 						</tr>
 						</table>
