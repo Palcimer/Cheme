@@ -96,4 +96,72 @@ public class GBoardService {
 		return data;
 	}
 
+	public int deleteBoardCmt(int cmtNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GBoardDao dao = new GBoardDao();
+		int result = dao.deleteBoardCmt(conn, cmtNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public int updateBoardCmt(int cmtNo, String gNcContent) {
+		Connection conn = JDBCTemplate.getConnection();
+		GBoardDao dao = new GBoardDao();
+		int result = dao.updateBoardCmt(conn, cmtNo, gNcContent);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public int insertBoardCmt(GBoardComment cmt) {
+		Connection conn = JDBCTemplate.getConnection();
+		GBoardDao dao = new GBoardDao();
+		int result = dao.insertBoardCmt(conn, cmt);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public GBoard selectBoard(int boardNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GBoardDao dao = new GBoardDao();
+		GBoard board = dao.selectBoard(conn, boardNo);
+		JDBCTemplate.close(conn);
+		return board;
+	}
+
+	public int deleteBoard(int boardNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GBoardDao dao = new GBoardDao();
+		int result = dao.deleteBoard(conn, boardNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public int updateGBoard(GBoard board) {
+		Connection conn = JDBCTemplate.getConnection();
+		GBoardDao dao = new GBoardDao();
+		int result = dao.updateBoard(conn, board);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
 }

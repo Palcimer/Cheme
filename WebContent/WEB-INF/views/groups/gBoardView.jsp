@@ -30,15 +30,14 @@
             </div>
             <%if(m != null && m.getMemberNo() == board.getgBoardWriter()) {%>
             <div class="board-buttons">
-            	<a href="/writeGBoardFrm?groupId=<%=board.getGroupId() %>" class="btn btn-outline-primary" style="width:140px">새 공지 작성</a>
-                <a href="/modGBoard?No=<%=board.getgBoardNo() %>" class="btn btn-outline-primary" style="width:140px">글 수정</a>
-                <a href="/delGBoard?No=<%=board.getgBoardNo() %>" class="btn btn-outline-primary" style="width:140px">글 삭제</a>
+                <a href="/modGBoard?boardNo=<%=board.getgBoardNo() %>" class="btn btn-outline-primary" style="width:140px">글 수정</a>
+                <a href="/delGBoard?boardNo=<%=board.getgBoardNo() %>" class="btn btn-outline-primary" style="width:140px">글 삭제</a>
             </div>          
             <%} %>   
             <div class="board-body"><%=board.getgBoardContentBr() %>
             	<%if(board.getgBoardFilename() != null) {%>
                 <div class="bg-light files">
-                   	첨부파일 : <i class="fas fa-clone"></i> <a href="file?No=<%=board.getgBoardNo() %>"><%=board.getgBoardFilename() %></a>
+                   	첨부파일 : <i class="fas fa-clone"></i> <a href="gBoardFile?boardNo=<%=board.getgBoardNo() %>"><%=board.getgBoardFilename() %></a>
                 </div>
                 <%} %>
             </div>
