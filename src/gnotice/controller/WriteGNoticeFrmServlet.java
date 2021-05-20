@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import group.model.service.GroupService;
+import group.model.vo.Group;
+
+
 /**
  * Servlet implementation class WriteGNoticeFrmServlet
  */
@@ -29,8 +33,10 @@ public class WriteGNoticeFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int groupId = Integer.parseInt(request.getParameter("groupId"));
+		Group group = new GroupService().selectOneGroup(groupId);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/writeGNotice.jsp");
 		request.setAttribute("groupId", groupId);
+		request.setAttribute("groupName", group.getGroupName());
 		rd.forward(request, response);
 		
 	}

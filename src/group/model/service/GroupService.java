@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import gnotice.model.dao.GNoticeDao;
 import group.model.dao.GroupDao;
 import group.model.vo.Group;
 import member.model.dao.MemberDao;
@@ -23,6 +24,7 @@ public class GroupService {
 				return result;
 	}
 
+<<<<<<< HEAD
 	public ArrayList<Integer> selectGroupId(int memberNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Integer> groupIdList  = new GroupDao().selectGroupId(conn, memberNo);
@@ -47,4 +49,22 @@ public class GroupService {
 
 
 
+=======
+	public boolean isMember(int groupId, int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GroupDao dao = new GroupDao();
+		boolean result = dao.isMember(conn, groupId, memberNo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public Group selectOneGroup(int groupId) {
+		Connection conn = JDBCTemplate.getConnection();
+		GroupDao dao = new GroupDao();
+		Group group = dao.selectOneGroup(conn, groupId);
+		JDBCTemplate.close(conn);
+		return group;
+	}
+
+>>>>>>> main
 }

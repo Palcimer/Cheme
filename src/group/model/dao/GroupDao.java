@@ -40,6 +40,7 @@ public class GroupDao {
 
 	}
 
+<<<<<<< HEAD
 	public ArrayList<Integer> selectGroupId(Connection conn, int memberNo) {
 
 		PreparedStatement pstmt = null;
@@ -55,6 +56,20 @@ public class GroupDao {
 				int groupId = (rset.getInt("group_id"));
 				groupIdList.add(groupId);
 
+=======
+	public boolean isMember(Connection conn, int groupId, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean result = false;
+		String query = "SELECT * FROM G_MEMBER WHERE MEMBER_NO=? AND GROUP_ID=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, groupId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = true;
+>>>>>>> main
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -63,6 +78,7 @@ public class GroupDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
+<<<<<<< HEAD
 		return groupIdList;
 	}
 
@@ -116,6 +132,41 @@ public class GroupDao {
 					g.setRecom(rset.getInt("recom"));
 					GroupAsMemberList.add(g);
 				}
+=======
+		return result;
+	}
+
+	public Group selectOneGroup(Connection conn, int groupId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Group group = new Group();
+		String query = "SELECT GROUPS.*, " + 
+				"(SELECT CATEGORY_NAME FROM CATEGORY WHERE CATEGORY_NO=(SELECT GROUP_CATEGORY FROM GROUPS WHERE GROUP_ID=?)) AS CATEGORY_NAME, " + 
+				"(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=(SELECT GROUP_LEADER FROM GROUPS WHERE GROUP_ID=?)) AS LEADER_NAME " + 
+				"FROM GROUPS WHERE GROUP_ID=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, groupId);
+			pstmt.setInt(2, groupId);
+			pstmt.setInt(3, groupId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				group.setGroupId(rset.getInt("group_id"));
+				group.setCategoryName(rset.getString("category_name"));
+				group.setLeaderName(rset.getString("leader_name"));
+				group.setGroupName(rset.getString("group_name"));
+				group.setGroupDetail(rset.getString("group_detail"));
+				group.setGroupImg(rset.getString("group_img"));
+				group.setKeyword1(rset.getString("keyword1"));
+				group.setKeyword2(rset.getString("keyword2"));
+				group.setKeyword3(rset.getString("keyword3"));
+				group.setKeyword4(rset.getString("keyword4"));
+				group.setKeyword5(rset.getString("keyword5"));
+				group.setGroupCategory(rset.getInt("group_category"));
+				group.setGroupLeader(rset.getInt("group_leader"));
+				group.setMaxMember(rset.getInt("max_member"));
+				group.setRecom(rset.getInt("recom"));				
+>>>>>>> main
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -124,7 +175,12 @@ public class GroupDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
+<<<<<<< HEAD
 		return GroupAsMemberList;
 	}
 
+=======
+		return group;
+	}
+>>>>>>> main
 }

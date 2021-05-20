@@ -16,7 +16,7 @@ public class GNoticeDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<GNotice> list = new ArrayList<GNotice>();
-		String query = "SELECT ROWNUM, GN.* FROM (SELECT * FROM G_NOTICE WHERE GROUP_ID=? ORDER BY 1 DESC) GN WHERE ROWNUM BETWEEN ? AND ?";
+		String query = "SELECT ROWNUM, GNN.* FROM (SELECT ROWNUM AS G_NOTICE_NO_DESC, GN.* FROM (SELECT * FROM G_NOTICE WHERE GROUP_ID=? ORDER BY 1) GN ORDER BY 1 DESC) GNN WHERE ROWNUM BETWEEN ? AND ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, groupId);
@@ -33,6 +33,7 @@ public class GNoticeDao {
 				gn.setgNoticeTitle(rset.getString("g_notice_title"));
 				gn.setgNoticeWriter(rset.getInt("g_notice_writer"));
 				gn.setGroupId(rset.getInt("group_id"));	
+				gn.setRnum(rset.getInt("g_notice_no_desc"));
 				list.add(gn);
 			}
 		} catch (SQLException e) {
@@ -106,7 +107,7 @@ public class GNoticeDao {
 		return list;
 	}
 
-	public String selectGroupName(Connection conn, int noticeNo) {
+	public String selectGroupNameByNoticeNo(Connection conn, int noticeNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String gName = null;
@@ -194,18 +195,129 @@ public class GNoticeDao {
 	public int insertNoticeCmt(Connection conn, GNoticeComment cmt) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO G_NOTICE_COMMENT VALUES(G_NOTICE_COMMENT_SEQ.NEXTVAL, ?, ?, ?, ?, NULL, DEFAULT)";
+		String query = "INSERT INTO G_NOTICE_COMMENT VALUES(G_NOTICE_COMMENT_SEQ.NEXTVAL, ?, ?, ?, ?, ?, DEFAULT)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, cmt.getgNoticeNo());
 			pstmt.setString(2, cmt.getgNcContent());
 			pstmt.setInt(3, cmt.getgNcWriter());
 			pstmt.setInt(4, cmt.getgNcLev());
+			if(cmt.getgNcRef() == 0) {
+				pstmt.setString(5, null);
+			} else {
+				pstmt.setInt(5, cmt.getgNcRef());
+			}			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public boolean isMember(Connection conn, int groupId, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean result = false;
+		String query = "SELECT * FROM G_MEMBER WHERE MEMBER_NO=? AND GROUP_ID=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, groupId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteNoticeCmt(Connection conn, int cmtNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM G_NOTICE_COMMENT WHERE G_NOTICE_COMMENT_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cmtNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateNoticeCmt(Connection conn, int cmtNo, String gNcContent) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		System.out.println(cmtNo);
+		System.out.println(gNcContent);
+		String query = "UPDATE G_NOTICE_COMMENT SET G_NOTICE_COMMENT_CONTENT=? WHERE G_NOTICE_COMMENT_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, gNcContent);
+			pstmt.setInt(2, cmtNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public String selectGroupNameByGroupId(Connection conn, int groupId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String gName = null;
+		String query = "SELECT GROUP_NAME FROM GROUPS WHERE GROUP_ID=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, groupId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				gName = rset.getString("group_name");
+			}
+			System.out.println(gName);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return gName;
+	}
+
+	public int totalNotice(Connection conn, int groupId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT COUNT(*) AS CNT FROM G_NOTICE WHERE GROUP_ID=?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, groupId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
 		return result;

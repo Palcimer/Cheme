@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import gnotice.model.service.GNoticeService;
 import gnotice.model.vo.GNotice;
+import group.model.service.GroupService;
+import group.model.vo.Group;
 
 /**
  * Servlet implementation class GroupDetailServlet
@@ -33,11 +35,27 @@ public class GroupDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int groupId = Integer.parseInt(request.getParameter("Id"));
+		String memNo = request.getParameter("mem");
+		int memberNo;
+		if(memNo == null) {
+			memberNo = 0;
+		} else {
+			memberNo = Integer.parseInt(memNo);
+		}
 		GNoticeService gns = new GNoticeService();
-		ArrayList<GNotice> list = gns.selectNoticeList(groupId);
-		System.out.println(list.get(0).getgNoticeTitle());
+		GroupService gs = new GroupService();
+		Group group = gs.selectOneGroup(groupId);
+		boolean isMem = gs.isMember(groupId, memberNo);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/groupDetail.jsp");
-		request.setAttribute("list", list);
+		if(isMem) {
+			ArrayList<GNotice> noticeList = gns.selectNoticeList(groupId);
+			request.setAttribute("groupInfo", group);
+			request.setAttribute("noticeList", noticeList);
+			request.setAttribute("isMem", isMem);
+		} else {
+			request.setAttribute("groupInfo", group);
+			request.setAttribute("isMem", isMem);
+		}
 		rd.forward(request, response);
 	}
 

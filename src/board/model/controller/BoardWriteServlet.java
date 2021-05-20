@@ -70,6 +70,8 @@ public class BoardWriteServlet extends HttpServlet {
 				//getOriginalFileName,getFilesystemName 매개변수는 <input type="file" name="">name속성값
 				//3. 비지니스로직
 				int result = new BoardService().insertBoard(b);
+				System.out.println("servlet ");
+				System.out.println(result);
 				//4. 결과처리
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 				if(result>0) {

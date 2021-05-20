@@ -132,6 +132,6 @@ $RECYCLE.BIN/
 *.class
 
 #테스트용 파일 추가
-test.jsp
+
 
 # End of https://www.toptal.com/developers/gitignore/api/java-web,windows,macos,eclipse

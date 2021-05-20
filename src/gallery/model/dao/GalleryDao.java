@@ -107,7 +107,7 @@ public class GalleryDao {
 				g.setGalleryNo(rset.getInt("gallery_no"));
 				g.setGalleryTitle(rset.getString("gallery_title"));
 				g.setGalleryWriter(rset.getInt("gallery_writer"));
-				g.setGroupId(rset.getInt("gallery_id"));
+				g.setGroupId(rset.getInt("group_id"));
 				
 				
 			}
@@ -214,6 +214,27 @@ public class GalleryDao {
 			pstmt.setInt(4, gc.getGalleryCommentRef());
 			result = pstmt.executeUpdate();
 			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateGallery(Connection conn, Gallery g) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update gallery set gallery_title=? , gallery_content=? , gallery_filename=? , gallery_filepath=? where gallery_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, g.getGalleryTitle());
+			pstmt.setString(2, g.getGalleryContent());
+			pstmt.setString(3, g.getGalleryFileName());
+			pstmt.setString(4, g.getGalleryFilepath());
+			pstmt.setInt(5,  g.getGalleryNo());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

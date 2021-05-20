@@ -27,13 +27,17 @@ public class Group {
     private String keyword4;
     // 키워드5 
     private String keyword5;
+    //모임장 이름
+    private String leaderName;
+    //카테고리 이름
+    private String categoryName;
 	public Group() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Group(int groupId, String groupName, String groupDetail, int groupLeader, String groupImg, int maxMember,
 			int groupCategory, int recom, String keyword1, String keyword2, String keyword3, String keyword4,
-			String keyword5) {
+			String keyword5, String leaderName, String categoryName) {
 		super();
 		this.groupId = groupId;
 		this.groupName = groupName;
@@ -48,6 +52,8 @@ public class Group {
 		this.keyword3 = keyword3;
 		this.keyword4 = keyword4;
 		this.keyword5 = keyword5;
+		this.leaderName = leaderName;
+		this.categoryName = categoryName;
 	}
 	public int getGroupId() {
 		return groupId;
@@ -91,6 +97,12 @@ public class Group {
 	public void setGroupCategory(int groupCategory) {
 		this.groupCategory = groupCategory;
 	}
+	public int getRecom() {
+		return recom;
+	}
+	public void setRecom(int recom) {
+		this.recom = recom;
+	}
 	public String getKeyword1() {
 		return keyword1;
 	}
@@ -121,10 +133,18 @@ public class Group {
 	public void setKeyword5(String keyword5) {
 		this.keyword5 = keyword5;
 	}
-	public int getRecom() {
-		return recom;
+	public String getLeaderName() {
+		return leaderName;
 	}
-	public void setRecom(int recom) {
-		this.recom = recom;
+	public void setLeaderName(String leaderName) {
+		this.leaderName = leaderName;
 	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+    
+	
 }

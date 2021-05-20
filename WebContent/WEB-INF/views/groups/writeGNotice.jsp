@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%
     int groupId = (int)request.getAttribute("groupId");
+    String groupName = (String)request.getAttribute("groupName");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,7 +14,7 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	 <div class="container">
         <div style="margin-bottom:50px">
-            <h6>그룹 이름</h6>
+            <h6><%=groupName %></h6>
             <div class="boardWrite">
                 <form action="/writeGNotice" method="post" enctype="multipart/form-data">
                     <fieldset>

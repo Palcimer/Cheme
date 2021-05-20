@@ -38,17 +38,16 @@ public class GNoticeCommentServlet extends HttpServlet {
 		int rpRef = Integer.parseInt(request.getParameter("rpRef"));
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		String rpContent = request.getParameter("rpContent");
-		System.out.println(rpWriter + "" + rpLv + "" + rpRef + "" +noticeNo+""+rpContent);
+		int mem = Integer.parseInt(request.getParameter("mem"));
+		int groupId = Integer.parseInt(request.getParameter("groupId"));
 		GNoticeComment cmt = new GNoticeComment(0, rpLv, rpRef, noticeNo, null, rpWriter, rpContent, null);
 		int result = new GNoticeService().insertNoticeCmt(cmt);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result > 0) {
-			response.setContentType("application/json");
-			response.setCharacterEncoding("utf-8");
-			new Gson().toJson(cmt, response.getWriter());
+			response.sendRedirect("/gNoticeView?groupId=" + groupId + "&noticeNo=" + noticeNo + "&mem=" + mem);
 		} else {			
-			request.setAttribute("msg", "에러가 발생했습니다.");
-			request.setAttribute("loc", "/gNoticeView?noticeNo=" + cmt.getgNoticeNo());
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			request.setAttribute("msg", "댓글을 다는 중 에러가 발생했습니다.");
+			request.setAttribute("loc", "/gNoticeView?groupId=" + groupId + "&noticeNo=" + noticeNo + "&mem=" + mem);
 			rd.forward(request, response);
 		}
 		
