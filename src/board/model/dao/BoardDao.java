@@ -232,7 +232,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "insert into board values(board_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		String query = "insert into board values(board_seq.nextval,?,?,1,to_char(sysdate,'yyyy-mm-dd'),?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, b.getBoardTitle());
