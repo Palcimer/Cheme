@@ -17,7 +17,6 @@ public class MemberService {
 	}
 
 	public int updateMember(Member m) {
-		// TODO Auto-generated method stub
 		Connection conn = JDBCTemplate.getConnection();
 
 		int result = new MemberDao().updateMember(conn, m);
@@ -30,4 +29,22 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public int deleteMember(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MemberDao().deleteMember(conn, memberNo);
+
+		JDBCTemplate.close(conn);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+
+		return result;
+	}
+
+
+
 }
