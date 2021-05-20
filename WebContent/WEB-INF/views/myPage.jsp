@@ -121,7 +121,10 @@ ArrayList<String> colorList = new ArrayList<String>(Arrays.asList("primary","sec
               	overflow: hidden;
               }
               .badge-wrap{
-              	display: flex;
+              	 display: flex;
+         		 width: 213px;
+              	flex-wrap: wrap;
+              	justify-content: space-around;
               }
             </style>
           </head>
@@ -166,7 +169,7 @@ ArrayList<String> colorList = new ArrayList<String>(Arrays.asList("primary","sec
 					    <div class="moimRow">
 					      <!-- 자바로 구현 -->
 					      <% for(Group g : groupAsLeaderList) { %>
-					        <a href="#">
+					        <a href="/groupDetail?Id=<%=g.getGroupId()%>&mem=<%=m.getMemberNo()%>">
 					      <div class="moim">
 					        <div class="photo">
 					            <img
@@ -175,6 +178,7 @@ ArrayList<String> colorList = new ArrayList<String>(Arrays.asList("primary","sec
 					            />
 					        </div>
 					        <div class="moimName"><%=g.getGroupName()%></div>
+					         </a>
 					        <div class="badge-wrap">
 					        <%if(g.getKeyword1()!=null){ %>
 					        <div class="badge bg-primary">
@@ -210,26 +214,25 @@ ArrayList<String> colorList = new ArrayList<String>(Arrays.asList("primary","sec
 					    </div>
 					  </div>
 					</div>
-					  </a>
+					 
 					<%} %>
                      <div class="myMoim-wrap">
 					  <h2>나의 모임</h2>
 					  <hr />
 					  <div class="list-wrap">
 					    <div class="moimRow">
-					      <!-- 자바로 구현 -->
 					      <% for(Group g : groupAsMemberList) { %>
-					
 					      <div class="moim">
 					        <div class="photo">
-					          <a href="#">
+					          <a href="/groupDetail?Id=<%=g.getGroupId()%>&mem=<%=m.getMemberNo()%>">
 					            <img
 					              src="../../upload/grouprepresenphoto\<%=g.getGroupImg() %>"
 					              alt=""
 					            />
-					          </a>
+					         
 					        </div>
 					        <div class="moimName"><%=g.getGroupName()%></div>
+					         </a>
 					        <div class="moimTag"><%%></div>
 					      </div>
 					      <%} %>

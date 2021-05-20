@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
@@ -55,11 +56,14 @@ public class UpdateMember extends HttpServlet {
 			// 페이지 이동
 		} else {
 			// 성공
-			request.setAttribute("msg", "성공");
-
+			request.setAttribute("msg", "정보변경 성공. "
+					+ "다시 로그인 해주세요.");
+			HttpSession session = request.getSession(false);
+			session.invalidate();
 		}
 		request.setAttribute("loc", "/");
 		rd.forward(request, response);
+		
 	}
 
 	/**
