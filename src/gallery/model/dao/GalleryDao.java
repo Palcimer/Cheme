@@ -74,14 +74,15 @@ public class GalleryDao {
 	public int insertGallery(Connection conn, Gallery ga) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into gallery values(gal_seq.nextval,1000,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		String query = "insert into gallery values(gal_seq.nextval,?,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
 		try {
-			pstmt = conn.prepareStatement(query);			
-			pstmt.setString(1, ga.getGalleryTitle()); 
-			pstmt.setString(2, ga.getGalleryContent());
-			pstmt.setInt(3, ga.getGalleryWriter());
-			pstmt.setString(4, ga.getGalleryFileName());
-			pstmt.setString(5, ga.getGalleryFilepath());
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, ga.getGroupId());
+			pstmt.setString(2, ga.getGalleryTitle()); 
+			pstmt.setString(3, ga.getGalleryContent());
+			pstmt.setInt(4, ga.getGalleryWriter());
+			pstmt.setString(5, ga.getGalleryFileName());
+			pstmt.setString(6, ga.getGalleryFilepath());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
