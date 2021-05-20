@@ -5,6 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+	.emdfhr{
+		text-align : right;
+	}
+</style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -41,12 +46,14 @@
 					<tr class="table-active">
 						<th>내용</th>
 						<td colspan="3">
-							<textarea class="form-control" name="galleryContent" id="exampleTextarea" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 300px;"></textarea>
+							<textarea class="form-control" name="galleryContent" id="exampleTextarea" rows="3" style=" resize: none; margin-top: 0px; margin-bottom: 0px; height: 300px;"></textarea>
 						</td>
 					</tr>
 					<tr class="table-active">
 						<th class="on-btn"colspan="4">
-							<button type="submit" class="btn btn-primary">등록하기</button>	
+							<div class="emdfhr">
+								<button type="submit" class="btn btn-primary">등록하기</button>
+							</div>	
 						</th>
 					</tr>
 				</table>
