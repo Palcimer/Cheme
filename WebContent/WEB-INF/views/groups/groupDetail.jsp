@@ -32,19 +32,19 @@
                     <p class="group-content"><%=info.getGroupDetail() %></p>
                     <div class="group-info">
                     	<%if(info.getKeyword1() != null) {%>
-                        <span class="badge rounded-pill bg-secondary">#<%=info.getKeyword1() %></span>
+                        <span class="badge rounded-pill bg-secondary"><%=info.getKeyword1() %></span>
                         <%} %>
                         <%if(info.getKeyword2() != null) {%>
-                        <span class="badge rounded-pill bg-warning">#<%=info.getKeyword2() %></span>
+                        <span class="badge rounded-pill bg-warning"><%=info.getKeyword2() %></span>
                         <%} %>
                         <%if(info.getKeyword3() != null) {%>
-                        <span class="badge rounded-pill bg-success">#<%=info.getKeyword3() %></span>
+                        <span class="badge rounded-pill bg-success"><%=info.getKeyword3() %></span>
                         <%} %>
                         <%if(info.getKeyword4() != null) {%>
-                        <span class="badge rounded-pill bg-danger">#<%=info.getKeyword4() %></span>
+                        <span class="badge rounded-pill bg-danger"><%=info.getKeyword4() %></span>
                         <%} %>
                         <%if(info.getKeyword5() != null) {%>
-                        <span class="badge rounded-pill bg-info">#<%=info.getKeyword5() %></span>
+                        <span class="badge rounded-pill bg-info"><%=info.getKeyword5() %></span>
                         <%} %>
                         <br>
                         <span>카테고리: <a href="#"><%=info.getCategoryName() %></a></span>

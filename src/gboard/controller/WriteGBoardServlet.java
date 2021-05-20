@@ -70,7 +70,7 @@ public class WriteGBoardServlet extends HttpServlet {
 		} else {
 			request.setAttribute("msg", "게시글 등록 실패");
 		}
-		request.setAttribute("loc", "/gBoardList?page=1");
+		request.setAttribute("loc", "/gBoardList?groupId=" + board.getGroupId() + "&mem=" + board.getgBoardWriter() + "&page=1");
 		rd.forward(request, response);
 	}
 
