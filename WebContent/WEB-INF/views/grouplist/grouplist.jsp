@@ -1,12 +1,12 @@
 <%@page import="group.model.vo.Group"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="member.model.vo.Member"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%
     ArrayList<Group> list = (ArrayList<Group>)request.getAttribute("list");
     String pageNavi = (String)request.getAttribute("pageNavi");
-    Member m = (Member)session.getAttribute("m");
+    
     /* int groupCategory =(Integer)request.getAttribute("groupCategory"); */
     %>
 <!DOCTYPE html>
