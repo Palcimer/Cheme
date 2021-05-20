@@ -261,8 +261,6 @@ public class GNoticeDao {
 	public int updateNoticeCmt(Connection conn, int cmtNo, String gNcContent) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		System.out.println(cmtNo);
-		System.out.println(gNcContent);
 		String query = "UPDATE G_NOTICE_COMMENT SET G_NOTICE_COMMENT_CONTENT=? WHERE G_NOTICE_COMMENT_NO=?";
 		try {
 			pstmt = conn.prepareStatement(query);

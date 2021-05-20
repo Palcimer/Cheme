@@ -1,33 +1,28 @@
-package group.controller;
+package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
-import group.model.service.GroupService;
-import group.model.vo.Group;
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class GroupUpdateFrmServlet
+ * Servlet implementation class PwCheck
  */
-@WebServlet(name = "GroupUpdateFrm", urlPatterns = { "/groupUpdateFrm" })
-public class GroupUpdateFrmServlet extends HttpServlet {
+@WebServlet("/pwCheck")
+public class PwCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GroupUpdateFrmServlet() {
+    public PwCheck() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,17 +31,20 @@ public class GroupUpdateFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");		
-		int groupId = Integer.parseInt(request.getParameter("groupNo"));		
-		Group g = new GroupService().selectOneGroup(groupId);		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/groupUpdateFrm.jsp");
-		request.setAttribute("g", g);
-		rd.forward(request, response);
-		
-		
+		// TODO Auto-generated method stub
+		String pw = (request.getParameter("memberPwDelete"));
+		System.out.println("pw: " + pw);
+		String id = ((request.getParameter("memberIdDelete")));
+		System.out.println("id: "+ id);
+		Member m = new MemberService().selectOneMember(id,pw);
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		if(m==null) {
+			out.print(0);
+		}else {
+			out.print(1);
+		}
 	}
-		
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

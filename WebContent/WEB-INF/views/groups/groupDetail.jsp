@@ -27,7 +27,8 @@
                 </div>
                 <div class="group-detail">
                     <p class="group-name"><%=info.getGroupName() %></p>
-                    <button type="button" class="btn btn-success">모임정보수정</button>
+                   <!-- (info.getGroupLeader() == m.getMemberNo()) -->                    
+                    <a href="/groupUpdateFrm?groupNo=<%=info.getGroupId()%>" class="btn btn-success">모임정보수정</a> <!-- if문 걸어줘야함 -->
                     <button type="button" class="btn btn-success">모임 탈퇴</button>
                     <p class="group-content"><%=info.getGroupDetail() %></p>
                     <div class="group-info">
@@ -70,14 +71,14 @@
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade active show" id="notice">
-                        <table class="table table-hover">
-							<%for(GNotice n : noticeList) {%>
-							<tr>
-								<td style="width:80%"><a href="/gNoticeView?groupId=<%=info.getGroupId() %>&noticeNo=<%=n.getgNoticeNo()%>&mem=<%=m.getMemberNo()%>"><%=n.getgNoticeTitle() %></a></td>
-								<td style="width:20%; text-align:center"><%=n.getgNoticeDate() %></td>
-							</tr>
-							<%} %>
-						</table>
+                        <table>
+			<%for(GNotice n : noticeList) {%>
+			<tr>
+				<td><a href="/gNoticeView?groupId=<%=info.getGroupId() %>&noticeNo=<%=n.getgNoticeNo()%>&mem=<%=m.getMemberNo()%>"><%=n.getgNoticeTitle() %></a></td>
+				<td><%=n.getgNoticeDate() %></td>
+			</tr>
+			<%} %>
+		</table>
                     </div>
                     <div class="tab-pane fade" id="board">
                         <p>게시판</p>

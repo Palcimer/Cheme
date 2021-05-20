@@ -1,4 +1,4 @@
-package group.controller;
+package member.controller;
 
 import java.io.IOException;
 
@@ -8,26 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
-import group.model.service.GroupService;
-import group.model.vo.Group;
+import member.model.service.MemberService;
 
 /**
- * Servlet implementation class GroupUpdateFrmServlet
+ * Servlet implementation class DeleteMyId
  */
-@WebServlet(name = "GroupUpdateFrm", urlPatterns = { "/groupUpdateFrm" })
-public class GroupUpdateFrmServlet extends HttpServlet {
+@WebServlet("/deleteMyId")
+public class DeleteMyId extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GroupUpdateFrmServlet() {
+    public DeleteMyId() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,17 +31,28 @@ public class GroupUpdateFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");		
-		int groupId = Integer.parseInt(request.getParameter("groupNo"));		
-		Group g = new GroupService().selectOneGroup(groupId);		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/groupUpdateFrm.jsp");
-		request.setAttribute("g", g);
+		// TODO Auto-generated method stub
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		System.out.println(memberNo);
+		//3.비지니스 로직
+		int result = new MemberService().deleteMember(memberNo);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+
+		if (result == 0) {
+			// 회원가입 실패
+			request.setAttribute("msg", "서버오류로 인한 실패.");
+			// alert으로 안내 후 이동할 페이지 지정
+			// 페이지 이동
+		} else {
+			// 성공
+			request.setAttribute("msg", "회원 탈퇴 완료.");
+			HttpSession session = request.getSession(false);
+			session.invalidate();
+		}
+		request.setAttribute("loc", "/");
 		rd.forward(request, response);
-		
-		
 	}
-		
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

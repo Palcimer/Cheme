@@ -62,7 +62,7 @@
                         	<form action = "/gComment" style="display:none">
 								<input type="hidden" name="rpLv" value="2">
 								<input type="hidden" name="rpWriter" value="<%=m.getMemberNo()%>">
-								<input type="hidden" name="No" value="<%=board.getgBoardNo()%>">
+								<input type="hidden" name="boardNo" value="<%=board.getgBoardNo()%>">
 								<input type="hidden" name="rpRef" value="<%=cmt.getgBoardCommentNo()%>">
 								<input type="hidden" name="groupId" value="<%=board.getGroupId()%>">
 								<input type="hidden" name="mem" value="<%=m.getMemberNo()%>">
@@ -103,7 +103,7 @@
                 	<form action="/gComment" method="post">                
 	                	<input type="hidden" name="rpLv" value="1">
 						<input type="hidden" name="rpWriter" value="<%=m.getMemberNo()%>">
-						<input type="hidden" name="No" value="<%=board.getgBoardNo()%>">
+						<input type="hidden" name="boardNo" value="<%=board.getgBoardNo()%>">
 						<input type="hidden" name="rpRef" value="0">
 						<input type="hidden" name="groupId" value="<%=board.getGroupId()%>">
 						<input type="hidden" name="mem" value="<%=m.getMemberNo()%>">
@@ -151,7 +151,7 @@
     	function modComplete(obj, cmtNo, boardNo, groupId, mem) {
     		var form = $("<form action='/modGBoardComment' method='post'></form>");
     		form.append($("<input type='hidden' name='cmtNo' value='" + cmtNo + "'>"));
-    		form.append($("<input type='hidden' name='No' value='" + boardNo + "'>"));
+    		form.append($("<input type='hidden' name='boardNo' value='" + boardNo + "'>"));
     		form.append($("<input type='hidden' name='groupId' value='" + groupId + "'>"));
     		form.append($("<input type='hidden' name='mem' value='" + mem + "'>"));
     		form.append($(obj).parent().prev());
