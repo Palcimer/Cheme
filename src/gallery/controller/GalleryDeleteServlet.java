@@ -1,6 +1,8 @@
 package gallery.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +38,13 @@ public class GalleryDeleteServlet extends HttpServlet {
 		GalleryService service = new GalleryService();
 		Gallery g = service.selectOneGallery(galleryNo);
 		int result = new GalleryService().deleteGallery(galleryNo);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		request.setAttribute("msg", "글 삭제 완료");
+		request.setAttribute("loc", "/galleryList?reqPage=1");
+		rd.forward(request, response);
+		
+		
 	}
 
 	/**

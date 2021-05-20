@@ -65,6 +65,7 @@
 					</div>
 				<%} %>
 			</div>
+			<br><br><br>
 			<div id="pageNavi"><%=pageNavi %></div>
 		</fieldset>
 	</div>
