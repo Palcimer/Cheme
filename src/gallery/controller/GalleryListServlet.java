@@ -35,15 +35,16 @@ public class GalleryListServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		int groupId = Integer.parseInt(request.getParameter("groupId"));
 		
 		//3.비즈니스로직
-		GalleryPageData gpd = new GalleryService().selectGalleryList(reqPage);
+		GalleryPageData gpd = new GalleryService().selectGalleryList(reqPage,groupId);
 		//4.결과처리
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gallery/galleryList.jsp");
 		request.setAttribute("list", gpd.getList());
 		request.setAttribute("pageNavi", gpd.getPageNavi());
-		rd.forward(request, response);
-		
+		request.setAttribute("groupId", groupId);
+		rd.forward(request, response);		
 	}
 
 	/**

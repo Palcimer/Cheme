@@ -14,16 +14,16 @@ import member.model.vo.Member;
 
 public class GalleryService {
 
-	public GalleryPageData selectGalleryList(int reqPage) {
+	public GalleryPageData selectGalleryList(int reqPage, int groupId) {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 9;
 		int end = reqPage * numPerPage;
 		int start = end -numPerPage + 1;
 		GalleryDao dao = new GalleryDao();
-		ArrayList<Gallery> list = dao.selectGalleryList(conn , start , end);		
+		ArrayList<Gallery> list = dao.selectGalleryList(conn ,groupId, start , end);		
 		//페이지 네비게이션 제작
 		//1) 전체 페이지수를 구해야함 
-		int totalCount = dao.totalCount(conn);
+		int totalCount = dao.totalCount(conn,groupId);
 		int totalPage = 0;
 		if(totalCount%numPerPage == 0) {
 			totalPage = totalCount/numPerPage;			
@@ -41,16 +41,16 @@ public class GalleryService {
 		//페이지 네비 시작번호가 1이 아닌경우 이전버튼 생성
 		if(pageNo != 1) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class='page-link' href='/galleryList?reqPage="+(pageNo-1)+"'>&laquo;</a></li>";
+			pageNavi += "<a class='page-link' href='/galleryList?reqPage="+(pageNo-1)+"&groupId="+groupId+"'>&laquo;</a></li>";
 		}
 		//페이지 숫자 생성
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {//현재보는 페이지를 부각시키기위한 코드
 				pageNavi += "<li class='page-item active'>";
-				pageNavi += "<a class='page-link' href='/galleryList?reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				pageNavi += "<a class='page-link' href='/galleryList?reqPage="+pageNo+"&groupId="+groupId+"'>"+pageNo+"</a></li>";
 			}else {
 				pageNavi += "<li class='page-item'>";
-				pageNavi += "<a class='page-link'href='/galleryList?reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				pageNavi += "<a class='page-link'href='/galleryList?reqPage="+pageNo+"&groupId="+groupId+"'>"+pageNo+"</a></li>";
 			}
 			pageNo++;
 			if(pageNo > totalPage) {
@@ -60,7 +60,7 @@ public class GalleryService {
 		//다음버튼 생성
 		if(pageNo <= totalPage) { //현재 페이지넘버 보다 토탈페이지가 높으면 다음버튼을 생성함
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class='page-link' href='/galleryList?reqPage="+(pageNo)+"'>&raquo;</a></li>";
+			pageNavi += "<a class='page-link' href='/galleryList?reqPage="+(pageNo)+"&groupId="+groupId+"'>&raquo;</a></li>";
 		}
 		pageNavi += "</ul>";
 		JDBCTemplate.close(conn);

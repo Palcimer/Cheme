@@ -5,6 +5,7 @@
     <%
     ArrayList<Gallery> list = (ArrayList<Gallery>)request.getAttribute("list");
     String pageNavi = (String)request.getAttribute("pageNavi");
+    int groupId = (Integer)request.getAttribute("groupId");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -48,7 +49,7 @@
 			<legend>갤러리</legend>
 			<%if (m != null ) {%>			
 			<div class="write-btn">
-				<a class="btn btn-info writeBtn" href="/galleryWriteFrm">글쓰기</a>
+				<a class="btn btn-info writeBtn" href="/galleryWriteFrm?groupId=<%=groupId%>">글쓰기</a>
 			</div>			
 			<%} %>
 			<div class="photoWrapper">

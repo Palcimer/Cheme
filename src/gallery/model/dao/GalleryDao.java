@@ -14,16 +14,17 @@ import member.model.vo.Member;
 
 public class GalleryDao {
 
-	public ArrayList<Gallery> selectGalleryList(Connection conn, int start, int end) {
+	public ArrayList<Gallery> selectGalleryList(Connection conn, int groupId, int start, int end) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Gallery> list = new ArrayList<Gallery>();
-		String qeury = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.*FROM (select g.*,member_name from gallery g join member  on (gallery_writer = member_no) ORDER BY GALLERY_NO DESC)N)WHERE RNUM BETWEEN ? AND ?";
+		String qeury = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.*FROM (select g.*,member_name from gallery g join member  on (gallery_writer = member_no) where group_id=? ORDER BY GALLERY_NO DESC)N)WHERE RNUM BETWEEN ? AND ?";
 		 	
 		try {
 			pstmt = conn.prepareStatement(qeury);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);;
+			pstmt.setInt(1, groupId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);;
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Gallery g = new Gallery();
@@ -49,13 +50,14 @@ public class GalleryDao {
 		return list;
 	}
 
-	public int totalCount(Connection conn) {
+	public int totalCount(Connection conn, int groupId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select count(*) as cnt from gallery";
+		String query = "select count(*) as cnt from gallery where group_id=?";
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, groupId);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				result = rset.getInt("cnt");
@@ -260,7 +262,7 @@ public class GalleryDao {
 			pstmt = conn.prepareStatement(qeury);
 			pstmt.setInt(1, groupId);
 			pstmt.setInt(2, start);
-			pstmt.setInt(2, end);
+			pstmt.setInt(3, end);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Gallery g = new Gallery();
@@ -269,8 +271,7 @@ public class GalleryDao {
 				g.setGalleryFilepath(rset.getString("gallery_filepath"));
 				g.setGalleryNo(rset.getInt("gallery_no"));
 				g.setGalleryTitle(rset.getString("gallery_title"));
-				g.setGalleryWriter(rset.getInt("gallery_writer"));
-				g.setGalleryNickName(rset.getString("member_name"));				
+				g.setGalleryWriter(rset.getInt("gallery_writer"));							
 				g.setGroupId(rset.getInt("group_id"));
 				g.setRnum(rset.getInt("rnum"));
 				list.add(g);

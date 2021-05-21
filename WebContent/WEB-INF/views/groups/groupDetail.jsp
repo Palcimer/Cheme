@@ -116,11 +116,11 @@
                     </div>
                     <div class="tab-pane fade" id="gallery">
 
-                        <p>갤러리</p>                        
+                        <a  href="/galleryList?reqPage=1&groupId=<%=info.getGroupId()%>">갤러리</a>                        
                     </div>
 
                     	<%if(galList.size() == 0) { %>
-                    	<p style="padding:10px 20px;"><a href="/galleryWriteFrm?groupId=<%=info.getGroupId() %>")>사진이 없습니다. 새 사진을 올려보세요.</a></p>
+                    	<p style="padding:10px 20px;"><a href="/galleryWriteFrm?groupId=<%=info.getGroupId() %>">사진이 없습니다. 새 사진을 올려보세요.</a></p>
                       	<%} else { %>                
                         <div class="photoWrapper">
                         <%for(Gallery g : galList) { %>
