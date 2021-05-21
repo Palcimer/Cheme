@@ -76,8 +76,8 @@ public class UpdateGNoticeServlet extends HttpServlet {
 			filepath = oldFilepath;
 		}
 		//공지 객체에 파일 이름 및 경로 저장 ???
-		notice.setFilename(mRequest.getParameter("filename"));
-		notice.setFilepath(mRequest.getParameter("filepath"));
+		notice.setFilename(filename);
+		notice.setFilepath(filepath);
 		
 		int result = new GNoticeService().updateGNotice(notice);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");

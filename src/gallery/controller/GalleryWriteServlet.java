@@ -63,6 +63,7 @@ public class GalleryWriteServlet extends HttpServlet {
 	ga.setGalleryContent(mRequest.getParameter("galleryContent"));
 	ga.setGalleryFileName(mRequest.getOriginalFileName("filename")); // 사용자가 업로드한 파일 명
 	ga.setGalleryFilepath(mRequest.getFilesystemName("filename"));   // 실제 업로드 된 파일 이름
+	ga.setGroupId(Integer.parseInt(mRequest.getParameter("groupId")));
 	//3.비즈니스 로직처리
 	int result = new GalleryService().insertGallery(ga);
 	//4.결과처리

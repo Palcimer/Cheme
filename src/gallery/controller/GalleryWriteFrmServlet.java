@@ -29,7 +29,10 @@ public class GalleryWriteFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		int groupId = Integer.parseInt(request.getParameter("groupId"));
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gallery/galleryWriteFrm.jsp");
+		request.setAttribute("groupId", groupId);
 		rd.forward(request, response);
 	}
 

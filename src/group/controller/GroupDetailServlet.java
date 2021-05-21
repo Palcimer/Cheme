@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import gallery.model.service.GalleryService;
+import gallery.model.vo.Gallery;
 import gboard.model.service.GBoardService;
 import gboard.model.vo.GBoard;
 import gnotice.model.service.GNoticeService;
@@ -47,15 +49,18 @@ public class GroupDetailServlet extends HttpServlet {
 		GNoticeService gns = new GNoticeService();
 		GBoardService gbs = new GBoardService();
 		GroupService gs = new GroupService();
+		GalleryService gls = new GalleryService();
 		Group group = gs.selectOneGroup(groupId);
 		boolean isMem = gs.isMember(groupId, memberNo);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/groupDetail.jsp");
 		if(isMem) {
 			ArrayList<GNotice> noticeList = gns.selectNoticeList(groupId);
 			ArrayList<GBoard> boardList = gbs.selectGBoardList(groupId);
+			ArrayList<Gallery> galList = gls.selectGalListForDetail(groupId);
 			request.setAttribute("groupInfo", group);
 			request.setAttribute("noticeList", noticeList);
 			request.setAttribute("boardList", boardList);
+			request.setAttribute("galList", galList);
 			request.setAttribute("isMem", isMem);
 		} else {
 			request.setAttribute("groupInfo", group);
