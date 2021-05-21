@@ -231,4 +231,42 @@ public class GBoardDao {
 		return result;
 	}
 
+	public int deleteBoard(Connection conn, int boardNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM G_BOARD WHERE G_BOARD_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int updateBoard(Connection conn, GBoard board) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "UPDATE G_BOARD SET G_BOARD_TITLE=?, G_BOARD_CONTENT=?, G_BOARD_FILENAME=?, G_BOARD_FILEPATH=? WHERE G_BOARD_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, board.getgBoardTitle());
+			pstmt.setString(2, board.getgBoardContent());
+			pstmt.setString(3, board.getgBoardFilename());
+			pstmt.setString(4, board.getgBoardFilepath());
+			pstmt.setInt(5, board.getgBoardNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 }

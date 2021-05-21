@@ -132,4 +132,45 @@ public class GBoardService {
 		return result;
 	}
 
+	public GBoard selectBoard(int boardNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GBoardDao dao = new GBoardDao();
+		GBoard board = dao.selectBoard(conn, boardNo);
+		JDBCTemplate.close(conn);
+		return board;
+	}
+
+	public int deleteBoard(int boardNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		GBoardDao dao = new GBoardDao();
+		int result = dao.deleteBoard(conn, boardNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public int updateGBoard(GBoard board) {
+		Connection conn = JDBCTemplate.getConnection();
+		GBoardDao dao = new GBoardDao();
+		int result = dao.updateBoard(conn, board);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public ArrayList<GBoard> selectGBoardList(int groupId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int start = 1;
+		int end = 5;
+		ArrayList<GBoard> list = new GBoardDao().selectBoardList(conn, start, end, groupId);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+
 }

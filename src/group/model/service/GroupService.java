@@ -15,7 +15,8 @@ public class GroupService {
 	public int insertGroup(Group g) {
 				Connection conn = JDBCTemplate.getConnection();
 				int result =  new GroupDao().insertGroup(g, conn);
-				if (result > 0) {
+				int result2 = new GroupDao().insertInitMem(g.getGroupId(), g.getGroupLeader(), conn);
+				if (result > 0 && result2 > 0) {
 					JDBCTemplate.commit(conn);
 				} else {
 					JDBCTemplate.rollback(conn);
@@ -83,6 +84,30 @@ public class GroupService {
 		JDBCTemplate.close(conn);
 		return result;
 		
+	}
+
+	public int insertMember(int groupId, int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new GroupDao().insertMember(conn, groupId, memberNo);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteMember(int groupId, int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new GroupDao().deleteMember(conn, groupId, memberNo);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }

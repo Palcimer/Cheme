@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import gboard.model.service.GBoardService;
+import gboard.model.vo.GBoard;
 import gnotice.model.service.GNoticeService;
 import gnotice.model.vo.GNotice;
 import group.model.service.GroupService;
@@ -43,14 +45,17 @@ public class GroupDetailServlet extends HttpServlet {
 			memberNo = Integer.parseInt(memNo);
 		}
 		GNoticeService gns = new GNoticeService();
+		GBoardService gbs = new GBoardService();
 		GroupService gs = new GroupService();
 		Group group = gs.selectOneGroup(groupId);
 		boolean isMem = gs.isMember(groupId, memberNo);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/groupDetail.jsp");
 		if(isMem) {
 			ArrayList<GNotice> noticeList = gns.selectNoticeList(groupId);
+			ArrayList<GBoard> boardList = gbs.selectGBoardList(groupId);
 			request.setAttribute("groupInfo", group);
 			request.setAttribute("noticeList", noticeList);
+			request.setAttribute("boardList", boardList);
 			request.setAttribute("isMem", isMem);
 		} else {
 			request.setAttribute("groupInfo", group);

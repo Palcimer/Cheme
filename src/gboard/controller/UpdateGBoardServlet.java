@@ -1,4 +1,4 @@
-package gnotice.controller;
+package gboard.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,20 +15,20 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import gnotice.model.service.GNoticeService;
-import gnotice.model.vo.GNotice;
+import gboard.model.service.GBoardService;
+import gboard.model.vo.GBoard;
 
 /**
- * Servlet implementation class UpdateGNoticeServlet
+ * Servlet implementation class UpdateGBoardServlet
  */
-@WebServlet(name = "UpdateGNotice", urlPatterns = { "/updateGNotice" })
-public class UpdateGNoticeServlet extends HttpServlet {
+@WebServlet(name = "UpdateGBoard", urlPatterns = { "/updateGBoard" })
+public class UpdateGBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateGNoticeServlet() {
+    public UpdateGBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,7 +41,7 @@ public class UpdateGNoticeServlet extends HttpServlet {
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 			request.setAttribute("msg", "파일오류[enctype]");
-			request.setAttribute("loc", "/writeGNoticeFrm");
+			request.setAttribute("loc", "/writeGBoardFrm");
 			rd.forward(request, response);
 			return;
 		}
@@ -53,13 +53,12 @@ public class UpdateGNoticeServlet extends HttpServlet {
 		//3) request->MultipartRequest 객체로 변환
 		//매개변수: request 객체, 파일저장경로, 최대크기, 인코딩타입, 파일명 중복 처리 객체
 		MultipartRequest mRequest = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new DefaultFileRenamePolicy());
-		//파일업로드 전처리 완료
-		GNotice notice = new GNotice();	
-		notice.setgNoticeWriter(Integer.parseInt(mRequest.getParameter("noticeWriter")));
-		notice.setgNoticeNo(Integer.parseInt(mRequest.getParameter("noticeNo")));
-		notice.setGroupId(Integer.parseInt(mRequest.getParameter("groupId")));
-		notice.setgNoticeContent(mRequest.getParameter("noticeContent"));
-		notice.setgNoticeTitle(mRequest.getParameter("noticeTitle"));
+		GBoard board = new GBoard();
+		board.setGroupId(Integer.parseInt(mRequest.getParameter("groupId")));
+		board.setgBoardWriter(Integer.parseInt(mRequest.getParameter("noticeWriter")));
+		board.setgBoardNo(Integer.parseInt(mRequest.getParameter("noticeNo")));
+		board.setgBoardContent(mRequest.getParameter("noticeContent"));
+		board.setgBoardTitle(mRequest.getParameter("noticeTitle"));
 		//새 파일 이름 및 경로
 		String filename = mRequest.getOriginalFileName("noticeFile");
 		String filepath = mRequest.getFilesystemName("noticeFile");
@@ -76,18 +75,19 @@ public class UpdateGNoticeServlet extends HttpServlet {
 			filepath = oldFilepath;
 		}
 		//공지 객체에 파일 이름 및 경로 저장 ???
-		notice.setFilename(mRequest.getParameter("filename"));
-		notice.setFilepath(mRequest.getParameter("filepath"));
+		board.setgBoardFilename(filename);
+		board.setgBoardFilepath(filepath);
 		
-		int result = new GNoticeService().updateGNotice(notice);
+		int result = new GBoardService().updateGBoard(board);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result > 0) {
-			request.setAttribute("msg", "공지사항이 수정되었습니다.");
+			request.setAttribute("msg", "게시글이 수정되었습니다.");
 		} else {
 			request.setAttribute("msg", "수정에 실패했습니다.");
 		}
-		request.setAttribute("loc", "/gNoticeView?groupId=" + notice.getGroupId() + "&noticeNo=" + notice.getgNoticeNo() + "&mem=" + notice.getgNoticeWriter());
+		request.setAttribute("loc", "/gBoardView?groupId=" + board.getGroupId() + "&boardNo=" + board.getgBoardNo() + "&mem=" + board.getgBoardWriter());
 		rd.forward(request, response);	
+		
 	}
 
 	/**

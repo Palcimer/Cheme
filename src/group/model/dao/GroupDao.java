@@ -195,6 +195,104 @@ public class GroupDao {
       return group;
    }
 
+   public int modifyGroup(Group g, Connection conn) {
+		PreparedStatement pstmt = null;
+		String query = "update groups set group_name=?, group_img=? , group_detail=?, max_member=? , keyword1=? ,keyword2=? ,keyword3=? ,keyword4=? ,keyword5=? where group_id=? ";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, g.getGroupName());
+			pstmt.setString(2, g.getGroupImg());
+			pstmt.setString(3, g.getGroupDetail());
+			pstmt.setInt(4, g.getMaxMember());
+			pstmt.setString(5, g.getKeyword1());
+			pstmt.setString(6, g.getKeyword2());
+			pstmt.setString(7, g.getKeyword3());
+			pstmt.setString(8, g.getKeyword4());
+			pstmt.setString(9, g.getKeyword5());
+			pstmt.setInt(10, g.getGroupId());
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+
+	}
+   
+   public boolean isLeader(Connection conn, int groupId, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean isLeader = false;
+		String query = "SELECT * FROM GROUPS WHERE GROUP_LEADER=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				if(rset.getInt("group_id") == groupId) {
+					isLeader = true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return isLeader;
+	}
+
+   public int insertInitMem(int groupId, int groupLeader, Connection conn) {
+	   PreparedStatement pstmt = null;
+	   int result = 0;
+	   String query = "INSERT INTO G_MEMBER VALUES (?, ?)";
+	   try {
+		   pstmt = conn.prepareStatement(query);
+		   pstmt.setInt(1, groupLeader);
+		   pstmt.setInt(2, groupId);
+		   result = pstmt.executeUpdate();
+	   } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		   e.printStackTrace();
+	   }
+	   return result;
+   }
+
+   public int insertMember(Connection conn, int groupId, int memberNo) {
+	   PreparedStatement pstmt = null;
+	   int result = 0;
+	   String query = "INSERT INTO G_MEMBER VALUES (?, ?)";
+	   try {
+		   pstmt = conn.prepareStatement(query);
+		   pstmt.setInt(1, memberNo);
+		   pstmt.setInt(2, groupId);
+		   result = pstmt.executeUpdate();
+	   } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		   e.printStackTrace();
+	   }
+	   return result;
+   }
+
+	public int deleteMember(Connection conn, int groupId, int memberNo) {
+		PreparedStatement pstmt = null;
+		   int result = 0;
+		   String query = "DELETE FROM G_MEMBER WHERE MEMBER_NO=? AND GROUP_ID=?";
+		   try {
+			   pstmt = conn.prepareStatement(query);
+			   pstmt.setInt(1, memberNo);
+			   pstmt.setInt(2, groupId);
+			   result = pstmt.executeUpdate();
+		   } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			   e.printStackTrace();
+		   }
+		   return result;
+	}
    
 
 }
