@@ -250,4 +250,39 @@ public class GalleryDao {
 		return result;
 	}
 
+	public ArrayList<Gallery> selectGalListForDetail(Connection conn, int start, int end, int groupId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Gallery> list = new ArrayList<Gallery>();
+		String qeury = "SELECT * FROM (SELECT ROWNUM AS RNUM, GNN.* FROM (SELECT ROWNUM AS GALLERY_DESC, GN.* FROM (SELECT * FROM GALLERY WHERE GROUP_ID=? ORDER BY 1) GN ORDER BY 1 DESC) GNN) WHERE RNUM BETWEEN ? AND ?";
+		 	
+		try {
+			pstmt = conn.prepareStatement(qeury);
+			pstmt.setInt(1, groupId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Gallery g = new Gallery();
+				g.setGalleryContent(rset.getString("gallery_content"));
+				g.setGalleryDate(rset.getString("gallery_date"));
+				g.setGalleryFilepath(rset.getString("gallery_filepath"));
+				g.setGalleryNo(rset.getInt("gallery_no"));
+				g.setGalleryTitle(rset.getString("gallery_title"));
+				g.setGalleryWriter(rset.getInt("gallery_writer"));
+				g.setGalleryNickName(rset.getString("member_name"));				
+				g.setGroupId(rset.getInt("group_id"));
+				g.setRnum(rset.getInt("rnum"));
+				list.add(g);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return list;
+	}
+
 }
