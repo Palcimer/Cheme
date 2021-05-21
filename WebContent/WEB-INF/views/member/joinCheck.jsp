@@ -299,6 +299,7 @@
 </head>
 
 <body>
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="main">
         <div class="loginwrap">
             <form action="/join" method="post">
@@ -360,7 +361,7 @@
 
     </div>
 
-
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 
 </html>

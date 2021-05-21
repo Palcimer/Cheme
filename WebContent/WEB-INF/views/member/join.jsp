@@ -484,6 +484,7 @@
        
     </script>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="main">
         <br>
         <div class="contents">
@@ -550,4 +551,5 @@
         </div>
     </div>
 </body>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </html>
