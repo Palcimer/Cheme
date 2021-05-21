@@ -21,7 +21,7 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
         <div>
-            <h6><%=gName %></h6>
+            <h6><a href="/groupDetail?Id=<%=board.getGroupId()%>&mem=<%=m.getMemberNo()%>"><%=gName %></a></h6>
             <h3>공지사항</h3>
             <!-- 공지 본문 -->
             <div>
@@ -59,7 +59,7 @@
                         		<a href="javascript:void(0)" onclick="recShow(this)">댓글</a>
                         	</span>
                         	
-                        	<form action = "/gComment" style="display:none">
+                        	<form action = "/gBoardComment" style="display:none">
 								<input type="hidden" name="rpLv" value="2">
 								<input type="hidden" name="rpWriter" value="<%=m.getMemberNo()%>">
 								<input type="hidden" name="boardNo" value="<%=board.getgBoardNo()%>">
@@ -100,7 +100,7 @@
                     <%} %>                    
                 </table>
                 <div class="replysubmit">
-                	<form action="/gComment" method="post">                
+                	<form action="/gBoardComment" method="post">                
 	                	<input type="hidden" name="rpLv" value="1">
 						<input type="hidden" name="rpWriter" value="<%=m.getMemberNo()%>">
 						<input type="hidden" name="boardNo" value="<%=board.getgBoardNo()%>">
@@ -113,7 +113,7 @@
                 </div>
             </div>
             <div class="board-tolist">
-            	<a href="/gList?groupId=1&mem=<%=m.getMemberNo()%>&page=1" class="btn btn-outline-primary" style="width:40%">글 목록으로</a>
+            	<a href="/gBoardList?groupId=<%=board.getGroupId() %>&mem=<%=m.getMemberNo()%>&page=1" class="btn btn-outline-primary" style="width:40%">글 목록으로</a>
             </div>
         </div>        
     </div>

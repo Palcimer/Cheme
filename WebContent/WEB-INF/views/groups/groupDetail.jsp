@@ -71,14 +71,22 @@
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade active show" id="notice">
-                        <table>
-			<%for(GNotice n : noticeList) {%>
-			<tr>
-				<td><a href="/gNoticeView?groupId=<%=info.getGroupId() %>&noticeNo=<%=n.getgNoticeNo()%>&mem=<%=m.getMemberNo()%>"><%=n.getgNoticeTitle() %></a></td>
-				<td><%=n.getgNoticeDate() %></td>
-			</tr>
-			<%} %>
-		</table>
+                        <table class="table table-hover">
+                      		<%if(noticeList.size() == 0) { %>
+                      		<p style="padding:10px 20px;">공지사항이 없습니다.
+                      			<%if(info.getGroupLeader() == m.getMemberNo()) {%>
+                      			<a href="writeGNoticeFrm?groupId=<%=info.getGroupId() %>">새 공지를 작성해보세요.</a>
+                      			<%} %>
+                      		</p>
+                      		<%} else { %>
+							<%for(GNotice n : noticeList) {%>
+							<tr>
+								<td style="width:80%"><a href="/gNoticeView?groupId=<%=info.getGroupId() %>&noticeNo=<%=n.getgNoticeNo()%>&mem=<%=m.getMemberNo()%>"><%=n.getgNoticeTitle() %></a></td>
+								<td style="width:20%; text-align:center"><%=n.getgNoticeDate() %></td>
+							</tr>
+							<%} %>
+							<%} %>
+						</table>
                     </div>
                     <div class="tab-pane fade" id="board">
                         <p>게시판</p>

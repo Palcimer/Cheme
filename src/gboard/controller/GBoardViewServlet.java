@@ -48,8 +48,9 @@ public class GBoardViewServlet extends HttpServlet {
 		if(isMem) {
 			GBoardViewData gbvd = gbs.selectBoardData(boardNo);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/groups/gBoardView.jsp");
+			System.out.println(gbvd.getBoard().getgBoardTitle());
 			request.setAttribute("gName", gbvd.getGroupName());
-			request.setAttribute("gNotice", gbvd.getBoard());
+			request.setAttribute("gBoard", gbvd.getBoard());
 			request.setAttribute("cmtList", gbvd.getCmtList());
 			rd.forward(request, response);		
 		} else {
