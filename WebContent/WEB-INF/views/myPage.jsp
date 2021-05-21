@@ -126,13 +126,19 @@ ArrayList<String> colorList = new ArrayList<String>(Arrays.asList("primary","sec
               	flex-wrap: wrap;
               	justify-content: space-around;
               }
+              .my-nav {
+              	display : flex;
+              }
+              .my-nav li{
+              	flex-grow: 1;
+              }
             </style>
           </head>
           <body>
             <%@include file="/WEB-INF/views/common/header.jsp"%>
             <div class="content-wrap">
               <div class="content">
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs my-nav">
                   <li class="nav-item">
                     <a
                       class="nav-link active"

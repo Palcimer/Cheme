@@ -44,10 +44,7 @@ pageEncoding="UTF-8"%> <% Member member =
   <body>
     <%@include file="/WEB-INF/views/common/header.jsp"%>
 
-    <form action="/myPageFrm">
-   		
-      <button>마이페이지</button>
-    </form>
+    
     <div class="content-wrap">
       <hr />
       <div class="content">
