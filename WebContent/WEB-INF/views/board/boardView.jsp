@@ -14,6 +14,48 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+	.view-photo{
+		text-align: center;
+	}
+	#photo{
+		border-bottom: none;
+	}
+	.view-photo>img{
+		width : 750px;
+		margin : 0 auto;
+	}
+	.title{
+		text-align: center;
+		width : 40%;
+	}
+	.writer{
+		width : 30%;
+	}
+	.date{
+		text-align: right;
+		width : 30%;
+	}	
+	.list{
+		text-align: right;
+	}
+	li{
+		list-style-type: none;
+		margin-left: 5px;
+	}
+	.profile{
+		width: 100px;
+        height: 100px;
+	}
+	.commentWrap{
+		display : flex;
+	}
+	.btn-box{
+		display: flex;
+		align-items: flex-end;
+	}
+	
+</style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -57,22 +99,22 @@
 				</tr>
 			</table>
 		</fieldset>
-		<%if(m!=null) {%>
+		<%if(m!=null) { %>
 		<div class="inputCommentBox">
-			<form action="/insertComment" method="post">
-				<ul>
+			<form action="/galleryInsertComment" method="post">
+				<ul class="commentWrap">
 					<li>
-						<i class="far fa-user fa-5x"></i>
+						<img class="profile" src="/img/user3.png">
 					</li>
 					<li>
-						<input type="hidden" name="bcLevel" value="1">
-						<input type="hidden" name="bcWriter" value="<%=m.getMemberId()%>">
-						<input type="hidden" name="boardRef" value="<%=b.getBoardNo() %>">
-						<input type="hidden" name="bcRef" value="0">
-						<textarea class="form-control" name="bcContent"></textarea>
+						<input type="hidden" name="galleryCommentLevel" value="1">
+						<input type="hidden" name="galleryCommentWriter" value="<%=m.getMemberName() %>">
+						<input type="hidden" name="galleryNo" value="<%=b.getBoardNo() %>">
+						<input type="hidden" name="galleryCommentRef" value="0">
+						<textarea class="form-control" name="galleryCommentContent" style = "resize: none; width: 900px; height: 100px"></textarea>
 					</li>
-					<li>
-						<button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
+					<li class="btn-box">
+						<button type="submit" class="btn btn-primary btn-lg btn btn-block down-btn">등록</button>
 					</li>
 				</ul>
 			</form>
