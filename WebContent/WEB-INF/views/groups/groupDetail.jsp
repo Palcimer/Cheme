@@ -113,7 +113,7 @@
 						</table>
                     </div>
                     <div class="tab-pane fade" id="gallery">
-                        <p>갤러리</p>
+                        <p>갤러리</p>                        
                     </div>
                 </div>
             </div>
