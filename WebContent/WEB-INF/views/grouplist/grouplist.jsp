@@ -22,8 +22,10 @@
 	<br>
 	<div class="container">
 		<fieldset>
-			<div class="categoryWrap">
+         <div class="categoryWrap">
                <a type="button" class="btn btn-primary" href="/groupList?reqPage=1">전체보기</a>
+         </div>
+         <div class="categoryWrap">
                <a type="button" class="btn btn-secondary" href="/groupListView?groupCategory=1&reqPage=1">여행</a>
                <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=2&reqPage=1">스포츠</a>
                <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=3&reqPage=1">공연전시</a>
@@ -31,6 +33,8 @@
                <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=5&reqPage=1">게임</a>
                <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=6&reqPage=1">공예</a>
                <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=7&reqPage=1">음악</a>
+         </div>
+         <div class="categoryWrap">
                <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=8&reqPage=1">그림</a>
                <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=9&reqPage=1">사진</a>
                <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=10&reqPage=1">어학</a>
@@ -39,14 +43,14 @@
                <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=13&reqPage=1">재태크</a>
                <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=14&reqPage=1">기타</a>
             </div>
-		</fieldset>	
+      </fieldset>   
 		<br><br><br>
 		<fieldset>
 			<legend>모임리스트</legend>
 			<div class = "groupListWrap">
 				<%for(Group g : list){ %>			
 				<div class ="listImg">
-				<img src = "img/sample.JPG" class = "groupListImg">
+				<img src ="/upload/grouprepresenphoto/<%=g.getGroupImg()%>" class = "groupListImg">
 				<%if(m!= null){ %>
 				<a style="text-align: center;" href="/groupDetail?Id=<%=g.getGroupId()%>&mem=<%=m.getMemberNo()%>"><%=g.getGroupName() %></a>
 				<%}else{ %>
@@ -65,8 +69,9 @@
          display : flex;
       }
       .categoryWrap a {
-         margin-left : 2px;   
+         margin : 5px;   
          flex-grow: 1;
+         width : 150px
       }
 		.container{
 			margin : 0 auto;
