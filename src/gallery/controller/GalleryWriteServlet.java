@@ -73,7 +73,7 @@ public class GalleryWriteServlet extends HttpServlet {
 	}else {
 		request.setAttribute("msg", "등록실패");
 	}
-	request.setAttribute("loc", "/galleryList?reqPage=1");
+	request.setAttribute("loc", "/galleryList?reqPage=1&groupId="+ga.getGroupId());
 	rd.forward(request, response);
 	
 	
