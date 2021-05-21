@@ -30,8 +30,8 @@
             <a href="#" class="tag" id="search">검색</a>
         </div>
         <div class="right">
-        	<%if(m != null){ %>       
-        		<a href="/myPageFrm" class="tag"><%=m.getMemberId() %></a>
+        	<%if(m != null){ %> 
+        	    <a href="/myPageFrm" class="tag"><%=m.getMemberId() %></a>
             	<a href="/logout" class="tag">로그아웃</a> 
         	<%}else{ %>
         		<a href="/login" class="tag" data-toggle="modal" data-target=".modal">login</a>
@@ -76,7 +76,11 @@
         <ul class="nuderline-hover home-nav">
         	<li><a href="/main">홈으로</a></li>
             <li><a href="/groupList?reqPage=1">모임 리스트</a></li>
+        		<%if(m != null){ %> 
             <li><a href="/insertGroupFrm">모임 만들기</a></li>
+            <%}else{%>
+            	  <li><a href="#" id ="noright">모임 만들기</a></li>
+            	<%}%> 
             <li><a href="/board?reqPage=1">공지사항</a></li>
             <li><a href="/">회사소개</a></li>
         </ul>
@@ -89,12 +93,11 @@
 		function initInputs(){
 			$("[name=loginFrm] input").val("");
 		}
-<<<<<<< HEAD
-	</script>
-=======
+
+
 		$("#noright").click(function(){
 			alert("로그인 후 사용해주세요.");
 		}) 
 		</script>
->>>>>>> bowwow2115
+
     
