@@ -79,6 +79,7 @@
 			</fieldset>
 		</form>
 	</div>
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script>
 		$("#delBtn").click(function(){
 			if(confirm("정말 파일을 삭제하시겠습니까?")){

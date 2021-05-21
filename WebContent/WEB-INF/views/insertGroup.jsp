@@ -43,6 +43,10 @@ pageEncoding="UTF-8"%> <% Member member =
   </head>
   <body>
     <%@include file="/WEB-INF/views/common/header.jsp"%>
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/heads/yong_chan
     
     <div class="content-wrap">
       <hr />

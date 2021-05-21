@@ -22,17 +22,23 @@
 	<br>
 	<div class="container">
 		<fieldset>
-			<legend>카테고리</legend>
-			<table id ="boardTable" class="table-hover" style="width:100%;">
-				<tr class="table-primary" style="text-align: center; height : 50px;">
-					<th><a href="/groupListView?groupCategory=1&reqPage=1">여행</a></th><th><a href="/groupListView?groupCategory=2&reqPage=1">스포츠</a></th><th><a href="/groupListView?groupCategory=3&reqPage=1">공연전시</a></th><th><a href="/groupListView?groupCategory=4&reqPage=1">이벤트</a></th>
-					<th><a href="/groupListView?groupCategory=5&reqPage=1">게임</a></th><th><a href="/groupListView?groupCategory=6&reqPage=1">공예</a></th><th><a href="/groupListView?groupCategory=7&reqPage=1">음악</a></th>
-				</tr>
-				<tr class="table-primary" style="text-align: center; height : 50px;">	
-					<th><a href="/groupListView?groupCategory=8&reqPage=1">그림</a></th><th><a href="/groupListView?groupCategory=9&reqPage=1">사진</a></th><th><a href="/groupListView?groupCategory=10&reqPage=1">어학</a></th><th><a href="/groupListView?groupCategory=11&reqPage=1">독서</a></th><th><a href="/groupListView?groupCategory=12&reqPage=1">기술</a></th>
-					<th><a href="/groupListView?groupCategory=13&reqPage=1">재태크</a></th><th><a href="/groupListView?groupCategory=14&reqPage=1">기타</a></th>
-				</tr>
-			</table>
+			<div class="categoryWrap">
+               <a type="button" class="btn btn-primary" href="/groupList?reqPage=1">전체보기</a>
+               <a type="button" class="btn btn-secondary" href="/groupListView?groupCategory=1&reqPage=1">여행</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=2&reqPage=1">스포츠</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=3&reqPage=1">공연전시</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=4&reqPage=1">이벤트</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=5&reqPage=1">게임</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=6&reqPage=1">공예</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=7&reqPage=1">음악</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=8&reqPage=1">그림</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=9&reqPage=1">사진</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=10&reqPage=1">어학</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=11&reqPage=1">독서</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=12&reqPage=1">기술</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=13&reqPage=1">재태크</a>
+               <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=14&reqPage=1">기타</a>
+            </div>
 		</fieldset>	
 		<br><br><br>
 		<fieldset>
@@ -55,6 +61,13 @@
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<style>
+	.categoryWrap{
+         display : flex;
+      }
+      .categoryWrap a {
+         margin-left : 2px;   
+         flex-grow: 1;
+      }
 		.container{
 			margin : 0 auto;
 		}

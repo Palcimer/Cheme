@@ -71,5 +71,6 @@
 			<div id="pageNavi"><%=pageNavi %></div>
 		</fieldset>
 	</div>
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

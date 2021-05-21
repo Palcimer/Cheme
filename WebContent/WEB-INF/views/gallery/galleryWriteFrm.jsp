@@ -60,6 +60,7 @@
 			</fieldset>
 		</form>
 	</div>
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script>
 		function loadImg(f){
 			console.log(f.files);//input file에서 선택한 파일을 배열로 가지고옴

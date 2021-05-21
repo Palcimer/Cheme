@@ -47,7 +47,15 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <%@include file="/WEB-INF/views/common/header.jsp"%>
-
+		<div class="content-wrap">
+      <hr />
+      <div class="content">
+        <form
+          action="/groupUpdate"
+          method="post"
+          enctype="multipart/form-data"
+          id="moimForm"
+        >
          <input type="hidden" value="<%=g.getGroupId() %>" name="groupId">
         <div class="modal" id="modal">
         <div class="modal-dialog" role="document">
@@ -114,7 +122,7 @@ pageEncoding="UTF-8"%>
                 class="form-control form-control-lg"
                 type="text"
                 id="moim-leader"
-                value="<%=g.getGroupCategory()%>" readonly
+                value="<%=g.getCategoryName()%>" readonly
               />
           </div>
 
