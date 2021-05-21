@@ -5,17 +5,25 @@
         }
         
         .head{
-            width: 1400px;
+            width: 1200px;
             height: 210px;
             margin: 0 auto;
+            overflow: hidden;
+        }
+        .left {
+        	display: inline-block;
+        	width: 970px;
+        	float:left;
         }
         .left img{
             margin-top: 30px;
-            width: 320px;
-            height: 150px;
+            width: 210px;
+            height: 100px;
         }
         .right{
-            margin-left: 100px;
+       	 	display: inline-block;
+        	float: right;
+        	width: 200px;
         }
         .head>div{
             display: inline-block;

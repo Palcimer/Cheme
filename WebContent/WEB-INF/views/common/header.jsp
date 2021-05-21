@@ -25,10 +25,6 @@
         <div class="left">
             <a href="/main"><img src="img/logo.png"></a>
         </div>
-        <div class="center">
-            <input type="text" id="searchBox" name="searchBox" placeholder="&#61442;">
-            <a href="#" class="tag" id="search">검색</a>
-        </div>
         <div class="right">
         	<%if(m != null){ %> 
         	    <a href="/myPageFrm" class="tag"><%=m.getMemberId() %></a>
