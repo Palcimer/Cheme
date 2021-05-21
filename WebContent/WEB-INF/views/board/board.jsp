@@ -34,7 +34,7 @@
 				</tr>
 				<%for(Board b : list){ %>
 				<tr id = "boardList" class="table-light">
-					<td style="text-align: center;"><%=b.getRnum() %></td>
+					<td style="text-align: center;"><%=b.getBoardNo() %></td>
 					<td style="text-align: center;"><a href="/boardView?boardNo=<%=b.getBoardNo()%>"><%=b.getBoardTitle() %></a></td>
 					<td style="text-align: center;"><%=b.getBoardMember()%></td>
 					<td style="text-align: center;"><%=b.getDate() %></td>
