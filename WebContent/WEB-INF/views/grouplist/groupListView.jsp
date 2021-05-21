@@ -22,8 +22,10 @@ int groupCategory = (Integer) request.getAttribute("groupCategory");
 	<br>
 	<div class="container">
 		<fieldset>
-         <div class="categoryWrap">
+        <div class="categoryWrap">
                <a type="button" class="btn btn-primary" href="/groupList?reqPage=1">전체보기</a>
+         </div>
+         <div class="categoryWrap">
                <a type="button" class="btn btn-secondary" href="/groupListView?groupCategory=1&reqPage=1">여행</a>
                <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=2&reqPage=1">스포츠</a>
                <a type="button" class="btn btn-secondary"  href="/groupListView?groupCategory=3&reqPage=1">공연전시</a>
