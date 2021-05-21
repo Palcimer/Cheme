@@ -89,5 +89,12 @@
 		function initInputs(){
 			$("[name=loginFrm] input").val("");
 		}
+<<<<<<< HEAD
 	</script>
+=======
+		$("#noright").click(function(){
+			alert("로그인 후 사용해주세요.");
+		}) 
+		</script>
+>>>>>>> bowwow2115
     
