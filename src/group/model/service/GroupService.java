@@ -16,7 +16,7 @@ public class GroupService {
 				Connection conn = JDBCTemplate.getConnection();
 				int result =  new GroupDao().insertGroup(g, conn);
 				int result2 = new GroupDao().insertInitMem(g.getGroupId(), g.getGroupLeader(), conn);
-				if (result > 0 && result2 > 0) {
+				if (result > 0) {
 					JDBCTemplate.commit(conn);
 				} else {
 					JDBCTemplate.rollback(conn);
