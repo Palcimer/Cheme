@@ -169,6 +169,7 @@
 		<%} %>
 		
 	</div>
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script>
 		$(".recShow").click(function(){
 			var idx = $(".recShow").index(this); //클릭한게 몇번째 댓글달기 버튼인지 구하는 코드

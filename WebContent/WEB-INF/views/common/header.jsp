@@ -13,7 +13,12 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://kit.fontawesome.com/8eb5905426.js" crossorigin="anonymous"></script>
     <style>
-    	
+    	.home-nav{
+    		display : flex;
+    	}
+    	.home-nav li{
+    		flex-grow: 1;
+    	}
     </style>
     
 	<div class="head">
@@ -25,8 +30,8 @@
             <a href="#" class="tag" id="search">검색</a>
         </div>
         <div class="right">
-        	<%if(m != null){ %>
-        		<a href="#" class="tag"><%=m.getMemberId() %></a>
+        	<%if(m != null){ %>       
+        		<a href="/myPageFrm" class="tag"><%=m.getMemberId() %></a>
             	<a href="/logout" class="tag">로그아웃</a> 
         	<%}else{ %>
         		<a href="/login" class="tag" data-toggle="modal" data-target=".modal">login</a>
@@ -68,7 +73,8 @@
         	<%} %>
         </div>
         <div class="navbar">
-        <ul class="nuderline-hover">
+        <ul class="nuderline-hover home-nav">
+        	<li><a href="/main">홈으로</a></li>
             <li><a href="/groupList?reqPage=1">모임 리스트</a></li>
             <li><a href="/insertGroupFrm">모임 만들기</a></li>
             <li><a href="/board?reqPage=1">공지사항</a></li>
