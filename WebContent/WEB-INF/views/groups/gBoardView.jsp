@@ -22,11 +22,11 @@
 	<div class="container">
         <div>
             <h6><a href="/groupDetail?Id=<%=board.getGroupId()%>&mem=<%=m.getMemberNo()%>"><%=gName %></a></h6>
-            <h3>공지사항</h3>
+            <h3>모임 게시판</h3>
             <!-- 공지 본문 -->
             <div>
-                <div class="bg-success board-title"><%=board.getgBoardTitle() %></div>
-                <div class="bg-success board-date"><%=board.getgBoardDate() %></div>
+                <div class="bg-warning board-title"><%=board.getgBoardTitle() %></div>
+                <div class="bg-warning board-date"><%=board.getgBoardDate() %></div>
             </div>
             <%if(m != null && m.getMemberNo() == board.getgBoardWriter()) {%>
             <div class="board-buttons">

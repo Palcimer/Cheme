@@ -18,7 +18,7 @@
             <div class="boardWrite">
                 <form action="/updateGBoard" method="post" enctype="multipart/form-data">
                     <fieldset>
-                        <legend><div class="bg-success legend">공지사항 수정</div></legend>
+                        <legend><div class="bg-warning legend">게시글 수정</div></legend>
                         <div class="form-group">
                         	<input type="hidden" name="groupId" value="<%=board.getGroupId()%>">
                             <input type="hidden" name="noticeWriter" value="<%=m.getMemberNo()%>">

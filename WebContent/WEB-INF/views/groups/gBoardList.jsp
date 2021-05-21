@@ -24,7 +24,7 @@
             <h3>모임 게시판</h3>
             <div style="margin-bottom:5px"><a href="/writeGBoardFrm?groupId=<%=list.get(0).getGroupId() %>" class="btn btn-outline-primary">새 글 쓰기</a></div>
             <table class="table table-hover board-table">
-                <tr class="table-success">
+                <tr class="table-warning">
                     <th scope="col" style="width:70px; text-align:center">번호</th>
                     <th scope="col">제목</th>
                     <th scope="col" style="width:150px; text-align:center">작성자</th>
