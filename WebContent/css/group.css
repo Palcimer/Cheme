@@ -7,13 +7,16 @@
 }
 .group-name {
   display: inline-block;
+  width: 300px;
   font-weight: bold;
+  color: black;
+  border-bottom: 1px solid #999;
 }
 .group-content {
 }
 .group-info {
   border-top: 1px solid #999;
-  padding-top: 10px;
+  padding-top: 3px;
   font-size: 13px;
 }
 .group-join {
@@ -26,7 +29,9 @@
 .tablink {
   text-align: center;
 }
-
+.member-page {
+	margin-top: 30px;
+}
 @media (min-width: 992px) {
   .group-image {
   }
@@ -43,6 +48,9 @@
     width: 100%;
     text-align: center;
     margin: 0px auto;
+  }
+  .group-name {
+    width: 100%;
   }
   .group-image img {
     width: 100%;

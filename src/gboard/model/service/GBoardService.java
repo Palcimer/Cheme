@@ -164,4 +164,13 @@ public class GBoardService {
 		return result;
 	}
 
+	public ArrayList<GBoard> selectGBoardList(int groupId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int start = 1;
+		int end = 5;
+		ArrayList<GBoard> list = new GBoardDao().selectBoardList(conn, start, end, groupId);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+
 }
