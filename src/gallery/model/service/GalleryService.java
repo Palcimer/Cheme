@@ -159,4 +159,15 @@ public class GalleryService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public ArrayList<Gallery> selectGalListForDetail(int groupId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int start = 1;
+		int end = 3;
+		GalleryDao dao = new GalleryDao();
+		ArrayList<Gallery> list = dao.selectGalListForDetail(conn, start, end, groupId);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	
 }

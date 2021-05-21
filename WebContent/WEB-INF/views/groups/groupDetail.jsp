@@ -1,3 +1,4 @@
+<%@page import="gallery.model.vo.Gallery"%>
 <%@page import="gboard.model.vo.GBoard"%>
 <%@page import="group.model.vo.Group"%>
 <%@page import="gnotice.model.vo.GNotice"%>
@@ -8,6 +9,7 @@
     boolean isMem = (boolean)request.getAttribute("isMem");
     ArrayList<GNotice> noticeList = (ArrayList<GNotice>)request.getAttribute("noticeList");
     ArrayList<GBoard> boardList = (ArrayList<GBoard>)request.getAttribute("boardList");
+    ArrayList<Gallery> galList = (ArrayList<Gallery>)request.getAttribute("galList");
     Group info = (Group)request.getAttribute("groupInfo");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -113,8 +115,23 @@
 						</table>
                     </div>
                     <div class="tab-pane fade" id="gallery">
-                        <p>갤러리</p>
-                    </div>
+                    	<%if(galList.size() == 0) { %>
+                    	<p style="padding:10px 20px;"><a href="/galleryWriteFrm">사진이 없습니다. 새 사진을 올려보세요.</a></p>
+                      	<%} else { %>                
+                        <div class="photoWrapper">
+                        <%for(Gallery g : galList) { %>
+							<div class="photo">
+								<a href="/galleryView?galleryNo=<%=g.getGalleryNo()%>"><img src="/upload/photo/<%=g.getGalleryFilepath()%>"></a>
+								<table class="table">
+									<tr>
+									<th colspan="4">제목 : <a href="/galleryView?galleryNo=<%=g.getGalleryNo()%>"><%=g.getGalleryTitle()%></a></th>
+									</tr>
+								</table>
+							</div>
+						<%} %>
+						</div>
+						<%} %>
+                   </div>
                 </div>
             </div>
             <%} %>
