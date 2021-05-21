@@ -89,6 +89,6 @@
 		}
 		$("#noright").click(function(){
 			alert("로그인 후 사용해주세요.");
-		})
+		}) 
 		</script>
     
