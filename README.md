@@ -4,13 +4,14 @@
  + 깃 허브 주소: https://github.com/gyk9710/FCAT/tree/bowwow2115
  + 수행기간: 21년 05월 07일 ~ 21년 05월 21일(약 2주)
  + 개발환경: Java(1.8), Oracle(11g), Eclipse, Git
+ + cf)bowwow2115가 작성한 부분만 기술
 ----------------
 #### 1. 모임만들기
 ![cheme_모임만들기](https://user-images.githubusercontent.com/78743780/126867411-8714a0dc-edcf-4c2d-b473-e10335dc2928.png)
 + 기능
   + 정규표현식을 통해 입력값 제한
   + 조건에 맞지 않을 경우 모달 폼 출력되지 않음(bool 변수를 통해 구현)
-  + 등록하고자하는 이미지 파일 화면에 출력
+  + 등록하고자 하는 이미지 파일 화면에 출력
 -------------
 #### 2. 내 모임 관리
 ![Untitled](https://user-images.githubusercontent.com/78743780/126867509-bcf406d2-0ec6-48c2-b624-b379cb8278e2.png)
