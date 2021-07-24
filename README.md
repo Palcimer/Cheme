@@ -4,7 +4,7 @@
  + 깃 허브 주소: https://github.com/gyk9710/FCAT/tree/bowwow2115
  + 수행기간: 21년 05월 07일 ~ 21년 05월 21일(약 2주)
  + 개발환경: Java(1.8), Oracle(11g), Eclipse, Git
- + cf)bowwow2115가 작성한 부분만 기술
+ + cf) bowwow2115가 작성한 부분만 기술
 ----------------
 #### 1. 모임만들기
 ![cheme_모임만들기](https://user-images.githubusercontent.com/78743780/126867411-8714a0dc-edcf-4c2d-b473-e10335dc2928.png)
