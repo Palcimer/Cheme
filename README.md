@@ -27,5 +27,5 @@
 #### 4. 회원탈퇴
 ![cheme_회원정보삭제](https://user-images.githubusercontent.com/78743780/126867410-eb35d69a-c411-494a-b8ec-17a4b0882a03.png)
 + 기능
-  + Ajax를 통해 사용자 확인
+  + Ajax를 통해 사용자 비밀번호를 페이지 이동없이 확인
   + 조건에 맞을 경우 모달창을 통해 재확인
