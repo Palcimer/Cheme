@@ -1,7 +1,7 @@
 # 프로젝트 명: cheme
 #### 프로젝트 목표: 모임 플랫폼 구현
 
- + 깃 허브 주소: https://github.com/gyk9710/FCAT/tree/bowwow2115
+ + 팀원: 6명
  + 수행기간: 21년 05월 07일 ~ 21년 05월 21일(약 2주)
  + 개발환경: Java(1.8), Oracle(11g), Eclipse, Git
  + cf) bowwow2115가 작성한 부분만 기술
